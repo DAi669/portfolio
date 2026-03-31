@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>匠リフォーム | 外壁塗装・屋根工事 地域密着30年</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    :root {
+      --navy:  #1a2f4e;
+      --navy2: #0f1e33;
+      --orange:#e8621a;
+      --orange2:#ff7a2e;
+      --gray:  #f4f5f7;
+      --white: #ffffff;
+      --text:  #1e2535;
+      --muted: #6b7280;
+      --border:#e2e5ea;
+      --sans:  'Noto Sans JP', sans-serif;
+      --oswald:'Oswald', sans-serif;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--white); color:var(--text); font-family:var(--sans); font-weight:300; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    img { display:block; max-width:100%; }
+    a { text-decoration:none; color:inherit; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:none} }
+    @keyframes slideLeft { from{opacity:0;transform:translateX(-50px)} to{opacity:1;transform:none} }
+    @keyframes slideRight { from{opacity:0;transform:translateX(50px)} to{opacity:1;transform:none} }
+    @keyframes counterTick { from{transform:translateY(-100%);opacity:0} to{transform:none;opacity:1} }
+    .js-up { opacity:0; } .js-up.go { animation:fadeUp 0.7s ease forwards; }
+    .js-left { opacity:0; } .js-left.go { animation:slideLeft 0.7s ease forwards; }
+    .js-right { opacity:0; } .js-right.go { animation:slideRight 0.7s ease forwards; }
+
+    /* Nav */
+    #nav { position:fixed; top:0; left:0; right:0; z-index:300; height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 3rem; background:var(--navy2); border-bottom:3px solid var(--orange); }
+    .nav-logo { font-family:var(--oswald); font-size:1.3rem; color:#fff; letter-spacing:0.1em; display:flex; align-items:center; gap:0.7rem; }
+    .nav-logo-badge { background:var(--orange); font-size:0.55rem; font-family:var(--sans); letter-spacing:0.15em; padding:0.2rem 0.5rem; }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links a { font-size:0.78rem; color:rgba(255,255,255,0.65); letter-spacing:0.08em; transition:color 0.25s; }
+    .nav-links a:hover { color:var(--orange2); }
+    .nav-tel-wrap { display:flex; align-items:center; gap:1rem; }
+    .nav-tel { font-family:var(--oswald); font-size:1.1rem; color:var(--orange2); letter-spacing:0.05em; }
+    .nav-cta { background:var(--orange); color:#fff; font-size:0.8rem; font-weight:700; letter-spacing:0.12em; padding:0.55rem 1.4rem; border:none; cursor:pointer; display:inline-block; transition:background 0.25s; }
+    .nav-cta:hover { background:var(--orange2); }
+
+    /* Hero */
+    #hero { padding-top:64px; min-height:100vh; position:relative; display:flex; align-items:center; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=85') center/cover; filter:brightness(0.25); }
+    .hero-diagonal { position:absolute; bottom:0; left:0; right:0; height:120px; background:var(--white); clip-path:polygon(0 100%,100% 0,100% 100%); }
+    .hero-inner { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:5rem 3rem; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+    .hero-left-content {}
+    .hero-eyebrow { font-size:0.72rem; letter-spacing:0.45em; color:var(--orange2); margin-bottom:1.2rem; font-weight:500; }
+    .hero-h1 { font-family:var(--oswald); font-size:clamp(2.5rem,6vw,4.8rem); color:#fff; line-height:1.05; letter-spacing:0.02em; margin-bottom:1.5rem; }
+    .hero-h1 em { color:var(--orange2); font-style:normal; display:block; }
+    .hero-copy { font-size:0.92rem; color:rgba(255,255,255,0.7); line-height:2; margin-bottom:2rem; }
+    .hero-checks { display:flex; flex-direction:column; gap:0.5rem; margin-bottom:2rem; }
+    .hero-check { display:flex; align-items:center; gap:0.7rem; font-size:0.85rem; color:rgba(255,255,255,0.85); }
+    .hero-check::before { content:'✓'; color:var(--orange2); font-weight:700; font-size:1rem; }
+    .hero-btns { display:flex; gap:0.8rem; flex-wrap:wrap; }
+    .btn-orange { background:var(--orange); color:#fff; font-size:0.9rem; font-weight:700; letter-spacing:0.12em; padding:1rem 2.4rem; border:none; cursor:pointer; display:inline-block; transition:background 0.25s, transform 0.2s; clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,0 100%); }
+    .btn-orange:hover { background:var(--orange2); transform:translateY(-2px); }
+    .btn-outline-w { color:#fff; border:2px solid rgba(255,255,255,0.4); font-size:0.88rem; font-weight:500; padding:0.98rem 2rem; display:inline-block; transition:border-color 0.25s, color 0.25s; }
+    .btn-outline-w:hover { border-color:var(--orange2); color:var(--orange2); }
+
+    /* Hero right: stats card */
+    .hero-stats-card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); backdrop-filter:blur(8px); padding:2rem; border-radius:4px; }
+    .hero-stats-card h3 { font-family:var(--oswald); font-size:1rem; color:var(--orange2); letter-spacing:0.2em; margin-bottom:1.5rem; }
+    .stat-row { display:flex; align-items:center; justify-content:space-between; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .stat-row:last-child { border-bottom:none; }
+    .stat-label { font-size:0.8rem; color:rgba(255,255,255,0.6); }
+    .stat-val { font-family:var(--oswald); font-size:1.8rem; color:#fff; }
+    .stat-val span { font-size:0.9rem; color:var(--orange2); }
+    .hero-urgency { margin-top:1.2rem; background:rgba(232,98,26,0.15); border:1px solid rgba(232,98,26,0.4); padding:0.9rem 1rem; }
+    .hero-urgency p { font-size:0.78rem; color:var(--orange2); text-align:center; line-height:1.6; }
+    .hero-urgency strong { font-weight:700; }
+
+    /* Wrap */
+    .wrap { max-width:1100px; margin:0 auto; padding:0 2.5rem; }
+    .sec-label { font-size:0.68rem; letter-spacing:0.5em; color:var(--orange); display:block; margin-bottom:0.5rem; font-weight:500; }
+    .sec-title { font-family:var(--oswald); font-size:clamp(1.8rem,4vw,2.8rem); color:var(--navy); letter-spacing:0.04em; }
+    .sec-title em { color:var(--orange); font-style:normal; }
+    .rule-orange { width:36px; height:3px; background:var(--orange); margin:0.8rem 0; }
+
+    /* Before/After Slider */
+    #works { padding:7rem 0; background:var(--gray); }
+    .works-head { text-align:center; margin-bottom:3.5rem; }
+    .works-head .rule-orange { margin:0.8rem auto; }
+    .ba-slider-wrap { position:relative; overflow:hidden; border-radius:4px; cursor:ew-resize; user-select:none; max-width:800px; margin:0 auto; }
+    .ba-before, .ba-after { position:relative; }
+    .ba-after { position:absolute; top:0; left:0; width:50%; overflow:hidden; }
+    .ba-after img { width:800px; max-width:none; }
+    .ba-before img { width:100%; display:block; }
+    .ba-handle { position:absolute; top:0; bottom:0; left:50%; width:3px; background:#fff; cursor:ew-resize; z-index:10; }
+    .ba-handle-circle { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:44px; height:44px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 12px rgba(0,0,0,0.3); font-size:0.8rem; color:var(--navy); font-weight:700; }
+    .ba-label { position:absolute; top:1rem; font-size:0.72rem; letter-spacing:0.2em; font-weight:700; padding:0.3rem 0.7rem; }
+    .ba-label.before { right:1rem; background:rgba(0,0,0,0.6); color:#fff; }
+    .ba-label.after { left:1rem; background:var(--orange); color:#fff; z-index:11; }
+    .works-thumbs { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:2rem; }
+    .work-thumb { overflow:hidden; border:2px solid transparent; cursor:pointer; transition:border-color 0.25s; }
+    .work-thumb.active { border-color:var(--orange); }
+    .work-thumb img { width:100%; height:80px; object-fit:cover; transition:transform 0.4s ease; }
+    .work-thumb:hover img { transform:scale(1.06); }
+
+    /* Price */
+    #price { padding:7rem 0; background:var(--white); }
+    .price-head { text-align:center; margin-bottom:3.5rem; }
+    .price-head .rule-orange { margin:0.8rem auto; }
+    .price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .price-card { border:1px solid var(--border); padding:2.2rem 2rem; transition:box-shadow 0.3s, transform 0.3s; }
+    .price-card:hover { box-shadow:0 8px 30px rgba(0,0,0,0.1); transform:translateY(-4px); }
+    .price-card.featured { border-color:var(--orange); border-top:4px solid var(--orange); }
+    .price-tag { font-size:0.65rem; letter-spacing:0.3em; color:var(--orange); margin-bottom:0.8rem; font-weight:700; }
+    .price-service { font-family:var(--oswald); font-size:1.3rem; color:var(--navy); margin-bottom:0.5rem; letter-spacing:0.05em; }
+    .price-range { font-size:1.4rem; font-weight:700; color:var(--orange); margin:1rem 0; }
+    .price-range span { font-size:0.85rem; color:var(--muted); font-weight:300; }
+    .price-note { font-size:0.75rem; color:var(--muted); margin-bottom:1.2rem; line-height:1.8; }
+    .price-includes { list-style:none; margin-bottom:1.5rem; }
+    .price-includes li { font-size:0.82rem; color:var(--text); padding:0.45rem 0; border-bottom:1px solid var(--gray); display:flex; align-items:center; gap:0.5rem; }
+    .price-includes li::before { content:'✓'; color:var(--orange); font-weight:700; }
+
+    /* Flow */
+    #flow { padding:7rem 0; background:var(--navy); }
+    .flow-head { text-align:center; margin-bottom:3.5rem; }
+    .flow-head .sec-label { color:var(--orange2); }
+    .flow-head .sec-title { color:#fff; }
+    .flow-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; align-items:start; }
+    .flow-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:1.5rem 1rem; text-align:center; position:relative; }
+    .flow-card::after { content:'→'; position:absolute; right:-1.2rem; top:50%; transform:translateY(-50%); color:var(--orange); font-size:1.2rem; font-weight:700; }
+    .flow-card:last-child::after { display:none; }
+    .flow-num { font-family:var(--oswald); font-size:2.5rem; color:var(--orange); line-height:1; margin-bottom:0.6rem; }
+    .flow-card h4 { font-size:0.88rem; color:#fff; font-weight:700; margin-bottom:0.3rem; }
+    .flow-card p { font-size:0.73rem; color:rgba(255,255,255,0.5); line-height:1.7; }
+
+    /* Gallery filter */
+    #gallery { padding:7rem 0; background:var(--gray); }
+    .gallery-head { text-align:center; margin-bottom:2.5rem; }
+    .gallery-head .rule-orange { margin:0.8rem auto; }
+    .filter-btns { display:flex; justify-content:center; gap:0.5rem; margin-bottom:2rem; flex-wrap:wrap; }
+    .filter-btn { font-size:0.78rem; font-weight:500; letter-spacing:0.1em; padding:0.5rem 1.4rem; border:1px solid var(--border); background:#fff; cursor:pointer; transition:background 0.25s, border-color 0.25s, color 0.25s; }
+    .filter-btn.active, .filter-btn:hover { background:var(--orange); border-color:var(--orange); color:#fff; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0.5rem; }
+    .gallery-item { overflow:hidden; cursor:pointer; }
+    .gallery-item img { width:100%; height:180px; object-fit:cover; transition:transform 0.5s ease; }
+    .gallery-item:hover img { transform:scale(1.07); }
+
+    /* CTA + Form */
+    #contact { padding:7rem 0; background:var(--white); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:4rem; align-items:start; }
+    .contact-left {}
+    .contact-left h3 { font-family:var(--oswald); font-size:1.3rem; color:var(--navy); letter-spacing:0.05em; margin-bottom:1.5rem; }
+    .strength-list { display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem; }
+    .strength-item { display:flex; gap:1rem; align-items:flex-start; }
+    .strength-icon { width:40px; height:40px; background:var(--navy); color:var(--orange2); display:flex; align-items:center; justify-content:center; font-family:var(--oswald); font-size:1.1rem; font-weight:700; flex-shrink:0; }
+    .strength-body h4 { font-size:0.92rem; font-weight:700; color:var(--navy); margin-bottom:0.2rem; }
+    .strength-body p { font-size:0.8rem; color:var(--muted); line-height:1.7; }
+    .contact-form-box { background:var(--gray); padding:2.5rem; border-top:4px solid var(--orange); }
+    .contact-form-box h3 { font-family:var(--oswald); font-size:1.2rem; color:var(--navy); margin-bottom:0.3rem; letter-spacing:0.05em; }
+    .contact-form-box p { font-size:0.78rem; color:var(--muted); margin-bottom:1.5rem; }
+    .fg { margin-bottom:1.1rem; }
+    .fg label { display:block; font-size:0.72rem; color:var(--orange); letter-spacing:0.12em; margin-bottom:0.4rem; font-weight:500; }
+    .fg label .req { color:#e74c3c; margin-left:0.3rem; }
+    .fg input, .fg select, .fg textarea { width:100%; background:#fff; border:1px solid var(--border); color:var(--text); padding:0.7rem 0.9rem; font-size:0.88rem; font-family:var(--sans); outline:none; transition:border-color 0.25s; -webkit-appearance:none; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--orange); }
+    .fg-row2 { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+    .btn-submit { width:100%; background:var(--orange); color:#fff; border:none; padding:1rem; font-size:0.9rem; font-weight:700; letter-spacing:0.2em; cursor:pointer; font-family:var(--sans); transition:background 0.25s; clip-path:polygon(0 0,calc(100% - 10px) 0,100% 100%,0 100%); }
+    .btn-submit:hover { background:var(--orange2); }
+
+    footer { background:var(--navy2); padding:2.5rem; display:grid; grid-template-columns:1fr auto; align-items:center; gap:1rem; }
+    .footer-logo { font-family:var(--oswald); font-size:1.2rem; color:#fff; letter-spacing:0.1em; }
+    .footer-logo span { color:var(--orange2); }
+    footer small { font-size:0.7rem; color:rgba(255,255,255,0.3); }
+
+    @media(max-width:960px){
+      #nav .nav-links { display:none; }
+      .hero-inner { grid-template-columns:1fr; gap:2rem; }
+      .price-grid { grid-template-columns:1fr; }
+      .flow-grid { grid-template-columns:repeat(2,1fr); }
+      .flow-card::after { display:none; }
+      .gallery-grid { grid-template-columns:repeat(2,1fr); }
+      .contact-grid { grid-template-columns:1fr; }
+      .works-thumbs { grid-template-columns:repeat(2,1fr); }
+      footer { grid-template-columns:1fr; text-align:center; }
+    }
+    @media(max-width:600px){ .fg-row2 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">匠リフォーム <span class="nav-logo-badge">SINCE 1994</span></div>
+  <ul class="nav-links">
+    <li><a href="#works">施工事例</a></li>
+    <li><a href="#price">料金</a></li>
+    <li><a href="#flow">ご依頼の流れ</a></li>
+    <li><a href="#gallery">ギャラリー</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <div class="nav-tel-wrap">
+    <span class="nav-tel">0120-XXX-XXX</span>
+    <a href="#contact" class="nav-cta">無料見積り</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-diagonal"></div>
+  <div class="hero-inner">
+    <div class="hero-left-content">
+      <p class="hero-eyebrow">TAKUMI REFORM — 地域密着30年の実績</p>
+      <h1 class="hero-h1">外壁塗装・<br>屋根工事の<br><em>プロ集団</em></h1>
+      <p class="hero-copy">30年間、1,400棟以上の施工実績。見積りから完工まで自社職人が一貫施工。中間マージンゼロで、高品質な仕事をリーズナブルな価格でご提供します。</p>
+      <div class="hero-checks">
+        <span class="hero-check">見積り・診断 完全無料</span>
+        <span class="hero-check">自社職人による一貫施工</span>
+        <span class="hero-check">10年保証付き（塗装工事）</span>
+        <span class="hero-check">助成金・補助金の申請サポート</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-orange">無料見積りを依頼する</a>
+        <a href="#works" class="btn-outline-w">施工事例を見る</a>
+      </div>
+    </div>
+    <div>
+      <div class="hero-stats-card">
+        <h3>TRACK RECORD</h3>
+        <div class="stat-row"><span class="stat-label">累計施工棟数</span><span class="stat-val">1,400<span>棟+</span></span></div>
+        <div class="stat-row"><span class="stat-label">顧客満足度</span><span class="stat-val">97<span>%</span></span></div>
+        <div class="stat-row"><span class="stat-label">地域実績年数</span><span class="stat-val">30<span>年</span></span></div>
+        <div class="stat-row"><span class="stat-label">自社職人数</span><span class="stat-val">42<span>名</span></span></div>
+        <div class="hero-urgency">
+          <p><strong>今月限定：外壁診断 + 御見積書 完全無料</strong><br>外壁の劣化チェックを今すぐ。先着20棟まで受付中。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Before/After -->
+<section id="works">
+  <div class="wrap">
+    <div class="works-head">
+      <span class="sec-label js-up">BEFORE / AFTER</span>
+      <h2 class="sec-title js-up">施工事例</h2>
+      <div class="rule-orange js-up"></div>
+      <p class="js-up" style="font-size:0.88rem;color:var(--muted)">スライダーを動かして施工前後をご確認ください</p>
+    </div>
+    <!-- Before/After Slider -->
+    <div class="ba-slider-wrap js-up" id="baSlider">
+      <div class="ba-before">
+        <img id="ba-img-before" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80" alt="施工前">
+        <span class="ba-label before">BEFORE</span>
+      </div>
+      <div class="ba-after" id="baAfter">
+        <img id="ba-img-after" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="施工後">
+        <span class="ba-label after">AFTER</span>
+      </div>
+      <div class="ba-handle" id="baHandle">
+        <div class="ba-handle-circle">⇄</div>
+      </div>
+    </div>
+    <!-- Thumbnails -->
+    <div class="works-thumbs js-up">
+      <div class="work-thumb active" data-before="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80" data-after="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70" alt="外壁塗装"></div>
+      <div class="work-thumb" data-before="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800&q=80" data-after="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&q=70" alt="屋根工事"></div>
+      <div class="work-thumb" data-before="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=800&q=80" data-after="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=300&q=70" alt="内装リフォーム"></div>
+      <div class="work-thumb" data-before="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80" data-after="https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=800&q=80"><img src="https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=300&q=70" alt="水回り"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Price -->
+<section id="price">
+  <div class="wrap">
+    <div class="price-head">
+      <span class="sec-label js-up">PRICING</span>
+      <h2 class="sec-title js-up">工事料金の目安</h2>
+      <div class="rule-orange js-up"></div>
+      <p class="js-up" style="font-size:0.83rem;color:var(--muted)">お家の状態によって変わります。まずは無料診断をご利用ください。</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card js-up">
+        <div class="price-tag">EXTERIOR PAINTING</div>
+        <div class="price-service">外壁塗装</div>
+        <div class="price-range">¥60万<span>〜</span></div>
+        <p class="price-note">30坪程度の2階建て住宅の目安。使用塗料グレードにより変動します。</p>
+        <ul class="price-includes"><li>高圧洗浄</li><li>下地処理・補修</li><li>塗料3回塗り</li><li>足場設置・解体</li><li>10年保証</li></ul>
+        <a href="#contact" class="btn-orange" style="display:block;text-align:center;font-size:0.82rem">無料見積りを依頼</a>
+      </div>
+      <div class="price-card featured js-up">
+        <div class="price-tag">ROOF WORK</div>
+        <div class="price-service">屋根塗装・葺き替え</div>
+        <div class="price-range">¥40万<span>〜</span></div>
+        <p class="price-note">屋根の状態により塗装か葺き替えかをご提案。火災保険が使えるケースも。</p>
+        <ul class="price-includes"><li>屋根診断（無料）</li><li>棟板金交換</li><li>防水シート張替え</li><li>塗装 or 葺き替え</li><li>15年保証</li></ul>
+        <a href="#contact" class="btn-orange" style="display:block;text-align:center;font-size:0.82rem">無料見積りを依頼</a>
+      </div>
+      <div class="price-card js-up">
+        <div class="price-tag">FULL REFORM</div>
+        <div class="price-service">外壁+屋根セット</div>
+        <div class="price-range">¥90万<span>〜</span></div>
+        <p class="price-note">セット割引で単体よりお得。外壁と屋根を同時施工することで足場代も節約。</p>
+        <ul class="price-includes"><li>外壁塗装全工程</li><li>屋根工事全工程</li><li>シーリング打替え</li><li>雨樋交換（必要な場合）</li><li>10年保証+5年点検</li></ul>
+        <a href="#contact" class="btn-orange" style="display:block;text-align:center;font-size:0.82rem">無料見積りを依頼</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Flow -->
+<section id="flow">
+  <div class="wrap">
+    <div class="flow-head">
+      <span class="sec-label">HOW IT WORKS</span>
+      <h2 class="sec-title js-up" style="color:#fff">ご依頼の流れ</h2>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-card js-up"><div class="flow-num">01</div><h4>お問い合わせ</h4><p>電話・フォーム<br>24時間受付</p></div>
+      <div class="flow-card js-up"><div class="flow-num">02</div><h4>現地診断</h4><p>専門スタッフが<br>無料で点検</p></div>
+      <div class="flow-card js-up"><div class="flow-num">03</div><h4>御見積提示</h4><p>詳細な工事内容と<br>価格をご説明</p></div>
+      <div class="flow-card js-up"><div class="flow-num">04</div><h4>着工・施工</h4><p>自社職人が<br>丁寧に施工</p></div>
+      <div class="flow-card js-up"><div class="flow-num">05</div><h4>完工・保証</h4><p>お引渡し後も<br>定期点検実施</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="gallery-head">
+      <span class="sec-label js-up">GALLERY</span>
+      <h2 class="sec-title js-up">施工写真</h2>
+      <div class="rule-orange js-up"></div>
+    </div>
+    <div class="filter-btns js-up">
+      <button class="filter-btn active" data-filter="all">すべて</button>
+      <button class="filter-btn" data-filter="gaiheki">外壁塗装</button>
+      <button class="filter-btn" data-filter="yane">屋根工事</button>
+      <button class="filter-btn" data-filter="naisou">内装リフォーム</button>
+    </div>
+    <div class="gallery-grid js-up">
+      <div class="gallery-item" data-cat="gaiheki"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="外壁1"></div>
+      <div class="gallery-item" data-cat="gaiheki"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&q=80" alt="外壁2"></div>
+      <div class="gallery-item" data-cat="yane"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80" alt="屋根1"></div>
+      <div class="gallery-item" data-cat="yane"><img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=400&q=80" alt="屋根2"></div>
+      <div class="gallery-item" data-cat="naisou"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&q=80" alt="内装1"></div>
+      <div class="gallery-item" data-cat="naisou"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80" alt="内装2"></div>
+      <div class="gallery-item" data-cat="gaiheki"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&q=80" alt="外壁3"></div>
+      <div class="gallery-item" data-cat="naisou"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80" alt="内装3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <span class="sec-label js-up">CONTACT</span>
+      <h2 class="sec-title js-up">無料見積り・お問い合わせ</h2>
+      <div class="rule-orange js-up" style="margin:0.8rem auto"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left js-up js-left">
+        <h3>なぜ匠リフォームが選ばれるのか</h3>
+        <div class="strength-list">
+          <div class="strength-item"><div class="strength-icon">01</div><div class="strength-body"><h4>完全自社施工・中間マージンゼロ</h4><p>下請けに依頼しないので、コストを大幅削減。浮いた費用を品質に充てます。</p></div></div>
+          <div class="strength-item"><div class="strength-icon">02</div><div class="strength-body"><h4>地元30年・口コミで選ばれ続ける</h4><p>紹介・リピート率70%以上。地域に根ざした誠実な仕事が評価されています。</p></div></div>
+          <div class="strength-item"><div class="strength-icon">03</div><div class="strength-body"><h4>助成金・火災保険サポート</h4><p>活用できる補助金・保険の調査・申請まで無料でサポートします。</p></div></div>
+        </div>
+      </div>
+      <div class="contact-form-box js-up js-right">
+        <h3>無料見積りフォーム</h3>
+        <p>お気軽にご相談ください。48時間以内にご連絡します。</p>
+        <form>
+          <div class="fg-row2">
+            <div class="fg"><label>お名前<span class="req">*</span></label><input type="text" placeholder="山田 太郎" required></div>
+            <div class="fg"><label>電話番号<span class="req">*</span></label><input type="tel" placeholder="090-XXXX-XXXX" required></div>
+          </div>
+          <div class="fg"><label>メールアドレス</label><input type="email" placeholder="example@email.com"></div>
+          <div class="fg"><label>ご住所・地域</label><input type="text" placeholder="東京都〇〇区〇〇"></div>
+          <div class="fg"><label>ご希望工事</label><select><option>外壁塗装</option><option>屋根塗装・葺き替え</option><option>外壁+屋根セット</option><option>内装リフォーム</option><option>その他・相談したい</option></select></div>
+          <div class="fg"><label>建物について</label><select><option>一戸建て（30坪未満）</option><option>一戸建て（30〜50坪）</option><option>一戸建て（50坪超）</option><option>マンション・アパート</option></select></div>
+          <div class="fg"><label>ご要望・気になる点</label><textarea rows="3" placeholder="「塗料の色を変えたい」「雨漏りが心配」など何でも"></textarea></div>
+          <button type="submit" class="btn-submit">無料見積りを依頼する</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">匠<span>リフォーム</span></div>
+  <small>© 2024 Takumi Reform. All Rights Reserved.</small>
+</footer>
+
+<script>
+$(function(){
+  /* Scroll reveal */
+  function reveal(){
+    $('.js-up:not(.go)').each(function(){
+      if($(this).offset().top < $(window).scrollTop() + $(window).height() - 60){
+        var d = $(this).data('delay') || 0;
+        setTimeout(()=>{ $(this).addClass('go'); }, d);
+      }
+    });
+    $('.js-left:not(.go)').each(function(){
+      if($(this).offset().top < $(window).scrollTop() + $(window).height() - 60)
+        setTimeout(()=>$(this).addClass('go'), $(this).data('delay')||0);
+    });
+    $('.js-right:not(.go)').each(function(){
+      if($(this).offset().top < $(window).scrollTop() + $(window).height() - 60)
+        setTimeout(()=>$(this).addClass('go'), $(this).data('delay')||0);
+    });
+  }
+  reveal(); $(window).on('scroll', reveal);
+
+  /* Before/After Slider */
+  var $slider = $('#baSlider'), $after = $('#baAfter'), $handle = $('#baHandle');
+  var dragging = false;
+  function setPos(x){
+    var w = $slider.width(), left = $slider.offset().left;
+    var pct = Math.min(Math.max((x - left) / w * 100, 5), 95);
+    $after.css('width', pct + '%');
+    $handle.css('left', pct + '%');
+    $('#ba-img-after').css('width', w + 'px');
+  }
+  setPos($slider.offset().left + $slider.width() * 0.5);
+  $handle.on('mousedown touchstart', function(e){ dragging=true; e.preventDefault(); });
+  $(document).on('mousemove touchmove', function(e){
+    if(!dragging) return;
+    var x = e.type==='touchmove' ? e.touches[0].pageX : e.pageX;
+    setPos(x);
+  }).on('mouseup touchend', function(){ dragging=false; });
+
+  /* Thumbnail switch */
+  $('.work-thumb').on('click', function(){
+    $('.work-thumb').removeClass('active');
+    $(this).addClass('active');
+    $('#ba-img-before').attr('src', $(this).data('before'));
+    $('#ba-img-after').attr('src', $(this).data('after'));
+    setPos($slider.offset().left + $slider.width() * 0.5);
+  });
+
+  /* Gallery filter */
+  $('.filter-btn').on('click', function(){
+    $('.filter-btn').removeClass('active');
+    $(this).addClass('active');
+    var f = $(this).data('filter');
+    if(f==='all') $('.gallery-item').show();
+    else { $('.gallery-item').hide(); $('.gallery-item[data-cat="'+f+'"]').show(); }
+  });
+
+  /* Form */
+  $('form').on('submit', function(e){
+    e.preventDefault();
+    var $btn=$(this).find('.btn-submit');
+    $btn.text('送信しました！48時間以内にご連絡します。').css('background','#27ae60').css('clip-path','none');
+  });
+});
+</script>
+</body>
+</html>

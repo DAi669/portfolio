@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>税理士法人 サクセスパートナーズ | 経営の悩みを、数字で解決する</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <style>
+    /* ============================================================
+       Variables & Reset
+    ============================================================ */
+    :root {
+      --blue:   #1b3a5c;
+      --blue2:  #0f2540;
+      --teal:   #0e8a6e;
+      --teal2:  #0bb888;
+      --light:  #f0f5fb;
+      --white:  #ffffff;
+      --text:   #1a1a2e;
+      --muted:  #6b7a8d;
+      --border: #dde4ef;
+      --sans:   'Noto Sans JP', sans-serif;
+      --gothic: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       Utilities
+    ============================================================ */
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 2.5rem; }
+    .sec-label {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.55em;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+    .sec-title {
+      font-family: var(--gothic);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1.4;
+    }
+    .sec-title em { color: var(--teal); font-style: normal; }
+    .rule-teal {
+      width: 36px; height: 3px;
+      background: var(--teal);
+      margin: 1rem 0;
+    }
+    .rule-center { margin: 1rem auto; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 1rem 2.8rem;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      font-family: var(--sans);
+    }
+    .btn-primary:hover {
+      background: var(--teal2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(14,138,110,0.3);
+    }
+    .btn-outline {
+      display: inline-block;
+      color: var(--blue);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 0.9rem 2.4rem;
+      border: 2px solid var(--blue);
+      border-radius: 2px;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-outline:hover { background: var(--blue); color: #fff; }
+
+    /* ============================================================
+       Navigation
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 300;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      box-shadow: 0 1px 12px rgba(0,0,0,0.05);
+    }
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .nav-logo-main {
+      font-family: var(--gothic);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+    }
+    .nav-logo-sub {
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      transition: color 0.25s;
+      font-weight: 400;
+    }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta-wrap { display: flex; align-items: center; gap: 1rem; }
+    .nav-tel-small {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.04em;
+    }
+    .nav-cta-btn {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      background: var(--teal);
+      color: #fff;
+      padding: 0.55rem 1.4rem;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      display: inline-block;
+      transition: background 0.25s;
+    }
+    .nav-cta-btn:hover { background: var(--teal2); }
+
+    /* ============================================================
+       Hero — Split Layout
+    ============================================================ */
+    #hero {
+      padding-top: 64px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-left {
+      background: var(--blue2);
+      display: flex;
+      align-items: center;
+      padding: 5rem 4rem 5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -80px;
+      width: 350px; height: 350px;
+      border-radius: 50%;
+      background: rgba(14,138,110,0.12);
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      top: -50px; left: -50px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+    }
+    .hero-left-body { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(14,138,110,0.2);
+      border: 1px solid rgba(14,138,110,0.4);
+      color: var(--teal2);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 1.8rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--teal2);
+      border-radius: 50%;
+    }
+    .hero-h1 {
+      font-family: var(--gothic);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 1.5rem;
+    }
+    .hero-h1 em { color: var(--teal2); font-style: normal; }
+    .hero-copy {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 2;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-note {
+      margin-top: 1.5rem;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.05em;
+    }
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-right-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--blue2) 0%, transparent 30%);
+    }
+    /* Floating card on hero */
+    .hero-card {
+      position: absolute;
+      bottom: 3rem;
+      right: 2rem;
+      background: #fff;
+      border-left: 4px solid var(--teal);
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      max-width: 240px;
+      animation: cardFloat 3s ease-in-out infinite;
+    }
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    .hero-card-num {
+      font-family: var(--gothic);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .hero-card-num span { font-size: 1rem; color: var(--muted); font-weight: 300; }
+    .hero-card-text { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5; }
+
+    /* ============================================================
+       Problems Section
+    ============================================================ */
+    #problems {
+      padding: 7rem 0;
+      background: var(--light);
+    }
+    .problems-head { text-align: center; margin-bottom: 3.5rem; }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .problem-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--blue);
+      padding: 2rem 1.8rem;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .problem-card:hover {
+      box-shadow: 0 8px 24px rgba(27,58,92,0.1);
+      transform: translateY(-4px);
+    }
+    .problem-icon {
+      width: 44px; height: 44px;
+      background: var(--light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .problem-icon svg { width: 22px; height: 22px; stroke: var(--blue); fill: none; stroke-width: 1.8; }
+    .problem-card h3 {
+      font-family: var(--gothic);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+    .problem-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.9; }
+    .problems-cta { text-align: center; margin-top: 3rem; }
+    .problems-cta p { font-size: 1rem; font-weight: 700; color: var(--blue); margin-bottom: 1.2rem; }
+
+    /* ============================================================
+       Services
+    ============================================================ */
+    #services {
+      padding: 7rem 0;
+      background: var(--white);
+    }
+    .services-head { text-align: center; margin-bottom: 4rem; }
+    .service-list { display: flex; flex-direction: column; gap: 0; }
+    .service-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s;
+    }
+    .service-item:first-child { border-top: 1px solid var(--border); }
+    .service-item:hover { background: var(--light); }
+    .service-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1rem;
+      font-family: var(--gothic);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--border);
+    }
+    .service-main {
+      padding: 2.5rem 2rem;
+      border-left: 1px solid var(--border);
+    }
+    .service-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .service-main h3 {
+      font-family: var(--gothic);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+    .service-main p { font-size: 0.85rem; color: var(--muted); line-height: 1.9; }
+    .service-sub {
+      padding: 2.5rem 2rem;
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      justify-content: center;
+    }
+    .service-sub-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    .service-sub-item::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       Flow / Process
+    ============================================================ */
+    #flow {
+      padding: 7rem 0;
+      background: var(--blue2);
+      position: relative;
+      overflow: hidden;
+    }
+    #flow::before {
+      content: 'FLOW';
+      position: absolute;
+      right: -1rem; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--gothic);
+      font-size: 14rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .flow-head { text-align: center; margin-bottom: 4rem; }
+    .flow-head .sec-title { color: #fff; }
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .flow-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(to right, var(--teal), var(--teal2));
+      z-index: 0;
+    }
+    .flow-step { text-align: center; padding: 0 1rem; position: relative; z-index: 1; }
+    .flow-step-circle {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-family: var(--gothic);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #fff;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(14,138,110,0.4);
+    }
+    .flow-step-circle::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(14,138,110,0.3);
+    }
+    .flow-step h4 {
+      font-family: var(--gothic);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .flow-step p { font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    /* ============================================================
+       Achievements
+    ============================================================ */
+    #achievements {
+      padding: 6rem 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .ach-item {
+      text-align: center;
+      padding: 2rem;
+      border-right: 1px solid var(--border);
+    }
+    .ach-item:last-child { border-right: none; }
+    .ach-num {
+      font-family: var(--gothic);
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+    }
+    .ach-num span { font-size: 1.4rem; color: var(--teal); }
+    .ach-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; letter-spacing: 0.1em; }
+
+    /* ============================================================
+       Testimonials — Swiper
+    ============================================================ */
+    #testimonials {
+      padding: 7rem 0;
+      background: var(--light);
+    }
+    .testimonials-head { text-align: center; margin-bottom: 3.5rem; }
+    .swiper-testimonial { padding-bottom: 3rem; }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem; left: 1.5rem;
+      font-family: Georgia, serif;
+      font-size: 5rem;
+      color: var(--light);
+      line-height: 1;
+    }
+    .testimonial-stars { color: #f1c40f; font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+    .testimonial-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 2;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+    .testimonial-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testimonial-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .testimonial-role { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+    .swiper-pagination-bullet-active { background: var(--teal); }
+    .swiper-button-next,
+    .swiper-button-prev { color: var(--teal); }
+
+    /* ============================================================
+       FAQ — Accordion
+    ============================================================ */
+    #faq {
+      padding: 7rem 0;
+      background: var(--white);
+    }
+    .faq-head { text-align: center; margin-bottom: 3.5rem; }
+    .faq-list { max-width: 800px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 0;
+      cursor: pointer;
+      gap: 1rem;
+      transition: color 0.25s;
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--teal); }
+    .faq-q-text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--blue);
+    }
+    .faq-q-text::before {
+      content: 'Q';
+      width: 28px; height: 28px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--gothic);
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .faq-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s, background 0.3s, border-color 0.3s;
+    }
+    .faq-icon::after {
+      content: '';
+      width: 8px; height: 8px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg) translate(-2px, -2px);
+      transition: border-color 0.3s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(180deg); background: var(--teal); border-color: var(--teal); }
+    .faq-item.open .faq-icon::after { border-color: #fff; }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner {
+      padding: 0 0 1.4rem 2.5rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 2;
+      border-left: 2px solid var(--teal);
+      margin-left: 0.5rem;
+      padding-left: 1.5rem;
+    }
+    .faq-a-inner strong { color: var(--teal); font-weight: 500; }
+
+    /* ============================================================
+       CTA / Contact
+    ============================================================ */
+    #contact {
+      padding: 7rem 0;
+      background: var(--light);
+    }
+    .contact-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .contact-head { text-align: center; margin-bottom: 3rem; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem; }
+    .contact-tel-box {
+      background: var(--blue);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .contact-tel-box h4 {
+      font-family: var(--gothic);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.7);
+    }
+    .contact-tel-num {
+      font-family: var(--gothic);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .contact-tel-hours { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+    .contact-tel-cta {
+      background: var(--teal);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 0.75rem 2rem;
+      display: inline-block;
+      margin-top: 0.5rem;
+      transition: background 0.25s;
+    }
+    .contact-tel-cta:hover { background: var(--teal2); }
+
+    .contact-form { background: #fff; padding: 2.5rem; border: 1px solid var(--border); }
+    .contact-form h4 {
+      font-family: var(--gothic);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cf-g { margin-bottom: 1.1rem; }
+    .cf-g label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+    .cf-g label .req {
+      color: #e74c3c;
+      font-size: 0.65rem;
+      margin-left: 0.3rem;
+    }
+    .cf-g input,
+    .cf-g select,
+    .cf-g textarea {
+      width: 100%;
+      background: var(--light);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+      font-family: var(--sans);
+      font-weight: 300;
+      outline: none;
+      border-radius: 2px;
+      transition: border-color 0.25s, background 0.25s;
+      -webkit-appearance: none;
+    }
+    .cf-g input:focus,
+    .cf-g select:focus,
+    .cf-g textarea:focus { border-color: var(--teal); background: #fff; }
+    .cf-g select option { background: #fff; }
+    .cf-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .btn-submit-cf {
+      width: 100%;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      padding: 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      border-radius: 2px;
+      font-family: var(--sans);
+      transition: background 0.25s;
+      margin-top: 0.5rem;
+    }
+    .btn-submit-cf:hover { background: var(--teal2); }
+
+    /* ============================================================
+       Footer
+    ============================================================ */
+    footer {
+      background: var(--blue2);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-info h4 {
+      font-family: var(--gothic);
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .footer-info p { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.8; }
+    footer small { font-size: 0.7rem; color: rgba(255,255,255,0.25); }
+
+    /* ============================================================
+       Responsive
+    ============================================================ */
+    @media (max-width: 960px) {
+      #nav { padding: 0 1.5rem; }
+      #nav .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { height: 300px; }
+      .hero-left { padding: 3rem 2rem; }
+      .problem-grid { grid-template-columns: 1fr 1fr; }
+      .service-item { grid-template-columns: 60px 1fr; }
+      .service-sub { display: none; }
+      .flow-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .flow-steps::before { display: none; }
+      .ach-grid { grid-template-columns: 1fr 1fr; }
+      .ach-item:nth-child(2) { border-right: none; }
+      .ach-item:nth-child(3) { border-top: 1px solid var(--border); }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .cf-row2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     Navigation
+============================================================ -->
+<nav id="nav">
+  <div class="nav-logo">
+    <span class="nav-logo-main">税理士法人 サクセスパートナーズ</span>
+    <span class="nav-logo-sub">SUCCESS PARTNERS TAX ACCOUNTING FIRM</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">サービス</a></li>
+    <li><a href="#flow">ご依頼の流れ</a></li>
+    <li><a href="#testimonials">お客様の声</a></li>
+    <li><a href="#faq">よくある質問</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <div class="nav-cta-wrap">
+    <span class="nav-tel-small">03-XXXX-XXXX</span>
+    <a href="#contact" class="nav-cta-btn">無料相談</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     Hero — Split
+============================================================ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-left-body">
+      <span class="hero-badge">初回相談無料・全国対応</span>
+      <h1 class="hero-h1">
+        経営の悩みを、<br>
+        <em>数字</em>で解決する。<br>
+        頼れる税務パートナー。
+      </h1>
+      <p class="hero-copy">
+        創業から10年、累計1,200社以上の経営者様を支援してきました。
+        税務申告だけでなく、節税・資金調達・事業承継まで、
+        あなたのビジネスに伴走し続けます。
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">無料相談を予約する</a>
+        <a href="#services" class="btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3);">サービス詳細</a>
+      </div>
+      <p class="hero-note">相談料は一切いただきません。まずはお気軽にご連絡ください。</p>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1000&q=85" alt="税理士事務所">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-card" data-aos="fade-up" data-aos-delay="600">
+      <div class="hero-card-num">1,200<span>社+</span></div>
+      <div class="hero-card-text">創業支援・税務申告の<br>豊富な実績</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Problems
+============================================================ -->
+<section id="problems">
+  <div class="wrap">
+    <div class="problems-head">
+      <span class="sec-label" data-aos="fade-up">PROBLEMS WE SOLVE</span>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="100">こんなお悩みはありませんか？</h2>
+      <div class="rule-teal rule-center" data-aos="fade-up" data-aos-delay="150"></div>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="problem-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>税金が高くて、どう節税すればいいか分からない</h3>
+        <p>適切な節税対策を知らないと、本来払わなくていい税金を支払い続けることになります。</p>
+      </div>
+      <div class="problem-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="problem-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>決算・確定申告の期限が近いのに準備が間に合わない</h3>
+        <p>毎年バタバタしてしまう。ギリギリになって慌てて対応するのは精神的にも消耗します。</p>
+      </div>
+      <div class="problem-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="problem-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>事業承継・相続の準備を早めに進めておきたい</h3>
+        <p>準備が遅れると選択肢が狭まります。早期の対策で、スムーズな引き継ぎが実現できます。</p>
+      </div>
+      <div class="problem-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="problem-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>インボイス・電子帳簿保存法への対応が分からない</h3>
+        <p>複雑な税制改正への対応を後回しにすると、ペナルティや業務負担増のリスクがあります。</p>
+      </div>
+      <div class="problem-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="problem-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>資金繰りが厳しく、融資のサポートが欲しい</h3>
+        <p>事業拡大や設備投資のための資金調達。銀行対応・補助金申請まで一括サポートします。</p>
+      </div>
+      <div class="problem-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="problem-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>記帳・経理業務が煩雑で本業に集中できない</h3>
+        <p>経理業務を丸ごとアウトソーシング。コア業務に専念できる環境を作ります。</p>
+      </div>
+    </div>
+    <div class="problems-cta" data-aos="fade-up">
+      <p>まずは無料でご相談ください。最適な解決策をご提案します。</p>
+      <a href="#contact" class="btn-primary">無料相談を申し込む</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Services
+============================================================ -->
+<section id="services">
+  <div class="wrap">
+    <div class="services-head">
+      <span class="sec-label" data-aos="fade-up">OUR SERVICES</span>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="100">サービス内容</h2>
+      <div class="rule-teal rule-center" data-aos="fade-up" data-aos-delay="150"></div>
+    </div>
+    <div class="service-list" data-aos="fade-up" data-aos-delay="200">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <div class="service-main">
+          <div class="service-tag">TAX ACCOUNTING</div>
+          <h3>税務・会計サポート</h3>
+          <p>記帳代行から決算申告まで一貫してサポート。freeeやマネーフォワードとの連携で、リアルタイムな経営数値の把握を実現します。</p>
+        </div>
+        <div class="service-sub">
+          <div class="service-sub-item">法人税・消費税申告</div>
+          <div class="service-sub-item">月次決算・試算表作成</div>
+          <div class="service-sub-item">記帳代行・経理代行</div>
+          <div class="service-sub-item">クラウド会計導入支援</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <div class="service-main">
+          <div class="service-tag">TAX SAVING</div>
+          <h3>節税・税務対策</h3>
+          <p>合法的な節税スキームをご提案。役員報酬の最適化、経費計上の見直し、各種税制優遇の活用など、御社の状況に合わせた戦略を設計します。</p>
+        </div>
+        <div class="service-sub">
+          <div class="service-sub-item">役員報酬最適化</div>
+          <div class="service-sub-item">経費・減価償却の見直し</div>
+          <div class="service-sub-item">各種税制優遇の活用</div>
+          <div class="service-sub-item">法人設立スキーム設計</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <div class="service-main">
+          <div class="service-tag">BUSINESS SUCCESSION</div>
+          <h3>事業承継・相続対策</h3>
+          <p>経営者の高齢化に伴い、事業承継・相続対策はますます重要に。早期の計画立案と実行で、スムーズな世代交代と税負担の最小化を実現します。</p>
+        </div>
+        <div class="service-sub">
+          <div class="service-sub-item">事業承継計画の策定</div>
+          <div class="service-sub-item">相続税試算・対策立案</div>
+          <div class="service-sub-item">株式評価・組織再編</div>
+          <div class="service-sub-item">M&Aアドバイザリー</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Flow
+============================================================ -->
+<section id="flow">
+  <div class="wrap">
+    <div class="flow-head">
+      <span class="sec-label" style="color:var(--teal2)" data-aos="fade-up">HOW IT WORKS</span>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="100">ご依頼の流れ</h2>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step" data-aos="fade-up" data-aos-delay="0">
+        <div class="flow-step-circle">01</div>
+        <h4>無料相談</h4>
+        <p>まずはお電話またはフォームからご連絡ください。お悩みをお聞きします。</p>
+      </div>
+      <div class="flow-step" data-aos="fade-up" data-aos-delay="100">
+        <div class="flow-step-circle">02</div>
+        <h4>ヒアリング</h4>
+        <p>現状の課題・ご要望を詳しくお伺いし、最適なプランをご提案します。</p>
+      </div>
+      <div class="flow-step" data-aos="fade-up" data-aos-delay="200">
+        <div class="flow-step-circle">03</div>
+        <h4>お見積り</h4>
+        <p>サービス内容と費用をご説明します。ご納得いただいてから契約します。</p>
+      </div>
+      <div class="flow-step" data-aos="fade-up" data-aos-delay="300">
+        <div class="flow-step-circle">04</div>
+        <h4>業務開始</h4>
+        <p>担当税理士が決まり次第、速やかに業務を開始いたします。</p>
+      </div>
+      <div class="flow-step" data-aos="fade-up" data-aos-delay="400">
+        <div class="flow-step-circle">05</div>
+        <h4>継続サポート</h4>
+        <p>月次の報告・相談を通じ、経営パートナーとして長期的に伴走します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Achievements
+============================================================ -->
+<section id="achievements">
+  <div class="wrap">
+    <div class="ach-grid">
+      <div class="ach-item" data-aos="fade-up" data-aos-delay="0">
+        <div class="ach-num" data-count="1200">0<span>社+</span></div>
+        <div class="ach-label">累計支援実績</div>
+      </div>
+      <div class="ach-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="ach-num" data-count="10">0<span>年</span></div>
+        <div class="ach-label">事務所設立からの年数</div>
+      </div>
+      <div class="ach-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="ach-num" data-count="98">0<span>%</span></div>
+        <div class="ach-label">顧客継続率</div>
+      </div>
+      <div class="ach-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="ach-num" data-count="12">0<span>名</span></div>
+        <div class="ach-label">所属税理士・スタッフ数</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Testimonials — Swiper
+============================================================ -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="testimonials-head">
+      <span class="sec-label" data-aos="fade-up">TESTIMONIALS</span>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="100">お客様の声</h2>
+      <div class="rule-teal rule-center" data-aos="fade-up" data-aos-delay="150"></div>
+    </div>
+    <div class="swiper swiper-testimonial" data-aos="fade-up" data-aos-delay="200">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">顧問税理士を変えてから、毎月の数字が見えるようになり、経営判断のスピードが格段に上がりました。節税対策の提案も的確で、前年比で法人税を約30%削減できました。</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=96&q=80" alt=""></div>
+              <div>
+                <div class="testimonial-name">田中 雄一 様</div>
+                <div class="testimonial-role">IT系スタートアップ 代表取締役（30代）</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">相続対策を早めに相談できて本当に良かったです。何から始めればよいか全く分からない状態でしたが、丁寧にステップを説明していただき、安心して進めることができました。</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&q=80" alt=""></div>
+              <div>
+                <div class="testimonial-name">山本 恵子 様</div>
+                <div class="testimonial-role">不動産賃貸業 オーナー（60代）</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">創業時から関わってもらっています。資金調達の場面でも銀行への交渉資料を一緒に作っていただき、無事に融資を受けることができました。本当に頼りになるパートナーです。</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&q=80" alt=""></div>
+              <div>
+                <div class="testimonial-name">佐藤 健太 様</div>
+                <div class="testimonial-role">飲食業 代表取締役（40代）</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="faq-head">
+      <span class="sec-label" data-aos="fade-up">FAQ</span>
+      <h2 class="sec-title" data-aos="fade-up" data-aos-delay="100">よくあるご質問</h2>
+      <div class="rule-teal rule-center" data-aos="fade-up" data-aos-delay="150"></div>
+    </div>
+    <div class="faq-list" data-aos="fade-up" data-aos-delay="200">
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">顧問料はどのくらいかかりますか？</span>
+          <span class="faq-icon"></span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">売上規模や業務内容によって異なりますが、<strong>月額2万円〜</strong>でご対応可能です。初回ヒアリング後に最適なプランをご提案しますので、まずはお気軽にご相談ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">今の税理士から変更することはできますか？</span>
+          <span class="faq-icon"></span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">もちろん可能です。<strong>切り替えに必要な手続きはすべて弊社が代行</strong>いたします。前の顧問税理士との連絡・引き継ぎも円滑に行いますのでご安心ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">個人事業主でも対応してもらえますか？</span>
+          <span class="faq-icon"></span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">はい、<strong>個人事業主・フリーランスの方も歓迎</strong>しております。確定申告のみのスポット対応から、月次顧問契約まで柔軟にご対応いたします。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">オンラインでの打ち合わせは可能ですか？</span>
+          <span class="faq-icon"></span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Zoom・Google Meet等のオンライン面談に完全対応</strong>しています。全国どこからでもご相談いただけます。もちろん来所でのご相談も歓迎しております。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">決算・申告だけでも依頼できますか？</span>
+          <span class="faq-icon"></span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">はい、<strong>決算・申告のみのスポット対応</strong>も承っております。まずは単発でご依頼いただき、その後ご満足いただければ継続的なサポートへの移行も可能です。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Contact
+============================================================ -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-head" data-aos="fade-up">
+      <span class="sec-label">CONTACT</span>
+      <h2 class="sec-title">無料相談・お問い合わせ</h2>
+      <div class="rule-teal rule-center"></div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-top:0.8rem;line-height:1.9">初回のご相談は完全無料です。お気軽にお問い合わせください。</p>
+    </div>
+    <div class="contact-grid" data-aos="fade-up" data-aos-delay="150">
+      <div class="contact-tel-box">
+        <h4>お電話でのご相談</h4>
+        <div class="contact-tel-num">03-XXXX-XXXX</div>
+        <div class="contact-tel-hours">受付時間：平日 9:00〜18:00</div>
+        <a href="tel:03-XXXX-XXXX" class="contact-tel-cta">今すぐ電話する</a>
+      </div>
+      <div class="contact-form">
+        <h4>無料相談フォーム</h4>
+        <form>
+          <div class="cf-row2">
+            <div class="cf-g">
+              <label>会社名・屋号<span class="req">*</span></label>
+              <input type="text" placeholder="株式会社〇〇" required>
+            </div>
+            <div class="cf-g">
+              <label>お名前<span class="req">*</span></label>
+              <input type="text" placeholder="山田 太郎" required>
+            </div>
+          </div>
+          <div class="cf-row2">
+            <div class="cf-g">
+              <label>電話番号<span class="req">*</span></label>
+              <input type="tel" placeholder="090-XXXX-XXXX" required>
+            </div>
+            <div class="cf-g">
+              <label>メールアドレス</label>
+              <input type="email" placeholder="example@email.com">
+            </div>
+          </div>
+          <div class="cf-g">
+            <label>ご相談内容</label>
+            <select>
+              <option>税務・会計サポート</option>
+              <option>節税・税務対策</option>
+              <option>事業承継・相続対策</option>
+              <option>資金調達・融資支援</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="cf-g">
+            <label>ご質問・ご要望</label>
+            <textarea rows="3" placeholder="お気軽にご記入ください"></textarea>
+          </div>
+          <button type="submit" class="btn-submit-cf">無料相談を申し込む</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-info">
+    <h4>税理士法人 サクセスパートナーズ</h4>
+    <p>〒100-0001 東京都千代田区丸の内 X-XX-XX XXビル 8F<br>
+    TEL: 03-XXXX-XXXX　FAX: 03-XXXX-XXXX　受付時間: 平日 9:00〜18:00</p>
+  </div>
+  <small>© 2024 Success Partners Tax Accounting Firm. All Rights Reserved.</small>
+</footer>
+
+<!-- ============================================================
+     JavaScript
+============================================================ -->
+<script>
+  /* AOS init */
+  AOS.init({ duration: 750, once: true, offset: 80 });
+
+  /* Swiper init */
+  new Swiper('.swiper-testimonial', {
+    slidesPerView: 1,
+    spaceBetween: 24,
+    loop: true,
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 2 } }
+  });
+
+  /* FAQ Accordion */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* Counter animation via IntersectionObserver */
+  const countEls = document.querySelectorAll('[data-count]');
+  const countObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el  = entry.target;
+      const end = parseInt(el.dataset.count);
+      const suffix = el.querySelector('span') ? el.querySelector('span').outerHTML : '';
+      let current = 0;
+      const duration = 1600;
+      const step = end / (duration / 16);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= end) {
+          el.innerHTML = end + suffix;
+          clearInterval(timer);
+          return;
+        }
+        el.innerHTML = Math.floor(current) + suffix;
+      }, 16);
+      countObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  countEls.forEach(el => countObs.observe(el));
+
+  /* Form submit */
+  document.querySelector('form').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]');
+    btn.textContent = '送信しました！担当者よりご連絡いたします。';
+    btn.style.background = '#27ae60';
+    setTimeout(() => {
+      btn.textContent = '無料相談を申し込む';
+      btn.style.background = '';
+    }, 4000);
+  });
+</script>
+</body>
+</html>

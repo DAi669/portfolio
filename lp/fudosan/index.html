@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ja" x-data>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プレミアコート代官山 | 都心に生きる、品格ある住まい</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    /* ============================================================
+       Variables & Reset
+    ============================================================ */
+    :root {
+      --navy:      #16243e;
+      --navy2:     #0d1829;
+      --gold:      #b8932a;
+      --gold2:     #d4ae52;
+      --ivory:     #f8f6f1;
+      --light:     #edeae3;
+      --text:      #2c2c2c;
+      --muted:     #7a7567;
+      --border:    #ddd8ce;
+      --serif:     'Cormorant Garamond', 'Yu Mincho', Georgia, serif;
+      --sans:      'Noto Sans JP', sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--ivory);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       Intersection Observer Reveal Classes
+    ============================================================ */
+    .io-hidden { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .io-hidden.io-left  { transform: translateX(-50px); }
+    .io-hidden.io-right { transform: translateX(50px); }
+    .io-hidden.io-scale { transform: scale(0.92); }
+    .io-visible { opacity: 1 !important; transform: none !important; }
+    .io-delay-1 { transition-delay: 0.1s; }
+    .io-delay-2 { transition-delay: 0.2s; }
+    .io-delay-3 { transition-delay: 0.3s; }
+    .io-delay-4 { transition-delay: 0.4s; }
+    .io-delay-5 { transition-delay: 0.5s; }
+
+    /* ============================================================
+       Navigation
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      background: transparent;
+      transition: background 0.45s ease, box-shadow 0.45s ease;
+    }
+    #nav.solid {
+      background: rgba(22, 36, 62, 0.97);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+    }
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .nav-brand-en {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: #fff;
+      letter-spacing: 0.08em;
+    }
+    .nav-brand-ja {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.25em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.1em;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold2); }
+    .nav-cta {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      color: #fff;
+      background: var(--gold);
+      padding: 0.6rem 1.6rem;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      transition: background 0.25s;
+    }
+    .nav-cta:hover { background: var(--gold2); }
+
+    /* ============================================================
+       Hero
+    ============================================================ */
+    #hero {
+      height: 100vh;
+      min-height: 700px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=85')
+        center/cover no-repeat;
+      transform: scale(1.08);
+      animation: heroZoom 12s ease-out forwards;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1.0); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(13,24,41,0.72) 0%,
+        rgba(13,24,41,0.30) 55%,
+        rgba(13,24,41,0.55) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 0 5rem 6rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .hero-left { max-width: 680px; }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      animation: fadeSlideUp 0.8s 0.4s ease both;
+    }
+    .hero-eyebrow-line { width: 32px; height: 1px; background: var(--gold); }
+    .hero-eyebrow-text { font-size: 0.72rem; letter-spacing: 0.45em; color: var(--gold2); }
+    .hero-title {
+      font-family: var(--serif);
+      color: #fff;
+      line-height: 1.1;
+      animation: fadeSlideUp 0.8s 0.6s ease both;
+    }
+    .hero-title .en {
+      display: block;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .hero-title .ja {
+      display: block;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: rgba(255,255,255,0.65);
+      margin-top: 0.5rem;
+    }
+    .hero-copy {
+      font-size: 1rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.75);
+      margin-top: 1.5rem;
+      animation: fadeSlideUp 0.8s 0.8s ease both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.2rem;
+      animation: fadeSlideUp 0.8s 1s ease both;
+    }
+    .btn-gold {
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      background: var(--gold);
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+    .btn-border-white {
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 0.9rem 2.2rem;
+      display: inline-block;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-border-white:hover { border-color: var(--gold2); color: var(--gold2); }
+
+    /* Stats strip on hero right */
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      animation: fadeSlideUp 0.8s 1.1s ease both;
+    }
+    .hero-stat {
+      text-align: right;
+      border-right: 2px solid var(--gold);
+      padding-right: 1.2rem;
+    }
+    .hero-stat-num {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      color: #fff;
+      line-height: 1;
+      font-weight: 600;
+    }
+    .hero-stat-unit { font-size: 0.85rem; color: var(--gold2); }
+    .hero-stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.5); letter-spacing: 0.2em; margin-top: 0.2rem; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll arrow */
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: fadeSlideUp 1s 1.5s ease both;
+      cursor: pointer;
+    }
+    .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.45em; color: rgba(255,255,255,0.45); }
+    .scroll-arrow {
+      width: 28px;
+      height: 28px;
+      border-right: 1px solid rgba(255,255,255,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      transform: rotate(45deg);
+      animation: arrowBounce 1.5s ease-in-out infinite;
+    }
+    @keyframes arrowBounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* ============================================================
+       Concept Strip
+    ============================================================ */
+    #concept {
+      background: var(--navy);
+      padding: 5rem 0;
+    }
+    .concept-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      display: grid;
+      grid-template-columns: 1fr 2px 1fr 2px 1fr;
+      gap: 0;
+      align-items: center;
+    }
+    .concept-divider { background: rgba(255,255,255,0.08); align-self: stretch; }
+    .concept-item { padding: 1rem 3rem; text-align: center; }
+    .concept-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1rem;
+      position: relative;
+    }
+    .concept-icon svg { width: 100%; height: 100%; stroke: var(--gold); fill: none; stroke-width: 1.2; }
+    .concept-item h3 {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    .concept-item p { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.9; }
+
+    /* ============================================================
+       Overview
+    ============================================================ */
+    #overview {
+      padding: 8rem 0;
+      background: var(--ivory);
+    }
+    .section-head {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .label-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.55em;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.7rem;
+    }
+    .h2-serif {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    .rule-gold {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.2rem auto 0;
+    }
+
+    /* Tabs (Alpine.js) */
+    .overview-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+    .tab-nav {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    .tab-btn {
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      padding: 0.9rem 2rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.25s, border-color 0.25s;
+      font-family: var(--sans);
+    }
+    .tab-btn.active { color: var(--navy); border-color: var(--gold); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Overview grid */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .overview-img { overflow: hidden; }
+    .overview-img img { width: 100%; height: 420px; object-fit: cover; }
+    .overview-specs table { width: 100%; border-collapse: collapse; }
+    .overview-specs tr { border-bottom: 1px solid var(--border); }
+    .overview-specs th {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      padding: 0.9rem 0;
+      font-weight: 500;
+      width: 38%;
+      vertical-align: top;
+    }
+    .overview-specs td {
+      font-size: 0.88rem;
+      color: var(--text);
+      padding: 0.9rem 0;
+      line-height: 1.8;
+    }
+    .overview-specs td strong { font-weight: 500; }
+
+    /* Floor plan grid */
+    .floorplan-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .fp-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .fp-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.1); transform: translateY(-4px); }
+    .fp-img { height: 200px; overflow: hidden; background: #f0ece4; display: flex; align-items: center; justify-content: center; }
+    .fp-img img { width: 100%; height: 100%; object-fit: cover; }
+    .fp-body { padding: 1.2rem; }
+    .fp-type { font-family: var(--serif); font-size: 1.4rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .fp-area { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .fp-price { font-size: 1.2rem; font-weight: 700; color: var(--gold); }
+    .fp-price span { font-size: 0.75rem; color: var(--muted); font-weight: 300; }
+
+    /* ============================================================
+       Features (zig-zag)
+    ============================================================ */
+    #features {
+      padding: 8rem 0;
+      background: var(--light);
+    }
+    .feature-row {
+      max-width: 1100px;
+      margin: 0 auto 6rem;
+      padding: 0 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .feature-row:last-child { margin-bottom: 0; }
+    .feature-row.reverse .feature-img { order: 2; }
+    .feature-row.reverse .feature-text { order: 1; }
+    .feature-img { overflow: hidden; position: relative; }
+    .feature-img img { width: 100%; height: 380px; object-fit: cover; transition: transform 0.6s ease; }
+    .feature-img:hover img { transform: scale(1.04); }
+    .feature-img-num {
+      position: absolute;
+      top: 1.5rem; left: 1.5rem;
+      font-family: var(--serif);
+      font-size: 4rem;
+      color: rgba(255,255,255,0.15);
+      line-height: 1;
+      font-weight: 600;
+    }
+    .feature-text .label-tag { text-align: left; }
+    .feature-text .h2-serif { text-align: left; font-size: clamp(1.5rem, 3vw, 2rem); }
+    .feature-text .rule-gold { margin: 1.2rem 0; }
+    .feature-text p { font-size: 0.9rem; color: var(--muted); line-height: 2.1; margin-bottom: 1rem; }
+    .feature-text p strong { color: var(--text); font-weight: 500; }
+
+    /* ============================================================
+       Gallery — Wipe Reveal
+    ============================================================ */
+    #gallery {
+      padding: 8rem 0;
+      background: var(--navy);
+    }
+    .gallery-head { text-align: center; margin-bottom: 3rem; }
+    .gallery-head .h2-serif { color: #fff; }
+
+    .gallery-main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 320px 320px;
+      gap: 0.4rem;
+    }
+    .gallery-item { overflow: hidden; position: relative; }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease, filter 0.7s ease;
+      filter: brightness(0.85);
+    }
+    .gallery-item:hover img { transform: scale(1.05); filter: brightness(1); }
+    .gallery-item-label {
+      position: absolute;
+      bottom: 1rem; left: 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.35);
+      padding: 0.3rem 0.8rem;
+      backdrop-filter: blur(4px);
+    }
+    /* Wipe animation via clip-path */
+    .gallery-item { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s cubic-bezier(0.77, 0, 0.175, 1); }
+    .gallery-item.revealed { clip-path: inset(0 0% 0 0); }
+
+    /* ============================================================
+       Location
+    ============================================================ */
+    #location {
+      padding: 8rem 0;
+      background: var(--ivory);
+    }
+    .location-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .location-map {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+      background: #d8d2c8;
+    }
+    .location-map img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.6) contrast(1.1); }
+    .station-list { margin-top: 2rem; }
+    .station-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .station-name { font-size: 0.88rem; color: var(--text); }
+    .station-line {
+      font-size: 0.7rem;
+      color: var(--muted);
+      background: var(--light);
+      padding: 0.2rem 0.6rem;
+      letter-spacing: 0.08em;
+    }
+    .station-time {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+    .station-time span { font-size: 0.7rem; font-weight: 300; color: var(--muted); }
+
+    .amenity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 0.6rem;
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+    .amenity-item::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       CTA / Contact
+    ============================================================ */
+    #contact {
+      padding: 8rem 0;
+      background: var(--navy2);
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=60') center/cover;
+      opacity: 0.06;
+    }
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+    .contact-head { text-align: center; margin-bottom: 3.5rem; }
+    .contact-head .h2-serif { color: #fff; }
+    .contact-head p { font-size: 0.88rem; color: rgba(255,255,255,0.5); margin-top: 1rem; line-height: 1.9; }
+    .contact-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 3.5rem;
+    }
+    .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .fg { margin-bottom: 1.4rem; }
+    .fg label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--gold2);
+      margin-bottom: 0.5rem;
+    }
+    .fg label .req { color: #e74c3c; margin-left: 0.3rem; }
+    .fg input,
+    .fg select,
+    .fg textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 0.8rem 1rem;
+      font-size: 0.88rem;
+      font-family: var(--sans);
+      font-weight: 300;
+      outline: none;
+      -webkit-appearance: none;
+      transition: border-color 0.3s;
+    }
+    .fg input::placeholder,
+    .fg textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .fg input:focus,
+    .fg select:focus,
+    .fg textarea:focus { border-color: var(--gold); }
+    .fg select option { background: var(--navy2); }
+    .fg-check { display: flex; align-items: flex-start; gap: 0.7rem; }
+    .fg-check input[type=checkbox] { width: auto; margin-top: 3px; accent-color: var(--gold); }
+    .fg-check label { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; cursor: pointer; }
+    .btn-contact-submit {
+      width: 100%;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 1.1rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: background 0.25s;
+    }
+    .btn-contact-submit:hover { background: var(--gold2); }
+
+    /* ============================================================
+       Footer
+    ============================================================ */
+    footer {
+      background: #040c18;
+      padding: 3rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand { font-family: var(--serif); font-size: 1.1rem; color: rgba(255,255,255,0.6); letter-spacing: 0.15em; }
+    footer small { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; }
+
+    /* ============================================================
+       Responsive
+    ============================================================ */
+    @media (max-width: 960px) {
+      #nav { padding: 0 1.5rem; }
+      #nav .nav-links { display: none; }
+      .hero-content { padding: 0 2rem 4rem; flex-direction: column; }
+      .hero-stats { flex-direction: row; justify-content: flex-start; }
+      .hero-stat { text-align: left; border-right: none; border-left: 2px solid var(--gold); padding-right: 0; padding-left: 1rem; }
+      .concept-inner { grid-template-columns: 1fr; }
+      .concept-divider { display: none; }
+      .overview-grid,
+      .feature-row,
+      .location-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .feature-row.reverse .feature-img,
+      .feature-row.reverse .feature-text { order: unset; }
+      .gallery-main { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-row: span 1; height: 280px; }
+      .gallery-item { height: 220px; }
+      .floorplan-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .form-row2 { grid-template-columns: 1fr; }
+      .floorplan-grid { grid-template-columns: 1fr; }
+      .contact-form { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     Navigation
+============================================================ -->
+<nav id="nav">
+  <div class="nav-brand">
+    <span class="nav-brand-en">Premier Court Daikanyama</span>
+    <span class="nav-brand-ja">プレミアコート代官山</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#overview">物件概要</a></li>
+    <li><a href="#features">特徴</a></li>
+    <li><a href="#gallery">ギャラリー</a></li>
+    <li><a href="#location">立地</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">資料請求</a>
+</nav>
+
+<!-- ============================================================
+     Hero
+============================================================ -->
+<section id="hero">
+  <div class="hero-media"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        <span class="hero-eyebrow-text">DAIKANYAMA, TOKYO — NEW LISTING</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="en">Premier Court</span>
+        <span class="ja">プレミアコート代官山</span>
+      </h1>
+      <p class="hero-copy">
+        代官山の静謐な高台に誕生する、全27邸の上質レジデンス。<br>
+        東京の洗練と、緑豊かな住環境が交差する場所に生きる。
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-gold">資料請求・見学予約</a>
+        <a href="#overview" class="btn-border-white">物件概要を見る</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">27<span class="hero-stat-unit">邸</span></div>
+        <div class="hero-stat-label">TOTAL UNITS</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3<span class="hero-stat-unit">分</span></div>
+        <div class="hero-stat-label">TO DAIKANYAMA ST.</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">12<span class="hero-stat-unit">階</span></div>
+        <div class="hero-stat-label">MAX FLOOR</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('concept').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-arrow"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     Concept Strip
+============================================================ -->
+<section id="concept">
+  <div class="concept-inner">
+    <div class="concept-item io-hidden" data-delay="0">
+      <div class="concept-icon">
+        <svg viewBox="0 0 48 48"><path d="M24 4 L44 20 L44 44 L4 44 L4 20 Z"/><path d="M18 44 L18 30 L30 30 L30 44"/></svg>
+      </div>
+      <h3>上質な居住空間</h3>
+      <p>天井高2.6mを確保した開放的なリビング。<br>自然素材を使った上質なインテリア。</p>
+    </div>
+    <div class="concept-divider"></div>
+    <div class="concept-item io-hidden" data-delay="150">
+      <div class="concept-icon">
+        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 8 L24 24 L34 34"/></svg>
+      </div>
+      <h3>利便性の高い立地</h3>
+      <p>代官山駅徒歩3分。渋谷・中目黒へも<br>アクセス良好な都心の好立地。</p>
+    </div>
+    <div class="concept-divider"></div>
+    <div class="concept-item io-hidden" data-delay="300">
+      <div class="concept-icon">
+        <svg viewBox="0 0 48 48"><path d="M6 42 L6 16 L24 6 L42 16 L42 42"/><path d="M16 42 L16 28 L32 28 L32 42"/><path d="M20 20 L28 20"/></svg>
+      </div>
+      <h3>長期資産価値</h3>
+      <p>代官山エリアの希少性と<br>高い建物グレードで資産価値を維持。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Overview — Alpine.js Tabs
+============================================================ -->
+<section id="overview">
+  <div class="section-head io-hidden">
+    <span class="label-tag">PROPERTY OVERVIEW</span>
+    <h2 class="h2-serif">物件概要</h2>
+    <div class="rule-gold"></div>
+  </div>
+
+  <div class="overview-wrap" x-data="{ tab: 'A' }">
+    <!-- Tab Nav -->
+    <div class="tab-nav io-hidden">
+      <button class="tab-btn" :class="{ active: tab === 'A' }" @click="tab = 'A'">物件情報</button>
+      <button class="tab-btn" :class="{ active: tab === 'B' }" @click="tab = 'B'">間取りプラン</button>
+      <button class="tab-btn" :class="{ active: tab === 'C' }" @click="tab = 'C'">設備・仕様</button>
+    </div>
+
+    <!-- Tab A: 物件情報 -->
+    <div x-show="tab === 'A'" x-transition:enter="fadeIn" style="animation: fadeIn 0.4s ease both">
+      <div class="overview-grid">
+        <div class="overview-img io-hidden io-left">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=85" alt="外観">
+        </div>
+        <div class="overview-specs io-hidden io-right">
+          <table>
+            <tr><th>物件名</th><td><strong>プレミアコート代官山</strong></td></tr>
+            <tr><th>所在地</th><td>東京都渋谷区代官山町 XX-XX</td></tr>
+            <tr><th>交通</th><td>東急東横線「代官山」駅 徒歩3分<br>JR山手線「渋谷」駅 徒歩12分</td></tr>
+            <tr><th>総戸数</th><td>27戸（非分譲住戸含む）</td></tr>
+            <tr><th>構造・規模</th><td>鉄筋コンクリート造 地上12階建</td></tr>
+            <tr><th>竣工予定</th><td>2025年3月下旬予定</td></tr>
+            <tr><th>入居予定</th><td>2025年5月下旬予定</td></tr>
+            <tr><th>管理形態</th><td>全日警ビルマネジメント（株）</td></tr>
+            <tr><th>売主</th><td>株式会社プレミア不動産</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab B: 間取り -->
+    <div x-show="tab === 'B'" x-transition:enter="fadeIn">
+      <div class="floorplan-grid">
+        <div class="fp-card io-hidden" data-delay="0">
+          <div class="fp-img">
+            <img src="https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=500&q=80" alt="1LDK">
+          </div>
+          <div class="fp-body">
+            <div class="fp-type">1LDK</div>
+            <div class="fp-area">42.80m² 〜 48.50m²</div>
+            <div class="fp-price">5,980万円<span>〜</span></div>
+          </div>
+        </div>
+        <div class="fp-card io-hidden" data-delay="100">
+          <div class="fp-img">
+            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=500&q=80" alt="2LDK">
+          </div>
+          <div class="fp-body">
+            <div class="fp-type">2LDK</div>
+            <div class="fp-area">62.30m² 〜 74.80m²</div>
+            <div class="fp-price">8,480万円<span>〜</span></div>
+          </div>
+        </div>
+        <div class="fp-card io-hidden" data-delay="200">
+          <div class="fp-img">
+            <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=500&q=80" alt="3LDK">
+          </div>
+          <div class="fp-body">
+            <div class="fp-type">3LDK</div>
+            <div class="fp-area">88.60m² 〜 105.20m²</div>
+            <div class="fp-price">12,800万円<span>〜</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab C: 設備 -->
+    <div x-show="tab === 'C'" x-transition:enter="fadeIn">
+      <div class="overview-grid">
+        <div class="overview-img io-hidden io-left">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=85" alt="キッチン">
+        </div>
+        <div class="overview-specs io-hidden io-right">
+          <table>
+            <tr><th>キッチン</th><td>システムキッチン（食洗機付）<br>天然石カウンタートップ</td></tr>
+            <tr><th>浴室</th><td>1坪以上の浴室・追焚機能<br>浴室乾燥機・ミストサウナ</td></tr>
+            <tr><th>床材</th><td>無垢フローリング（リビング・寝室）<br>石貼り（エントランス・洗面）</td></tr>
+            <tr><th>セキュリティ</th><td>24時間有人管理<br>オートロック・防犯カメラ</td></tr>
+            <tr><th>スマートホーム</th><td>宅配ボックス・スマートロック<br>高速光ファイバー完備</td></tr>
+            <tr><th>駐車場</th><td>機械式駐車場 12台（月額38,000円）</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Features (zig-zag)
+============================================================ -->
+<section id="features">
+  <div class="feature-row">
+    <div class="feature-img io-hidden io-left">
+      <div class="feature-img-num">01</div>
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85" alt="外観デザイン">
+    </div>
+    <div class="feature-text io-hidden io-right">
+      <span class="label-tag">ARCHITECTURE</span>
+      <h2 class="h2-serif">代官山の街並みに<br>溶け込む建築美</h2>
+      <div class="rule-gold"></div>
+      <p>著名建築家がデザインしたファサードは、代官山の上質な街並みと調和しながらも、<strong>圧倒的な存在感</strong>を放ちます。</p>
+      <p>自然素材をふんだんに使い、経年変化を美しく取り込む設計思想。時を経るごとに、より深みを増す建物です。</p>
+    </div>
+  </div>
+
+  <div class="feature-row reverse">
+    <div class="feature-text io-hidden io-left">
+      <span class="label-tag">INTERIOR</span>
+      <h2 class="h2-serif">妥協なき<br>インテリアクオリティ</h2>
+      <div class="rule-gold"></div>
+      <p>天井高2.6mを確保したリビング。<strong>無垢フローリング</strong>と天然石を組み合わせた床面が、上質な空気感を生み出します。</p>
+      <p>収納計画も徹底的に見直し、すっきりとした空間の中に必要な機能をすべて凝縮しました。</p>
+    </div>
+    <div class="feature-img io-hidden io-right">
+      <div class="feature-img-num">02</div>
+      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=85" alt="インテリア">
+    </div>
+  </div>
+
+  <div class="feature-row">
+    <div class="feature-img io-hidden io-left">
+      <div class="feature-img-num">03</div>
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85" alt="眺望">
+    </div>
+    <div class="feature-text io-hidden io-right">
+      <span class="label-tag">VIEW & ENVIRONMENT</span>
+      <h2 class="h2-serif">都市の稜線と<br>緑が交差する眺望</h2>
+      <div class="rule-gold"></div>
+      <p>高台に位置するため、代官山の緑と東京の<strong>スカイラインを同時に望む</strong>、唯一無二の眺望を享受できます。</p>
+      <p>中庭には樹齢50年を超える既存樹を活かした緑地を整備。四季を感じる豊かな住環境を実現しました。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Gallery
+============================================================ -->
+<section id="gallery">
+  <div class="gallery-head io-hidden">
+    <span class="label-tag" style="color:var(--gold2)">GALLERY</span>
+    <h2 class="h2-serif">物件ギャラリー</h2>
+  </div>
+  <div class="gallery-main">
+    <div class="gallery-item" style="transition-delay:0s">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=85" alt="外観">
+      <span class="gallery-item-label">EXTERIOR</span>
+    </div>
+    <div class="gallery-item" style="transition-delay:0.15s">
+      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=85" alt="リビング">
+      <span class="gallery-item-label">LIVING ROOM</span>
+    </div>
+    <div class="gallery-item" style="transition-delay:0.3s">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=85" alt="キッチン">
+      <span class="gallery-item-label">KITCHEN</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Location
+============================================================ -->
+<section id="location">
+  <div class="section-head io-hidden">
+    <span class="label-tag">LOCATION</span>
+    <h2 class="h2-serif">立地・周辺環境</h2>
+    <div class="rule-gold"></div>
+  </div>
+  <div class="location-grid">
+    <div class="io-hidden io-left">
+      <div class="location-map">
+        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=900&q=80" alt="地図">
+      </div>
+      <div class="station-list">
+        <div class="station-item">
+          <span class="station-name">代官山駅</span>
+          <span class="station-line">東急東横線</span>
+          <span class="station-time">徒歩 3<span>分</span></span>
+        </div>
+        <div class="station-item">
+          <span class="station-name">渋谷駅</span>
+          <span class="station-line">JR / 各線</span>
+          <span class="station-time">徒歩 12<span>分</span></span>
+        </div>
+        <div class="station-item">
+          <span class="station-name">中目黒駅</span>
+          <span class="station-line">東急 / 日比谷線</span>
+          <span class="station-time">徒歩 10<span>分</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="io-hidden io-right">
+      <h3 style="font-family:var(--serif);font-size:1.4rem;color:var(--navy);margin-bottom:1rem;font-weight:400;">周辺施設</h3>
+      <div class="amenity-grid">
+        <div class="amenity-item">代官山 蔦屋書店 徒歩2分</div>
+        <div class="amenity-item">オーバカナル 徒歩3分</div>
+        <div class="amenity-item">代官山アドレス 徒歩5分</div>
+        <div class="amenity-item">渋谷ストリーム 徒歩12分</div>
+        <div class="amenity-item">目黒川 徒歩8分</div>
+        <div class="amenity-item">東京大学附属病院 車10分</div>
+        <div class="amenity-item">区立猿楽小学校 徒歩5分</div>
+        <div class="amenity-item">代官山ヒルサイドテラス 徒歩4分</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Contact
+============================================================ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-head io-hidden">
+      <span class="label-tag">CONTACT</span>
+      <h2 class="h2-serif" style="color:#fff">資料請求・見学予約</h2>
+      <div class="rule-gold"></div>
+      <p>
+        物件の詳細資料のお届けや、モデルルームのご見学をご希望の方は<br>
+        下記フォームよりお申し込みください。担当者より折り返しご連絡いたします。
+      </p>
+    </div>
+    <div class="contact-form io-hidden io-scale">
+      <form>
+        <div class="form-row2">
+          <div class="fg">
+            <label>お名前<span class="req">*</span></label>
+            <input type="text" placeholder="山田 太郎" required>
+          </div>
+          <div class="fg">
+            <label>フリガナ<span class="req">*</span></label>
+            <input type="text" placeholder="ヤマダ タロウ" required>
+          </div>
+        </div>
+        <div class="form-row2">
+          <div class="fg">
+            <label>電話番号<span class="req">*</span></label>
+            <input type="tel" placeholder="090-XXXX-XXXX" required>
+          </div>
+          <div class="fg">
+            <label>メールアドレス<span class="req">*</span></label>
+            <input type="email" placeholder="example@email.com" required>
+          </div>
+        </div>
+        <div class="form-row2">
+          <div class="fg">
+            <label>ご希望間取り</label>
+            <select>
+              <option value="">-- 選択してください --</option>
+              <option>1LDK（5,980万円〜）</option>
+              <option>2LDK（8,480万円〜）</option>
+              <option>3LDK（12,800万円〜）</option>
+              <option>未定</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>ご検討時期</label>
+            <select>
+              <option>3ヶ月以内</option>
+              <option>半年以内</option>
+              <option>1年以内</option>
+              <option>時期未定</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label>ご質問・ご要望</label>
+          <textarea rows="3" placeholder="ご自由にご記入ください"></textarea>
+        </div>
+        <div class="fg">
+          <div class="fg-check">
+            <input type="checkbox" id="agree">
+            <label for="agree">個人情報の取り扱いに同意します。送信された情報は物件のご案内のみに使用いたします。</label>
+          </div>
+        </div>
+        <button type="submit" class="btn-contact-submit">資料請求・見学予約を申し込む</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-brand">Premier Court Daikanyama</div>
+  <small>© 2024 Premier Estate Co., Ltd. All Rights Reserved.</small>
+</footer>
+
+<!-- ============================================================
+     JavaScript — Intersection Observer
+============================================================ -->
+<script>
+  /* ----------------------------------------------------------
+     1. Navbar solid on scroll
+  ---------------------------------------------------------- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('solid', window.scrollY > 60);
+  });
+
+  /* ----------------------------------------------------------
+     2. Intersection Observer — reveal on scroll
+  ---------------------------------------------------------- */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el    = entry.target;
+      const delay = el.dataset.delay ? parseInt(el.dataset.delay) : 0;
+      setTimeout(() => el.classList.add('io-visible'), delay);
+      revealObserver.unobserve(el);
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.io-hidden').forEach(el => revealObserver.observe(el));
+
+  /* ----------------------------------------------------------
+     3. Gallery wipe reveal
+  ---------------------------------------------------------- */
+  const galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        galleryObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.gallery-item').forEach(el => galleryObserver.observe(el));
+
+  /* ----------------------------------------------------------
+     4. Smooth scroll for nav links
+  ---------------------------------------------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const offset = target.getBoundingClientRect().top + window.scrollY - 68;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    });
+  });
+
+  /* ----------------------------------------------------------
+     5. Counter animation for hero stats
+  ---------------------------------------------------------- */
+  function animateCounter(el, end, duration = 1400) {
+    let start = 0;
+    const step = end / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= end) { el.textContent = end; clearInterval(timer); return; }
+      el.textContent = Math.floor(start);
+    }, 16);
+  }
+
+  const counterObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      document.querySelectorAll('.hero-stat-num').forEach(el => {
+        const match = el.textContent.match(/\d+/);
+        if (match) {
+          const num    = parseInt(match[0]);
+          const suffix = el.querySelector('.hero-stat-unit');
+          const text   = suffix ? suffix.outerHTML : '';
+          el.innerHTML = '0' + text;
+          const numNode = el.childNodes[0];
+          animateCounter({ get textContent() { return numNode.textContent; },
+                           set textContent(v){ numNode.textContent = v; } }, num);
+        }
+      });
+      counterObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  counterObs.observe(document.getElementById('hero'));
+
+  /* ----------------------------------------------------------
+     6. Form submit feedback
+  ---------------------------------------------------------- */
+  document.querySelector('form').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-contact-submit');
+    btn.textContent = '送信しました。担当者よりご連絡いたします。';
+    btn.style.background = '#27ae60';
+    setTimeout(() => {
+      btn.textContent = '資料請求・見学予約を申し込む';
+      btn.style.background = '';
+    }, 4000);
+  });
+</script>
+</body>
+</html>

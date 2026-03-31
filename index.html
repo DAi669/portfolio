@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web制作ポートフォリオ | LP・ランディングページ制作実績</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    /* ============================================================
+       Variables & Reset
+    ============================================================ */
+    :root {
+      --primary:   #1a1a2e;
+      --accent:    #4f8ef7;
+      --accent2:   #7b5ea7;
+      --gradient:  linear-gradient(135deg, #4f8ef7 0%, #7b5ea7 100%);
+      --white:     #ffffff;
+      --light:     #f8f9fc;
+      --gray:      #e8eaf0;
+      --text:      #1a1a2e;
+      --muted:     #6b7280;
+      --border:    #e2e8f0;
+      --sans:      'Noto Sans JP', 'Inter', sans-serif;
+      --en:        'Montserrat', 'Inter', sans-serif;
+      --radius:    12px;
+      --shadow:    0 4px 24px rgba(26,26,46,0.08);
+      --shadow-hover: 0 12px 40px rgba(79,142,247,0.2);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--light);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 400;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       Animations
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideRight {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-12px); }
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       Header / Nav
+    ============================================================ */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    #header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .logo {
+      font-family: var(--en);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+      letter-spacing: 0.05em;
+    }
+    nav a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--gradient);
+      color: var(--white) !important;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.08em;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(79,142,247,0.35) !important; }
+
+    /* ============================================================
+       Hero
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--primary);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 40%, #0d1b3e 100%);
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: float 6s ease-in-out infinite;
+    }
+    .hero-orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #4f8ef7 0%, transparent 70%);
+      top: -100px; left: -100px;
+      animation-delay: 0s;
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #7b5ea7 0%, transparent 70%);
+      bottom: -80px; right: -80px;
+      animation-delay: 3s;
+    }
+    .hero-orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #4f8ef7 0%, transparent 70%);
+      top: 50%; right: 20%;
+      opacity: 0.2;
+      animation-delay: 1.5s;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 120px 20px 80px;
+      max-width: 860px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(79,142,247,0.15);
+      border: 1px solid rgba(79,142,247,0.3);
+      color: #7fb3ff;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .hero-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: #4f8ef7;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+    .hero-title {
+      font-size: clamp(38px, 7vw, 72px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-title span {
+      display: block;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: fadeUp 0.8s 0.2s ease both, gradientShift 4s ease infinite;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+      margin-bottom: 48px;
+      font-weight: 300;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      animation: fadeUp 0.8s 0.6s ease both;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: var(--en);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .hero-stat-num span {
+      font-size: 20px;
+      color: #4f8ef7;
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      animation: fadeUp 1s 1s ease both;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.7); opacity: 0.5; }
+    }
+
+    /* ============================================================
+       Section Commons
+    ============================================================ */
+    section { padding: 100px 20px; }
+    .section-label {
+      font-family: var(--en);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 560px;
+    }
+    .section-head { margin-bottom: 60px; }
+
+    /* ============================================================
+       About
+    ============================================================ */
+    #about {
+      background: var(--white);
+    }
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card {
+      background: var(--primary);
+      border-radius: 20px;
+      padding: 48px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,142,247,0.3) 0%, transparent 70%);
+    }
+    .about-card-en {
+      font-family: var(--en);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .about-card-name {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .about-card-role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 28px;
+    }
+    .about-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-tag {
+      background: rgba(79,142,247,0.15);
+      border: 1px solid rgba(79,142,247,0.3);
+      color: #7fb3ff;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .about-floating {
+      position: absolute;
+      bottom: -24px; right: -24px;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .about-floating-icon {
+      width: 40px; height: 40px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .about-floating-text { font-size: 12px; color: var(--muted); }
+    .about-floating-text strong { display: block; font-size: 14px; color: var(--text); font-weight: 600; margin-bottom: 2px; }
+    .about-content {}
+    .about-lead {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .about-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 2;
+      margin-bottom: 40px;
+    }
+    .about-points {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .about-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--light);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--accent);
+    }
+    .about-point-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .about-point-text { font-size: 13px; color: var(--text); line-height: 1.6; }
+    .about-point-text strong { font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; }
+
+    /* ============================================================
+       Skills
+    ============================================================ */
+    #skills {
+      background: var(--light);
+    }
+    .skills-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .skill-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    }
+    .skill-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent);
+    }
+    .skill-card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .skill-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .skill-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .skill-bars { display: flex; flex-direction: column; gap: 10px; }
+    .skill-bar { }
+    .skill-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .skill-bar-track {
+      height: 4px;
+      background: var(--gray);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--gradient);
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    /* ============================================================
+       Works
+    ============================================================ */
+    #works {
+      background: var(--white);
+    }
+    .works-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .works-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .filter-btn {
+      padding: 7px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--sans);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--gradient);
+      color: var(--white);
+      border-color: transparent;
+    }
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .work-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .work-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+    .work-thumb {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .work-thumb-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.4s ease;
+    }
+    .work-card:hover .work-thumb-bg { transform: scale(1.05); }
+    .work-thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .work-card:hover .work-thumb-overlay { opacity: 1; }
+    .work-thumb-btn {
+      background: var(--white);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+      transform: translateY(10px);
+      transition: transform 0.3s ease;
+    }
+    .work-card:hover .work-thumb-btn { transform: translateY(0); }
+    .work-thumb-title {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+    }
+    .work-thumb-en {
+      font-family: var(--en);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      line-height: 1.2;
+    }
+    .work-thumb-ja {
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+      margin-top: 4px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+    }
+    .work-info {
+      padding: 20px 22px 24px;
+    }
+    .work-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .work-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 10px;
+      letter-spacing: 0.05em;
+    }
+    .work-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .work-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .work-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      transition: gap 0.2s;
+    }
+    .work-link:hover { gap: 10px; }
+    .work-link svg { width: 14px; height: 14px; }
+
+    /* ============================================================
+       Process
+    ============================================================ */
+    #process {
+      background: var(--primary);
+    }
+    .process-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .process-inner .section-title { color: var(--white); }
+    .process-inner .section-label { color: #7fb3ff; }
+    .process-inner .section-desc { color: rgba(255,255,255,0.55); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: calc(12.5% + 28px);
+      right: calc(12.5% + 28px);
+      height: 2px;
+      background: linear-gradient(90deg, #4f8ef7, #7b5ea7);
+      opacity: 0.3;
+    }
+    .process-step {
+      text-align: center;
+      padding: 32px 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .process-step:hover {
+      background: rgba(79,142,247,0.08);
+      border-color: rgba(79,142,247,0.2);
+    }
+    .process-num {
+      font-family: var(--en);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .process-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .process-step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .process-step-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       Price
+    ============================================================ */
+    #price {
+      background: var(--light);
+    }
+    .price-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .price-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 36px 28px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .price-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .price-card.featured {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: scale(1.03);
+    }
+    .price-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+    .price-badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--gradient);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 16px;
+      border-radius: 12px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .price-plan {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .price-card.featured .price-plan { color: rgba(255,255,255,0.5); }
+    .price-amount {
+      font-family: var(--en);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-card.featured .price-amount { color: var(--white); }
+    .price-amount span { font-size: 16px; font-weight: 500; }
+    .price-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .price-card.featured .price-note { color: rgba(255,255,255,0.45); border-bottom-color: rgba(255,255,255,0.1); }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .price-list li {
+      font-size: 13px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .price-card.featured .price-list li { color: rgba(255,255,255,0.8); }
+    .price-list li::before {
+      content: '';
+      display: inline-block;
+      width: 16px; height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%234f8ef7'/%3E%3Cpath d='M4.5 8l2.5 2.5 5-5' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+      flex-shrink: 0;
+    }
+    .price-btn {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .price-btn-outline {
+      border: 2px solid var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+    .price-btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .price-btn-gradient {
+      background: var(--gradient);
+      color: var(--white);
+      border: none;
+    }
+    .price-btn-gradient:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(79,142,247,0.35); }
+    .price-btn-white {
+      background: var(--white);
+      color: var(--primary);
+      border: none;
+    }
+    .price-btn-white:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+
+    /* ============================================================
+       CTA
+    ============================================================ */
+    #cta {
+      background: var(--white);
+      padding: 100px 20px;
+    }
+    .cta-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .cta-title {
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    .cta-title span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--gradient);
+      color: var(--white);
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,142,247,0.35); }
+    .btn-secondary {
+      background: var(--white);
+      color: var(--text);
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border: 2px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .cta-note {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ============================================================
+       Footer
+    ============================================================ */
+    #footer {
+      background: var(--primary);
+      padding: 60px 40px 32px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 32px;
+    }
+    .footer-logo {
+      font-family: var(--en);
+      font-size: 20px;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+    .footer-links {
+      display: flex;
+      gap: 60px;
+    }
+    .footer-links-col {}
+    .footer-links-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .footer-links-col a {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .footer-links-col a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ============================================================
+       Responsive
+    ============================================================ */
+    @media (max-width: 900px) {
+      #header { padding: 0 20px; }
+      nav { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-floating { display: none; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .works-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .price-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .price-card.featured { transform: scale(1); }
+      .footer-top { flex-direction: column; }
+      .footer-links { gap: 40px; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 70px 20px; }
+      .hero-stats { gap: 28px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .works-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .footer-links { flex-direction: column; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       Header
+  ============================================================ -->
+  <header id="header">
+    <div class="logo">LP.Portfolio</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#works">Works</a>
+      <a href="#process">Flow</a>
+      <a href="#price">Price</a>
+      <a href="#cta" class="nav-cta">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       Hero
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">LP・ランディングページ制作</div>
+      <h1 class="hero-title">
+        売れるデザインで、<br>
+        <span>ビジネスを加速させる。</span>
+      </h1>
+      <p class="hero-sub">
+        HTML / CSS / jQuery を駆使した、<br>
+        コンバージョン重視のランディングページを制作します。<br>
+        多業種対応・レスポンシブ・高速表示を標準装備。
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">10<span>+</span></div>
+          <div class="hero-stat-label">制作実績</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">2<span>年</span></div>
+          <div class="hero-stat-label">コーディング経験</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">∞</div>
+          <div class="hero-stat-label">対応業種</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>SCROLL</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       About
+  ============================================================ -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-visual reveal">
+        <div class="about-card">
+          <div class="about-card-en">WEB CREATOR</div>
+          <div class="about-card-name">フリーランス<br>Web制作者</div>
+          <div class="about-card-role">LP制作 / コーディング / デザイン</div>
+          <div class="about-skills">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">jQuery</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">PHP</span>
+            <span class="skill-tag">Responsive</span>
+            <span class="skill-tag">Animation</span>
+          </div>
+        </div>
+        <div class="about-floating">
+          <div class="about-floating-icon">⚡</div>
+          <div class="about-floating-text">
+            <strong>迅速な納品</strong>
+            ご要望に応じて柔軟に対応
+          </div>
+        </div>
+      </div>
+      <div class="about-content reveal reveal-delay-2">
+        <div class="section-label">ABOUT ME</div>
+        <div class="section-title">課題解決に特化した<br>LP制作を提供します</div>
+        <p class="about-body">
+          HTML・CSS・jQuery で2年の実務経験を持つフリーランスのWeb制作者です。
+          「見た目の美しさ」だけでなく、「ユーザーを動かす」ランディングページの制作にこだわっています。
+          多業種でのLP制作実績があり、業種ごとのターゲット心理を踏まえたデザインが強みです。
+        </p>
+        <div class="about-points">
+          <div class="about-point">
+            <span class="about-point-icon">🎯</span>
+            <div class="about-point-text">
+              <strong>コンバージョン重視の設計</strong>
+              ファーストビュー・CVボタン・フォームまで、申込率を高める導線設計
+            </div>
+          </div>
+          <div class="about-point">
+            <span class="about-point-icon">📱</span>
+            <div class="about-point-text">
+              <strong>全デバイス対応</strong>
+              スマホ・タブレット・PCに完全対応したレスポンシブデザイン
+            </div>
+          </div>
+          <div class="about-point">
+            <span class="about-point-icon">✨</span>
+            <div class="about-point-text">
+              <strong>スクロールアニメーション実装</strong>
+              読み進めたくなるインタラクティブなUXを標準装備
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Skills
+  ============================================================ -->
+  <section id="skills">
+    <div class="skills-inner">
+      <div class="section-head reveal" style="text-align:center; max-width:none;">
+        <div class="section-label" style="text-align:center;">SKILLS</div>
+        <div class="section-title" style="text-align:center;">使用技術・スキル</div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-card-icon" style="background:linear-gradient(135deg,#ff6b35,#f7931e);">🎨</div>
+          <div class="skill-card-title">デザイン・コーディング</div>
+          <div class="skill-card-desc">業種・ターゲットに合わせたデザインを一から構築。HTML/CSSで忠実に再現します。</div>
+          <div class="skill-bars">
+            <div class="skill-bar">
+              <div class="skill-bar-label"><span>HTML / CSS</span><span>90%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-label"><span>レスポンシブ対応</span><span>88%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-1">
+          <div class="skill-card-icon" style="background:linear-gradient(135deg,#4f8ef7,#7b5ea7);">⚙️</div>
+          <div class="skill-card-title">jQuery / JavaScript</div>
+          <div class="skill-card-desc">スクロールアニメーション・スライダー・モーダルなど、動きのあるインタラクションを実装。</div>
+          <div class="skill-bars">
+            <div class="skill-bar">
+              <div class="skill-bar-label"><span>jQuery</span><span>82%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-label"><span>アニメーション実装</span><span>80%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-2">
+          <div class="skill-card-icon" style="background:linear-gradient(135deg,#11998e,#38ef7d);">🛠️</div>
+          <div class="skill-card-title">PHP / バックエンド</div>
+          <div class="skill-card-desc">フォーム処理・メール送信など、問い合わせフォーム実装も対応可能です。</div>
+          <div class="skill-bars">
+            <div class="skill-bar">
+              <div class="skill-bar-label"><span>PHP</span><span>75%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-label"><span>フォーム実装</span><span>78%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Works
+  ============================================================ -->
+  <section id="works">
+    <div class="works-inner">
+      <div class="section-head reveal">
+        <div class="section-label">WORKS</div>
+        <div class="section-title">制作実績</div>
+        <p class="section-desc">多業種にわたるLP制作実績をご覧ください。各業種のターゲット層に合わせたデザインと導線設計を心がけています。</p>
+      </div>
+      <div class="works-filter reveal">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="food">飲食</button>
+        <button class="filter-btn" data-filter="health">美容・健康</button>
+        <button class="filter-btn" data-filter="service">サービス</button>
+        <button class="filter-btn" data-filter="life">ライフスタイル</button>
+      </div>
+      <div class="works-grid">
+
+        <!-- 1. 焼き鳥居酒屋 -->
+        <div class="work-card reveal" data-category="food">
+          <a href="lp/yakitori/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#c0392b 0%,#3d1f00 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en">YAKITORI</div>
+                <div class="work-thumb-ja">焼き鳥居酒屋</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#fff0ee;color:#c0392b;">飲食</span>
+                <span class="work-tag" style="background:#f0f4ff;color:#4f8ef7;">和食</span>
+              </div>
+              <div class="work-title">鳥吉 | 串打ち一筋の大衆酒場</div>
+              <div class="work-desc">和の重厚感を表現した居酒屋LP。炭・煙・素材の質感をデザインに落とし込み、予約訴求を最大化。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 2. 焼肉プレミアム -->
+        <div class="work-card reveal reveal-delay-1" data-category="food">
+          <a href="lp/yakiniku-premium/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#1a0a00 0%,#8b0000 50%,#d4a017 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en">YAKINIKU</div>
+                <div class="work-thumb-ja">高級焼肉</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#fff8e8;color:#b8860b;">飲食</span>
+                <span class="work-tag" style="background:#1a0a00;color:#d4a017;">高級</span>
+              </div>
+              <div class="work-title">銀座焼肉 煌 | プレミアム焼肉</div>
+              <div class="work-desc">高級感と特別感を演出したプレミアム焼肉のLP。黒×ゴールドの配色で高単価層へのアピールを意識。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 3. 整体院 -->
+        <div class="work-card reveal reveal-delay-2" data-category="health">
+          <a href="lp/seitai/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#1a2f3a 0%,#2e5d52 50%,#4e8b7a 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en">SEITAI</div>
+                <div class="work-thumb-ja">整体院</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#e8f5f2;color:#2e7d65;">美容・健康</span>
+                <span class="work-tag" style="background:#f0f4ff;color:#4f8ef7;">整体</span>
+              </div>
+              <div class="work-title">癒和整体院 | 根本改善の整体</div>
+              <div class="work-desc">深い緑×白の清潔感あるデザインで信頼感を演出。症状別の悩みに寄り添うLP構成で予約率向上を狙う。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 4. ジム -->
+        <div class="work-card reveal" data-category="health">
+          <a href="lp/gym/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#080808 0%,#1a1a1a 50%,#e63312 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en" style="font-size:22px;">APEX GYM</div>
+                <div class="work-thumb-ja">パーソナルジム</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#fff0ee;color:#e63312;">美容・健康</span>
+                <span class="work-tag" style="background:#1a1a1a;color:#e63312;">フィットネス</span>
+              </div>
+              <div class="work-title">APEX GYM | パーソナルトレーニング</div>
+              <div class="work-desc">黒×赤の力強いデザインと動的なアニメーションで「強さ」を表現。Anime.jsを活用した迫力あるUX。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 5. サプリメント -->
+        <div class="work-card reveal reveal-delay-1" data-category="health">
+          <a href="lp/supplement/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#0a2a1a 0%,#1a5c3a 50%,#2ea86a 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en">SUPPLEMENT</div>
+                <div class="work-thumb-ja">サプリメント</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#e8f5ee;color:#1a7a45;">美容・健康</span>
+                <span class="work-tag" style="background:#f0f4ff;color:#4f8ef7;">EC</span>
+              </div>
+              <div class="work-title">VITALIFE | 健康サプリメント</div>
+              <div class="work-desc">緑×白の清潔感で自然由来の安心感を演出。成分・効果の訴求と購買導線を意識した構成。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 6. 婚活 -->
+        <div class="work-card reveal reveal-delay-2" data-category="life">
+          <a href="lp/konkatsu/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#2a1a1a 0%,#a85470 50%,#c4a45a 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en">KONKATSU</div>
+                <div class="work-thumb-ja">婚活サービス</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#fdf0f3;color:#a85470;">ライフスタイル</span>
+                <span class="work-tag" style="background:#f9f3e8;color:#c4a45a;">婚活</span>
+              </div>
+              <div class="work-title">アモーレ婚活 | 真剣な出逢い</div>
+              <div class="work-desc">ローズ×ゴールドの上品なデザイン。Three.jsパーティクルで特別感を演出した婚活サービスLP。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 7. 不動産 -->
+        <div class="work-card reveal" data-category="life">
+          <a href="lp/fudosan/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#0a1628 0%,#1a3a5c 50%,#2d6a9f 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en">FUDOSAN</div>
+                <div class="work-thumb-ja">不動産</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#e8f0ff;color:#1a3a7c;">ライフスタイル</span>
+                <span class="work-tag" style="background:#f0f4ff;color:#4f8ef7;">不動産</span>
+              </div>
+              <div class="work-title">ライフスタイル不動産 | 住まい探し</div>
+              <div class="work-desc">信頼感×先進性を表現した紺×白のLP。物件検索・資料請求への導線を意識したプロフェッショナルな設計。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 8. 税理士 -->
+        <div class="work-card reveal reveal-delay-1" data-category="service">
+          <a href="lp/zeirishi/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#1a1a2e 0%,#2d2d5e 50%,#4a4a8a 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en">ZEIRISHI</div>
+                <div class="work-thumb-ja">税理士事務所</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#f0f0ff;color:#4a4a8a;">サービス</span>
+                <span class="work-tag" style="background:#f0f4ff;color:#4f8ef7;">士業</span>
+              </div>
+              <div class="work-title">山田税理士事務所 | 税務・経営サポート</div>
+              <div class="work-desc">誠実さと専門性を重視したネイビー×ゴールドのデザイン。無料相談への申込みを促す設計。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 9. リフォーム -->
+        <div class="work-card reveal reveal-delay-2" data-category="service">
+          <a href="lp/reform/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#2a2a2a 0%,#4a4a4a 50%,#e8a020 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en">REFORM</div>
+                <div class="work-thumb-ja">リフォーム</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#fff8e8;color:#b8860b;">サービス</span>
+                <span class="work-tag" style="background:#f5f5f5;color:#555;">住宅</span>
+              </div>
+              <div class="work-title">匠リフォーム | 住まいの全面改修</div>
+              <div class="work-desc">施工事例のビジュアルを活かした住宅リフォームLP。グレー×アンバーで信頼と温もりを両立。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 10. プログラミングスクール -->
+        <div class="work-card reveal" data-category="service">
+          <a href="lp/programming-school/index.html" target="_blank">
+            <div class="work-thumb">
+              <div class="work-thumb-bg" style="background:linear-gradient(135deg,#050d1a 0%,#0a2a4a 50%,#00c8ff 100%);"></div>
+              <div class="work-thumb-overlay"><div class="work-thumb-btn">詳細を見る →</div></div>
+              <div class="work-thumb-title">
+                <div class="work-thumb-en" style="font-size:20px;">CODING<br>SCHOOL</div>
+                <div class="work-thumb-ja">プログラミングスクール</div>
+              </div>
+            </div>
+            <div class="work-info">
+              <div class="work-tags">
+                <span class="work-tag" style="background:#e0f8ff;color:#007aa0;">サービス</span>
+                <span class="work-tag" style="background:#f0f4ff;color:#4f8ef7;">教育</span>
+              </div>
+              <div class="work-title">TechRise Academy | プログラミングスクール</div>
+              <div class="work-desc">テック感あふれるネオン×ダークデザイン。転職・副業を目指す層への強いCTA設計が特徴。</div>
+              <div class="work-link">
+                サイトを見る
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Process
+  ============================================================ -->
+  <section id="process">
+    <div class="process-inner">
+      <div class="section-head reveal" style="text-align:center;">
+        <div class="section-label">FLOW</div>
+        <div class="section-title">制作の流れ</div>
+        <p class="section-desc" style="text-align:center; margin:0 auto;">ご依頼から納品まで、スムーズに進められるよう丁寧にサポートします。</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="process-num">STEP 01</div>
+          <span class="process-icon">💬</span>
+          <div class="process-step-title">ヒアリング</div>
+          <div class="process-step-desc">業種・ターゲット・目的・ご予算などをお聞きし、方向性を固めます。</div>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="process-num">STEP 02</div>
+          <span class="process-icon">🎨</span>
+          <div class="process-step-title">デザイン・構成設計</div>
+          <div class="process-step-desc">セクション構成・カラー・フォントを決定。ファーストビューのデザイン案をご確認いただきます。</div>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="process-num">STEP 03</div>
+          <span class="process-icon">💻</span>
+          <div class="process-step-title">コーディング・実装</div>
+          <div class="process-step-desc">HTML/CSS/jQueryでコーディング。アニメーションやレスポンシブ対応も同時に実装します。</div>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="process-num">STEP 04</div>
+          <span class="process-icon">🚀</span>
+          <div class="process-step-title">確認・納品</div>
+          <div class="process-step-desc">修正対応後、最終チェックを経て納品。公開後のサポートもご相談ください。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Price
+  ============================================================ -->
+  <section id="price">
+    <div class="price-inner">
+      <div class="section-head reveal" style="text-align:center; max-width:none;">
+        <div class="section-label" style="text-align:center;">PRICE</div>
+        <div class="section-title" style="text-align:center;">料金プラン</div>
+        <p class="section-desc" style="text-align:center; margin:0 auto;">実績作り期間中のため、相場より低価格でご提供しています。</p>
+      </div>
+      <div class="price-grid">
+        <div class="price-card reveal">
+          <div class="price-plan">BASIC</div>
+          <div class="price-amount">¥<span>15,000</span></div>
+          <div class="price-note">〜（税込）/ 1ページ</div>
+          <ul class="price-list">
+            <li>LP 1ページ制作</li>
+            <li>レスポンシブ対応</li>
+            <li>スクロールアニメーション</li>
+            <li>修正2回まで</li>
+            <li>HTML/CSSファイル納品</li>
+          </ul>
+          <a href="#cta" class="price-btn price-btn-outline">お問い合わせ</a>
+        </div>
+        <div class="price-card featured reveal reveal-delay-1">
+          <div class="price-badge">⭐ 人気プラン</div>
+          <div class="price-plan">STANDARD</div>
+          <div class="price-amount">¥<span>20,000</span></div>
+          <div class="price-note">〜（税込）/ 1ページ</div>
+          <ul class="price-list">
+            <li>LP 1ページ制作</li>
+            <li>レスポンシブ対応</li>
+            <li>アニメーション実装</li>
+            <li>修正3回まで</li>
+            <li>お問い合わせフォーム</li>
+            <li>公開サポート</li>
+          </ul>
+          <a href="#cta" class="price-btn price-btn-white">お問い合わせ</a>
+        </div>
+        <div class="price-card reveal reveal-delay-2">
+          <div class="price-plan">PREMIUM</div>
+          <div class="price-amount">¥<span>30,000</span></div>
+          <div class="price-note">〜（税込）/ 1ページ</div>
+          <ul class="price-list">
+            <li>LP 1ページ制作</li>
+            <li>レスポンシブ対応</li>
+            <li>高品質アニメーション</li>
+            <li>修正無制限</li>
+            <li>フォーム・PHP実装</li>
+            <li>公開・アフターサポート</li>
+            <li>SEO基本対応</li>
+          </ul>
+          <a href="#cta" class="price-btn price-btn-gradient">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA
+  ============================================================ -->
+  <section id="cta">
+    <div class="cta-inner">
+      <div class="reveal">
+        <div class="section-label" style="text-align:center;">CONTACT</div>
+        <h2 class="cta-title">
+          あなたのビジネスに<br>
+          <span>最適なLPを作りましょう。</span>
+        </h2>
+        <p class="cta-desc">
+          まずはお気軽にご相談ください。<br>
+          業種・ご予算・ご要望をお聞きし、最適なプランをご提案します。
+        </p>
+        <div class="cta-buttons">
+          <a href="https://www.lancers.jp" target="_blank" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1l2.1 4.2L15 6.1l-3.5 3.4.8 4.7L8 12l-4.3 2.2.8-4.7L1 6.1l4.9-.9L8 1z" fill="currentColor"/></svg>
+            ランサーズで依頼する
+          </a>
+          <a href="https://crowdworks.jp" target="_blank" class="btn-secondary">
+            クラウドワークスで依頼する
+          </a>
+        </div>
+        <p class="cta-note">※ ポートフォリオサイトのため、各クラウドソーシングサイトにてお問い合わせください</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Footer
+  ============================================================ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">LP.Portfolio</div>
+          <p class="footer-tagline">HTML / CSS / jQuery で<br>売れるランディングページを制作します。</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-links-col">
+            <div class="footer-links-title">Menu</div>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#works">Works</a>
+            <a href="#process">Flow</a>
+            <a href="#price">Price</a>
+          </div>
+          <div class="footer-links-col">
+            <div class="footer-links-title">Works</div>
+            <a href="lp/yakitori/index.html" target="_blank">焼き鳥居酒屋</a>
+            <a href="lp/yakiniku-premium/index.html" target="_blank">高級焼肉</a>
+            <a href="lp/seitai/index.html" target="_blank">整体院</a>
+            <a href="lp/gym/index.html" target="_blank">パーソナルジム</a>
+            <a href="lp/supplement/index.html" target="_blank">サプリメント</a>
+          </div>
+          <div class="footer-links-col">
+            <div class="footer-links-title">More Works</div>
+            <a href="lp/konkatsu/index.html" target="_blank">婚活サービス</a>
+            <a href="lp/fudosan/index.html" target="_blank">不動産</a>
+            <a href="lp/zeirishi/index.html" target="_blank">税理士事務所</a>
+            <a href="lp/reform/index.html" target="_blank">リフォーム</a>
+            <a href="lp/programming-school/index.html" target="_blank">プログラミングスクール</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 LP.Portfolio. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+       Header scroll effect
+    ============================================================ */
+    $(window).on('scroll', function() {
+      if ($(this).scrollTop() > 20) {
+        $('#header').addClass('scrolled');
+      } else {
+        $('#header').removeClass('scrolled');
+      }
+    });
+
+    /* ============================================================
+       Smooth scroll
+    ============================================================ */
+    $('a[href^="#"]').on('click', function(e) {
+      e.preventDefault();
+      const target = $($(this).attr('href'));
+      if (target.length) {
+        $('html, body').animate({ scrollTop: target.offset().top - 64 }, 600, 'swing');
+      }
+    });
+
+    /* ============================================================
+       Reveal on scroll
+    ============================================================ */
+    function checkReveal() {
+      $('.reveal').each(function() {
+        const elemTop = $(this).offset().top;
+        const windowBottom = $(window).scrollTop() + $(window).height();
+        if (windowBottom > elemTop + 60) {
+          $(this).addClass('visible');
+        }
+      });
+    }
+    $(window).on('scroll', checkReveal);
+    checkReveal();
+
+    /* ============================================================
+       Skill bars animate
+    ============================================================ */
+    let skillsAnimated = false;
+    $(window).on('scroll', function() {
+      if (skillsAnimated) return;
+      const skillsTop = $('#skills').offset().top;
+      if ($(this).scrollTop() + $(window).height() > skillsTop + 100) {
+        skillsAnimated = true;
+        $('.skill-bar-fill').each(function() {
+          const w = $(this).data('width') + '%';
+          $(this).css('width', w);
+        });
+      }
+    });
+
+    /* ============================================================
+       Works filter
+    ============================================================ */
+    $('.filter-btn').on('click', function() {
+      $('.filter-btn').removeClass('active');
+      $(this).addClass('active');
+      const filter = $(this).data('filter');
+      if (filter === 'all') {
+        $('.work-card').fadeIn(300);
+      } else {
+        $('.work-card').each(function() {
+          if ($(this).data('category') === filter) {
+            $(this).fadeIn(300);
+          } else {
+            $(this).fadeOut(200);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

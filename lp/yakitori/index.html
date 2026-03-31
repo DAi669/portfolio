@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>焼き鳥 鳥吉 | 串打ち一筋、煙と笑顔の大衆酒場</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    /* ============================================================
+       Variables & Reset
+    ============================================================ */
+    :root {
+      --red:    #c0392b;
+      --red2:   #96281b;
+      --amber:  #e67e22;
+      --yellow: #f1c40f;
+      --cream:  #fdf6e3;
+      --dark:   #1a1208;
+      --brown:  #3d1f00;
+      --text:   #2c1a00;
+      --muted:  #7a5a3a;
+      --serif:  'Shippori Mincho', 'Yu Mincho', serif;
+      --sans:   'Noto Sans JP', sans-serif;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       Animations (CSS keyframes — jQuery will trigger classes)
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes smokeRise {
+      0%   { transform: translateY(0)    scaleX(1);   opacity: 0.6; }
+      50%  { transform: translateY(-60px) scaleX(1.4); opacity: 0.3; }
+      100% { transform: translateY(-120px) scaleX(1.8); opacity: 0; }
+    }
+    @keyframes flamePulse {
+      0%, 100% { transform: scaleY(1)   scaleX(1);   opacity: 1; }
+      50%       { transform: scaleY(1.2) scaleX(0.9); opacity: 0.85; }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes stampBounce {
+      0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+      70%  { transform: scale(1.15) rotate(3deg); opacity: 1; }
+      100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+    }
+
+    .js-reveal        { opacity: 0; }
+    .js-reveal.anim-up    { animation: fadeUp    0.7s ease forwards; }
+    .js-reveal.anim-left  { animation: fadeLeft  0.7s ease forwards; }
+    .js-reveal.anim-right { animation: fadeRight 0.7s ease forwards; }
+    .js-reveal.anim-scale { animation: scaleIn   0.7s ease forwards; }
+    .js-reveal.anim-fade  { animation: fadeIn    0.8s ease forwards; }
+
+    /* ============================================================
+       Navigation
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--dark);
+      padding: 0 3rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--red);
+      transition: box-shadow 0.3s;
+    }
+    #nav.shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      color: #fff;
+      letter-spacing: 0.15em;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .nav-logo-badge {
+      background: var(--red);
+      color: #fff;
+      font-size: 0.6rem;
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.1em;
+      font-family: var(--sans);
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.1em;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
+    .nav-tel {
+      color: var(--yellow);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================================
+       Ticket Ribbon (decorative)
+    ============================================================ */
+    .ribbon {
+      background: var(--red);
+      padding: 0.55rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ribbon-track {
+      display: inline-flex;
+      animation: marquee 18s linear infinite;
+    }
+    .ribbon-track span {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      color: #fff;
+      padding: 0 2rem;
+    }
+    .ribbon-track span::before { content: '◆  '; color: var(--yellow); }
+
+    /* ============================================================
+       Hero
+    ============================================================ */
+    #hero {
+      padding-top: 60px;
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1547592166-23ac45744acd?w=1920&q=85') center/cover no-repeat;
+      filter: brightness(0.22) saturate(1.2);
+    }
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 20px,
+          rgba(255,255,255,0.015) 20px,
+          rgba(255,255,255,0.015) 21px
+        );
+    }
+    .hero-left {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 3rem 4rem 6rem;
+      flex: 1;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      padding: 0.4rem 1rem;
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.3s ease forwards;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      animation: fadeLeft 0.8s 0.5s ease forwards;
+    }
+    .hero-title .small { font-size: clamp(1rem, 2.5vw, 1.5rem); color: rgba(255,255,255,0.65); display: block; margin-bottom: 0.3rem; letter-spacing: 0.3em; }
+    .hero-title .big   { font-size: clamp(3.5rem, 9vw, 7rem); display: block; letter-spacing: 0.05em; }
+    .hero-title .big em { color: var(--yellow); font-style: normal; }
+    .hero-copy {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255,255,255,0.8);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.8s ease forwards;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 1s ease forwards;
+    }
+    .btn-red {
+      background: var(--red);
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 0.9rem 2.2rem;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+    .btn-outline-light {
+      background: transparent;
+      color: #fff;
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid rgba(255,255,255,0.4);
+      display: inline-block;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline-light:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    /* Smoke SVG animation */
+    .hero-smoke {
+      position: absolute;
+      right: 8%;
+      bottom: 30%;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s ease forwards;
+    }
+    .smoke-line {
+      width: 3px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.25);
+      margin: 0 auto 0.5rem;
+      transform-origin: bottom;
+    }
+    .smoke-line:nth-child(1) { height: 80px; animation: smokeRise 2.5s 0.2s ease-in-out infinite; }
+    .smoke-line:nth-child(2) { height: 60px; animation: smokeRise 2.5s 0.9s ease-in-out infinite; margin-left: 20px; }
+    .smoke-line:nth-child(3) { height: 70px; animation: smokeRise 2.5s 1.6s ease-in-out infinite; margin-left: -20px; }
+    .hero-flame-wrap {
+      position: absolute;
+      right: 7%;
+      bottom: 25%;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s ease forwards;
+    }
+    .flame {
+      width: 60px;
+      height: 90px;
+      background: radial-gradient(ellipse at 50% 100%, var(--amber) 0%, var(--red) 50%, transparent 100%);
+      border-radius: 50% 50% 30% 30%;
+      animation: flamePulse 1.2s ease-in-out infinite;
+      filter: blur(4px);
+    }
+    .hero-stamp {
+      position: absolute;
+      right: 3%;
+      top: 30%;
+      z-index: 2;
+      width: 110px;
+      height: 110px;
+      border: 3px solid var(--red);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-12deg);
+      background: rgba(192, 57, 43, 0.12);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      animation: stampBounce 0.6s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    .hero-stamp p { font-family: var(--serif); color: var(--red); font-size: 0.65rem; text-align: center; line-height: 1.5; }
+    .hero-stamp strong { font-size: 1.3rem; color: var(--red); display: block; line-height: 1; }
+
+    /* ============================================================
+       Points Strip (3つの魅力)
+    ============================================================ */
+    #points {
+      background: var(--dark);
+      padding: 3.5rem 0;
+    }
+    .points-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .point-item {
+      padding: 2.2rem 2rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      opacity: 0;
+    }
+    .point-item:last-child { border-right: none; }
+    .point-num {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 0.6rem;
+      font-family: var(--sans);
+    }
+    .point-num span { font-size: 0.9rem; vertical-align: super; }
+    .point-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+    .point-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.8; }
+
+    /* ============================================================
+       About (Story)
+    ============================================================ */
+    #about {
+      padding: 6rem 0;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    #about::before {
+      content: '鳥吉';
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--serif);
+      font-size: 16rem;
+      color: rgba(0,0,0,0.04);
+      line-height: 1;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .about-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-imgs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px;
+      gap: 0.6rem;
+      opacity: 0;
+    }
+    .about-img-item { overflow: hidden; }
+    .about-img-item:first-child { grid-row: span 2; }
+    .about-img-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .about-img-item:hover img { transform: scale(1.06); }
+
+    .about-text { opacity: 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      color: var(--red);
+      border-bottom: 2px solid var(--red);
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      color: var(--brown);
+    }
+    .section-title em { color: var(--red); font-style: normal; }
+    .about-text p {
+      font-size: 0.92rem;
+      line-height: 2.1;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .about-text strong { color: var(--text); font-weight: 700; }
+
+    /* ============================================================
+       Menu Horizontal Scroll
+    ============================================================ */
+    #menu {
+      padding: 6rem 0;
+      background: #fff8ef;
+    }
+    .menu-head {
+      max-width: 1100px;
+      margin: 0 auto 2.5rem;
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .menu-head-left { opacity: 0; }
+    .menu-note { font-size: 0.78rem; color: var(--muted); opacity: 0; }
+
+    .menu-scroll-outer {
+      overflow-x: auto;
+      padding: 0 2.5rem 1.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--red) transparent;
+    }
+    .menu-scroll-outer::-webkit-scrollbar { height: 4px; }
+    .menu-scroll-outer::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+    .menu-track {
+      display: flex;
+      gap: 1.2rem;
+      width: max-content;
+      padding-left: 2.5rem;
+    }
+    .menu-card {
+      scroll-snap-align: start;
+      width: 200px;
+      background: #fff;
+      border: 1px solid #eddfc8;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+    }
+    .menu-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .menu-card-img { height: 150px; overflow: hidden; }
+    .menu-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .menu-card:hover .menu-card-img img { transform: scale(1.07); }
+    .menu-card-body { padding: 0.9rem 1rem; }
+    .menu-card-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--brown);
+      margin-bottom: 0.25rem;
+    }
+    .menu-card-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.6rem; }
+    .menu-card-price { font-size: 1.05rem; font-weight: 700; color: var(--red); }
+    .menu-card-price span { font-size: 0.7rem; color: var(--muted); font-weight: 400; }
+    .menu-card.bestseller { border-color: var(--amber); }
+    .menu-card.bestseller .menu-card-img::after {
+      content: 'BEST';
+      position: absolute;
+      top: 8px; left: 8px;
+      background: var(--amber);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.15em;
+    }
+    .menu-card { position: relative; }
+
+    /* ============================================================
+       Nomi-hodai / Course
+    ============================================================ */
+    #nomi {
+      padding: 6rem 0;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+    #nomi::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=70') center/cover;
+      opacity: 0.06;
+    }
+    .nomi-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .nomi-head { text-align: center; margin-bottom: 3.5rem; opacity: 0; }
+    .nomi-head .section-label { color: var(--yellow); border-color: var(--yellow); }
+    .nomi-head .section-title { color: #fff; }
+    .nomi-head p { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 0.8rem; }
+    .nomi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .nomi-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2rem 1.8rem;
+      text-align: center;
+      transition: border-color 0.3s, background 0.3s;
+      opacity: 0;
+    }
+    .nomi-card:hover { border-color: var(--amber); background: rgba(230,126,34,0.06); }
+    .nomi-card.popular { border-color: var(--red); background: rgba(192,57,43,0.08); }
+    .nomi-card-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      padding: 0.25rem 0.8rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    .nomi-card.popular .nomi-card-tag { background: var(--red); color: #fff; }
+    .nomi-card:not(.popular) .nomi-card-tag { border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); }
+    .nomi-card-name { font-family: var(--serif); font-size: 1.25rem; color: #fff; margin-bottom: 0.3rem; }
+    .nomi-card-time { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-bottom: 1rem; letter-spacing: 0.15em; }
+    .nomi-card-price { font-size: 2.2rem; font-weight: 900; color: var(--yellow); line-height: 1; }
+    .nomi-card-price sub { font-size: 0.85rem; color: rgba(255,255,255,0.5); font-weight: 400; vertical-align: middle; }
+    .nomi-card-includes {
+      list-style: none;
+      margin: 1.4rem 0 1.8rem;
+      text-align: left;
+    }
+    .nomi-card-includes li {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .nomi-card-includes li::before { content: '◆'; color: var(--amber); font-size: 0.5rem; flex-shrink: 0; }
+
+    /* ============================================================
+       Gallery — Masonry-ish
+    ============================================================ */
+    #gallery {
+      padding: 6rem 0;
+      background: var(--cream);
+    }
+    .gallery-head {
+      max-width: 1100px;
+      margin: 0 auto 2.5rem;
+      padding: 0 2.5rem;
+      opacity: 0;
+    }
+    .gallery-cols {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+    .g-col { display: flex; flex-direction: column; gap: 0.5rem; }
+    .g-photo {
+      overflow: hidden;
+      opacity: 0;
+    }
+    .g-photo img { width: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .g-photo:hover img { transform: scale(1.07); }
+
+    /* ============================================================
+       Access & Hours
+    ============================================================ */
+    #access {
+      padding: 6rem 0;
+      background: #fff8ef;
+    }
+    .access-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .access-left { opacity: 0; }
+    .access-map {
+      width: 100%;
+      height: 280px;
+      background: #d8cbb4;
+      overflow: hidden;
+      position: relative;
+      margin-top: 2rem;
+    }
+    .access-map img { width: 100%; height: 100%; object-fit: cover; filter: sepia(30%); }
+    .access-map-pin {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -100%);
+      width: 30px;
+      height: 30px;
+      background: var(--red);
+      border-radius: 50% 50% 50% 0;
+      transform: translate(-50%, -100%) rotate(-45deg);
+    }
+    .info-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+    .info-table tr { border-bottom: 1px solid #eddfc8; }
+    .info-table th {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--red);
+      font-weight: 700;
+      padding: 0.8rem 1rem 0.8rem 0;
+      width: 30%;
+      vertical-align: top;
+    }
+    .info-table td { font-size: 0.88rem; color: var(--muted); padding: 0.8rem 0; line-height: 1.8; }
+    .info-table td strong { color: var(--text); font-weight: 700; }
+
+    .access-right { opacity: 0; }
+    .access-right h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--brown);
+      margin-bottom: 1.5rem;
+    }
+    .reserve-box {
+      background: var(--dark);
+      padding: 2.5rem;
+    }
+    .reserve-box h4 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .reserve-box p { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 1.8rem; }
+    .form-g { margin-bottom: 1.2rem; }
+    .form-g label { display: block; font-size: 0.72rem; color: var(--amber); letter-spacing: 0.12em; margin-bottom: 0.4rem; }
+    .form-g input,
+    .form-g select,
+    .form-g textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.85rem;
+      font-family: var(--sans);
+      outline: none;
+      -webkit-appearance: none;
+      transition: border-color 0.25s;
+    }
+    .form-g input::placeholder,
+    .form-g textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-g input:focus,
+    .form-g select:focus,
+    .form-g textarea:focus { border-color: var(--amber); }
+    .form-g select option { background: #1a1208; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .btn-reserve {
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: background 0.25s;
+    }
+    .btn-reserve:hover { background: var(--red2); }
+
+    /* ============================================================
+       Footer
+    ============================================================ */
+    footer {
+      background: var(--dark);
+      border-top: 3px solid var(--red);
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: #fff;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+    }
+    .footer-logo span { color: var(--yellow); }
+    footer small { font-size: 0.72rem; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
+
+    /* ============================================================
+       Responsive
+    ============================================================ */
+    @media (max-width: 900px) {
+      #nav .nav-links { display: none; }
+      #nav { padding: 0 1.5rem; }
+
+      .about-grid,
+      .access-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .points-grid,
+      .nomi-grid { grid-template-columns: 1fr; }
+      .point-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .point-item:last-child { border-bottom: none; }
+
+      .hero-left { padding: 3rem 1.5rem; }
+      .hero-stamp,
+      .hero-smoke,
+      .hero-flame-wrap { display: none; }
+
+      .gallery-cols { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .form-row-2 { grid-template-columns: 1fr; }
+      .menu-card { width: 165px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     Navigation
+============================================================ -->
+<nav id="nav">
+  <div class="nav-logo">
+    焼き鳥 鳥吉
+    <span class="nav-logo-badge">SINCE 1987</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">こだわり</a></li>
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#nomi">飲み放題</a></li>
+    <li><a href="#gallery">店内</a></li>
+    <li><a href="#access">アクセス</a></li>
+  </ul>
+  <a href="tel:03-XXXX-XXXX" class="nav-tel">03-XXXX-XXXX</a>
+</nav>
+
+<!-- Ribbon -->
+<div class="ribbon" style="margin-top:60px;">
+  <div class="ribbon-track" id="ribbon">
+    <span>本日も全品新鮮炭火焼き</span>
+    <span>飲み放題コース 2時間 2,500円〜</span>
+    <span>宴会・団体歓迎</span>
+    <span>テイクアウト可</span>
+    <span>毎週月曜定休</span>
+    <span>本日も全品新鮮炭火焼き</span>
+    <span>飲み放題コース 2時間 2,500円〜</span>
+    <span>宴会・団体歓迎</span>
+    <span>テイクアウト可</span>
+    <span>毎週月曜定休</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     Hero
+============================================================ -->
+<section id="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-bg-pattern"></div>
+
+  <div class="hero-left">
+    <span class="hero-badge">YAKITORI TORIGICHI</span>
+    <h1 class="hero-title">
+      <span class="small">串打ち一筋 三十七年</span>
+      <span class="big"><em>鳥吉</em>の炭焼き</span>
+    </h1>
+    <p class="hero-copy">
+      煙と笑顔があふれる場所。<br>
+      一本一本、丁寧に串打ちした自慢の焼き鳥を<br>
+      昭和の頃から変わらぬ価格でお届けします。
+    </p>
+    <div class="hero-btns">
+      <a href="#nomi" class="btn-red">飲み放題コースを見る</a>
+      <a href="#menu" class="btn-outline-light">メニューを見る</a>
+    </div>
+  </div>
+
+  <div class="hero-smoke">
+    <div class="smoke-line"></div>
+    <div class="smoke-line"></div>
+    <div class="smoke-line"></div>
+  </div>
+  <div class="hero-flame-wrap">
+    <div class="flame"></div>
+  </div>
+  <div class="hero-stamp">
+    <p>一本から<br>注文<br><strong>OK!</strong><br>串打ち職人</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     Points
+============================================================ -->
+<section id="points">
+  <div class="points-grid">
+    <div class="point-item js-reveal" data-anim="anim-up" data-delay="0">
+      <div class="point-num"><span>#</span>1</div>
+      <div class="point-title">串打ち職人の一本</div>
+      <div class="point-desc">毎朝仕入れた国産鶏を<br>熟練の職人が手串打ち。<br>素材の旨みを逃しません。</div>
+    </div>
+    <div class="point-item js-reveal" data-anim="anim-up" data-delay="100">
+      <div class="point-num"><span>#</span>2</div>
+      <div class="point-title">圧倒的コスパ</div>
+      <div class="point-desc">一本 150円〜の良心価格。<br>飲み放題付きコースも<br>2,500円からご用意。</div>
+    </div>
+    <div class="point-item js-reveal" data-anim="anim-up" data-delay="200">
+      <div class="point-num"><span>#</span>3</div>
+      <div class="point-title">完全個室・宴会対応</div>
+      <div class="point-desc">2名から50名まで対応。<br>歓送迎会・忘年会・<br>同窓会にも最適です。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     About
+============================================================ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-imgs js-reveal" data-anim="anim-left">
+      <div class="about-img-item">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700&q=85" alt="焼き鳥">
+      </div>
+      <div class="about-img-item">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=85" alt="店内">
+      </div>
+      <div class="about-img-item">
+        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&q=85" alt="炭火">
+      </div>
+    </div>
+    <div class="about-text js-reveal" data-anim="anim-right">
+      <span class="section-label">OUR STORY</span>
+      <h2 class="section-title">
+        昭和62年、この煙突から<br>
+        <em>鳥吉</em>は始まった。
+      </h2>
+      <p>
+        創業以来、変わらないのは<strong>「旨くて安くて、また来たくなる」</strong>という一点のみ。
+        先代から受け継いだ秘伝のタレと、毎朝仕入れる国産鶏、そして備長炭。
+        この三つが鳥吉の味の全てです。
+      </p>
+      <p>
+        カウンター越しに職人の手仕事を眺めながら、冷えたビールを一杯。
+        サラリーマンも学生も、家族連れも常連さんも、
+        みんなが「ただいま」と言える場所でありたいと思っています。
+      </p>
+      <p>
+        串一本 150円から。今夜も煙と笑顔でお待ちしております。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Menu (横スクロール)
+============================================================ -->
+<section id="menu">
+  <div class="menu-head">
+    <div class="menu-head-left js-reveal" data-anim="anim-up">
+      <span class="section-label">MENU</span>
+      <h2 class="section-title">定番メニュー</h2>
+    </div>
+    <p class="menu-note js-reveal" data-anim="anim-fade">← 横にスクロールできます</p>
+  </div>
+  <div class="menu-scroll-outer">
+    <div class="menu-track" id="menuTrack">
+      <div class="menu-card bestseller js-reveal" data-anim="anim-up" data-delay="0">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80" alt="もも塩">
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">もも塩</div>
+          <div class="menu-card-desc">ジューシーなもも肉を粗塩とレモンで</div>
+          <div class="menu-card-price">¥180<span> / 本</span></div>
+        </div>
+      </div>
+      <div class="menu-card js-reveal" data-anim="anim-up" data-delay="60">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="つくね">
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">つくね</div>
+          <div class="menu-card-desc">秘伝のタレで仕上げた自家製つくね</div>
+          <div class="menu-card-price">¥150<span> / 本</span></div>
+        </div>
+      </div>
+      <div class="menu-card bestseller js-reveal" data-anim="anim-up" data-delay="120">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=400&q=80" alt="ねぎま">
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">ねぎま</div>
+          <div class="menu-card-desc">甘みのある長ねぎと鶏の黄金コンビ</div>
+          <div class="menu-card-price">¥160<span> / 本</span></div>
+        </div>
+      </div>
+      <div class="menu-card js-reveal" data-anim="anim-up" data-delay="180">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" alt="かわ">
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">かわ</div>
+          <div class="menu-card-desc">パリパリ食感が止まらない鶏皮串</div>
+          <div class="menu-card-price">¥150<span> / 本</span></div>
+        </div>
+      </div>
+      <div class="menu-card js-reveal" data-anim="anim-up" data-delay="240">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80" alt="砂肝">
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">砂肝</div>
+          <div class="menu-card-desc">コリコリ食感がクセになる砂肝塩</div>
+          <div class="menu-card-price">¥150<span> / 本</span></div>
+        </div>
+      </div>
+      <div class="menu-card bestseller js-reveal" data-anim="anim-up" data-delay="300">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=80" alt="手羽先">
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">手羽先</div>
+          <div class="menu-card-desc">香ばしい炭火で焼いた特製手羽先</div>
+          <div class="menu-card-price">¥220<span> / 本</span></div>
+        </div>
+      </div>
+      <div class="menu-card js-reveal" data-anim="anim-up" data-delay="360">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1607116667981-ff348e0d7729?w=400&q=80" alt="レバー">
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">レバー</div>
+          <div class="menu-card-desc">新鮮な国産鶏レバーをタレで</div>
+          <div class="menu-card-price">¥160<span> / 本</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Nomi-hodai / Course
+============================================================ -->
+<section id="nomi">
+  <div class="nomi-inner">
+    <div class="nomi-head js-reveal" data-anim="anim-up">
+      <span class="section-label">NOMIHODAI COURSE</span>
+      <h2 class="section-title" style="color:#fff;">飲み放題コース</h2>
+      <p>2名様よりご利用いただけます。前日までにご予約ください。</p>
+    </div>
+    <div class="nomi-grid">
+      <div class="nomi-card js-reveal" data-anim="anim-up" data-delay="0">
+        <span class="nomi-card-tag">STANDARD</span>
+        <div class="nomi-card-name">気軽に宴会コース</div>
+        <div class="nomi-card-time">2時間飲み放題</div>
+        <div class="nomi-card-price">¥2,500<sub> / 人</sub></div>
+        <ul class="nomi-card-includes">
+          <li>飲み放題（生ビール含む）</li>
+          <li>串焼き5本盛り合わせ</li>
+          <li>おつまみ2品</li>
+          <li>〆の焼きおにぎり</li>
+        </ul>
+        <a href="#access" class="btn-red" style="display:block;text-align:center;font-size:0.8rem;">このコースを予約</a>
+      </div>
+      <div class="nomi-card popular js-reveal" data-anim="anim-up" data-delay="120">
+        <span class="nomi-card-tag">POPULAR</span>
+        <div class="nomi-card-name">鳥吉満喫コース</div>
+        <div class="nomi-card-time">2時間半飲み放題</div>
+        <div class="nomi-card-price">¥3,500<sub> / 人</sub></div>
+        <ul class="nomi-card-includes">
+          <li>飲み放題（プレミアム含む）</li>
+          <li>串焼き8本盛り合わせ</li>
+          <li>おつまみ4品</li>
+          <li>サラダ・唐揚げ</li>
+          <li>〆の焼きおにぎり or 焼きそば</li>
+        </ul>
+        <a href="#access" class="btn-red" style="display:block;text-align:center;font-size:0.8rem;">このコースを予約</a>
+      </div>
+      <div class="nomi-card js-reveal" data-anim="anim-up" data-delay="240">
+        <span class="nomi-card-tag">PREMIUM</span>
+        <div class="nomi-card-name">職人おまかせコース</div>
+        <div class="nomi-card-time">3時間飲み放題</div>
+        <div class="nomi-card-price">¥4,800<sub> / 人</sub></div>
+        <ul class="nomi-card-includes">
+          <li>飲み放題（全ドリンク）</li>
+          <li>職人おまかせ串12本</li>
+          <li>おつまみ全6品</li>
+          <li>刺身盛り合わせ</li>
+          <li>〆の料理（選択式）</li>
+          <li>デザート</li>
+        </ul>
+        <a href="#access" class="btn-red" style="display:block;text-align:center;font-size:0.8rem;">このコースを予約</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Gallery
+============================================================ -->
+<section id="gallery">
+  <div class="gallery-head js-reveal" data-anim="anim-up">
+    <span class="section-label">GALLERY</span>
+    <h2 class="section-title">店内・料理</h2>
+  </div>
+  <div class="gallery-cols">
+    <div class="g-col">
+      <div class="g-photo js-reveal" data-anim="anim-fade" data-delay="0">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80" alt="カウンター席" style="height:240px">
+      </div>
+      <div class="g-photo js-reveal" data-anim="anim-fade" data-delay="100">
+        <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=500&q=80" alt="料理" style="height:160px">
+      </div>
+    </div>
+    <div class="g-col" style="margin-top:2rem">
+      <div class="g-photo js-reveal" data-anim="anim-fade" data-delay="60">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&q=80" alt="焼き鳥" style="height:180px">
+      </div>
+      <div class="g-photo js-reveal" data-anim="anim-fade" data-delay="160">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80" alt="盛り合わせ" style="height:220px">
+      </div>
+    </div>
+    <div class="g-col">
+      <div class="g-photo js-reveal" data-anim="anim-fade" data-delay="120">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&q=80" alt="個室" style="height:220px">
+      </div>
+      <div class="g-photo js-reveal" data-anim="anim-fade" data-delay="200">
+        <img src="https://images.unsplash.com/photo-1544025162-d76538456073?w=500&q=80" alt="炭火" style="height:180px">
+      </div>
+    </div>
+    <div class="g-col" style="margin-top:2rem">
+      <div class="g-photo js-reveal" data-anim="anim-fade" data-delay="80">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="一品料理" style="height:200px">
+      </div>
+      <div class="g-photo js-reveal" data-anim="anim-fade" data-delay="180">
+        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=500&q=80" alt="炭火焼き" style="height:200px">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Access
+============================================================ -->
+<section id="access">
+  <div class="access-inner">
+    <div class="access-left js-reveal" data-anim="anim-left">
+      <span class="section-label">ACCESS</span>
+      <h2 class="section-title">アクセス・営業時間</h2>
+      <table class="info-table">
+        <tr>
+          <th>住所</th>
+          <td><strong>東京都新宿区歌舞伎町 1-XX-XX</strong><br>鳥吉ビル 1F</td>
+        </tr>
+        <tr>
+          <th>営業時間</th>
+          <td>月〜金 17:00 – 26:00<br>土・日 16:00 – 26:00</td>
+        </tr>
+        <tr>
+          <th>定休日</th>
+          <td>毎週月曜日</td>
+        </tr>
+        <tr>
+          <th>電話</th>
+          <td><strong>03-XXXX-XXXX</strong></td>
+        </tr>
+        <tr>
+          <th>最寄り駅</th>
+          <td>JR新宿駅 東口より徒歩5分</td>
+        </tr>
+      </table>
+      <div class="access-map">
+        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=70" alt="地図イメージ">
+        <div class="access-map-pin"></div>
+      </div>
+    </div>
+    <div class="access-right js-reveal" data-anim="anim-right">
+      <h3>ご予約・お問い合わせ</h3>
+      <div class="reserve-box">
+        <h4>ウェブ予約フォーム</h4>
+        <p>前日 22:00 までに受付中</p>
+        <div class="form-row-2">
+          <div class="form-g">
+            <label>お名前</label>
+            <input type="text" placeholder="山田 太郎">
+          </div>
+          <div class="form-g">
+            <label>電話番号</label>
+            <input type="tel" placeholder="090-XXXX-XXXX">
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-g">
+            <label>来店日</label>
+            <input type="date">
+          </div>
+          <div class="form-g">
+            <label>来店時間</label>
+            <select>
+              <option>17:00〜</option>
+              <option>18:00〜</option>
+              <option>19:00〜</option>
+              <option>20:00〜</option>
+              <option>21:00〜</option>
+              <option>22:00〜</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-g">
+            <label>人数</label>
+            <select>
+              <option>2名</option>
+              <option>3名</option>
+              <option>4名</option>
+              <option>5〜10名</option>
+              <option>10名以上</option>
+            </select>
+          </div>
+          <div class="form-g">
+            <label>コース</label>
+            <select>
+              <option>気軽に宴会（2,500円）</option>
+              <option>鳥吉満喫（3,500円）</option>
+              <option>職人おまかせ（4,800円）</option>
+              <option>未定（個別相談）</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-g">
+          <label>ご要望</label>
+          <textarea rows="3" placeholder="アレルギー、記念日演出など..."></textarea>
+        </div>
+        <button class="btn-reserve">予約リクエストを送る</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">焼き鳥 <span>鳥吉</span></div>
+  <small>© 2024 TORIGICHI All Rights Reserved.</small>
+</footer>
+
+<!-- ============================================================
+     JavaScript — jQuery Scroll Animations
+============================================================ -->
+<script>
+$(function () {
+
+  /* ----------------------------------------------------------
+     1. Navbar shadow on scroll
+  ---------------------------------------------------------- */
+  $(window).on('scroll', function () {
+    $('#nav').toggleClass('shadow', $(this).scrollTop() > 10);
+  });
+
+  /* ----------------------------------------------------------
+     2. Scroll-reveal with jQuery
+     Elements with class .js-reveal get their data-anim class
+     applied when they enter the viewport.
+  ---------------------------------------------------------- */
+  function revealOnScroll() {
+    var windowBottom = $(window).scrollTop() + $(window).height();
+
+    $('.js-reveal:not(.revealed)').each(function () {
+      var elemTop = $(this).offset().top;
+      if (windowBottom > elemTop + 60) {
+        var $el    = $(this);
+        var anim   = $el.data('anim')   || 'anim-up';
+        var delay  = $el.data('delay')  || 0;
+
+        setTimeout(function () {
+          $el.addClass(anim + ' revealed');
+        }, parseInt(delay));
+      }
+    });
+  }
+
+  // Run on load and scroll
+  revealOnScroll();
+  $(window).on('scroll', revealOnScroll);
+
+  /* ----------------------------------------------------------
+     3. Smooth scroll for nav links
+  ---------------------------------------------------------- */
+  $('a[href^="#"]').on('click', function (e) {
+    var target = $(this.hash);
+    if (target.length) {
+      e.preventDefault();
+      $('html, body').animate(
+        { scrollTop: target.offset().top - 60 },
+        600,
+        'swing'
+      );
+    }
+  });
+
+  /* ----------------------------------------------------------
+     4. Menu card entrance — stagger on first scroll to section
+  ---------------------------------------------------------- */
+  var menuTriggered = false;
+  $(window).on('scroll', function () {
+    if (menuTriggered) return;
+    var menuTop = $('#menu').offset().top;
+    if ($(this).scrollTop() + $(this).height() > menuTop + 100) {
+      menuTriggered = true;
+      $('.menu-card').each(function (i) {
+        var $card = $(this);
+        setTimeout(function () {
+          $card.css({ animation: 'fadeUp 0.6s ease forwards' });
+        }, i * 80);
+      });
+    }
+  });
+
+  /* ----------------------------------------------------------
+     5. Header parallax on hero bg
+  ---------------------------------------------------------- */
+  $(window).on('scroll', function () {
+    var scrolled = $(this).scrollTop();
+    if (scrolled < $(window).height()) {
+      $('.hero-bg-img').css('transform', 'translateY(' + (scrolled * 0.25) + 'px)');
+    }
+  });
+
+  /* ----------------------------------------------------------
+     6. Ribbon auto-duplicate for seamless loop
+     (already duplicated in HTML; just ensure smooth play)
+  ---------------------------------------------------------- */
+  // No JS needed — pure CSS animation handles it.
+
+  /* ----------------------------------------------------------
+     7. Form submit feedback
+  ---------------------------------------------------------- */
+  $('form').on('submit', function (e) {
+    e.preventDefault();
+    var $btn = $(this).find('button[type=submit], .btn-reserve');
+    $btn.text('送信しました！').css('background', '#27ae60');
+    setTimeout(function () {
+      $btn.text('予約リクエストを送る').css('background', '');
+    }, 3000);
+  });
+
+});
+</script>
+</body>
+</html>

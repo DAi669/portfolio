@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMINA BOOST | 医師監修の最高級プロテイン・サプリメント</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green:  #2d6a4f;
+      --green2: #1b4332;
+      --green-l:#d8f3dc;
+      --lime:   #95d5b2;
+      --gold:   #b5851a;
+      --ivory:  #fdfbf7;
+      --cream:  #f5f0e8;
+      --white:  #ffffff;
+      --text:   #1a2e1e;
+      --muted:  #6b7c6b;
+      --border: #dce8dc;
+      --serif:  'DM Serif Display', Georgia, serif;
+      --dm:     'DM Sans', sans-serif;
+      --sans:   'Noto Sans JP', sans-serif;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--ivory); color:var(--text); font-family:var(--sans); font-weight:300; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    img { display:block; max-width:100%; }
+    a { text-decoration:none; color:inherit; }
+
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+    @keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+    @keyframes slideLeft{ from{opacity:0;transform:translateX(-40px)} to{opacity:1;transform:none} }
+    @keyframes slideRight{from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:none} }
+    @keyframes floatUp  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    @keyframes fillBar  { from{width:0} to{width:var(--target-w)} }
+    @keyframes spin360  { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+    .io { opacity:0; transition:opacity 0.75s ease, transform 0.75s ease; transform:translateY(28px); }
+    .io.in { opacity:1; transform:none; }
+    .io-l { opacity:0; transform:translateX(-40px); transition:opacity 0.7s ease, transform 0.7s ease; }
+    .io-r { opacity:0; transform:translateX(40px); transition:opacity 0.7s ease, transform 0.7s ease; }
+    .io-l.in, .io-r.in { opacity:1; transform:none; }
+
+    /* Sticky buy button */
+    #sticky-buy { position:fixed; bottom:0; left:0; right:0; z-index:300; transform:translateY(100%); transition:transform 0.4s ease; }
+    #sticky-buy.show { transform:translateY(0); }
+
+    /* Nav */
+    #nav { position:fixed; top:0; left:0; right:0; z-index:200; height:60px; display:flex; align-items:center; justify-content:space-between; padding:0 3rem; background:rgba(253,251,247,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:var(--serif); font-size:1.3rem; color:var(--green2); letter-spacing:0.04em; font-style:italic; }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links a { font-family:var(--dm); font-size:0.82rem; color:var(--muted); transition:color 0.25s; letter-spacing:0.05em; }
+    .nav-links a:hover { color:var(--green); }
+    .nav-buy { background:var(--green); color:#fff; font-family:var(--dm); font-size:0.8rem; font-weight:500; letter-spacing:0.1em; padding:0.55rem 1.5rem; border-radius:100px; transition:background 0.25s; display:inline-block; }
+    .nav-buy:hover { background:var(--green2); }
+
+    /* Hero */
+    #hero { padding-top:60px; min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; background:linear-gradient(160deg, var(--ivory) 60%, var(--green-l) 100%); overflow:hidden; position:relative; }
+    #hero::before { content:''; position:absolute; top:-100px; right:-100px; width:600px; height:600px; border-radius:50%; background:rgba(149,213,178,0.18); pointer-events:none; }
+    .hero-left { padding:4rem 3rem 4rem 5rem; position:relative; z-index:1; }
+    .hero-tag { display:inline-flex; align-items:center; gap:0.5rem; background:var(--green-l); color:var(--green); font-family:var(--dm); font-size:0.72rem; letter-spacing:0.25em; font-weight:500; padding:0.35rem 0.9rem; border-radius:100px; margin-bottom:1.5rem; border:1px solid var(--lime); }
+    .hero-h1 { font-family:var(--serif); font-size:clamp(2.5rem,5vw,4rem); line-height:1.15; color:var(--green2); margin-bottom:0.5rem; }
+    .hero-h1 em { color:var(--green); font-style:italic; }
+    .hero-sub { font-family:var(--dm); font-size:1rem; color:var(--muted); margin-bottom:1.5rem; letter-spacing:0.05em; }
+    .hero-copy { font-size:0.92rem; color:var(--muted); line-height:2; margin-bottom:2rem; max-width:460px; }
+    .hero-stars { display:flex; align-items:center; gap:0.5rem; margin-bottom:1.8rem; }
+    .star-icons { color:#e2ac2e; font-size:1rem; letter-spacing:0.05em; }
+    .hero-stars small { font-family:var(--dm); font-size:0.78rem; color:var(--muted); }
+    .hero-btns { display:flex; gap:0.8rem; flex-wrap:wrap; align-items:center; }
+    .btn-green { background:var(--green); color:#fff; font-family:var(--dm); font-size:0.9rem; font-weight:500; letter-spacing:0.1em; padding:1rem 2.4rem; border-radius:100px; border:none; cursor:pointer; display:inline-block; transition:background 0.25s, box-shadow 0.25s, transform 0.2s; box-shadow:0 4px 20px rgba(45,106,79,0.25); }
+    .btn-green:hover { background:var(--green2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(45,106,79,0.35); }
+    .btn-outline-green { color:var(--green); border:1.5px solid var(--green); font-family:var(--dm); font-size:0.88rem; padding:0.98rem 1.8rem; border-radius:100px; display:inline-block; transition:background 0.25s, color 0.25s; }
+    .btn-outline-green:hover { background:var(--green); color:#fff; }
+    .hero-note { font-family:var(--dm); font-size:0.72rem; color:var(--muted); margin-top:0.8rem; }
+
+    /* Hero right: Product image with floating badges */
+    .hero-right { display:flex; align-items:center; justify-content:center; position:relative; padding:3rem; }
+    .product-img-wrap { position:relative; animation:floatUp 4s ease-in-out infinite; }
+    .product-img-wrap img { width:320px; height:420px; object-fit:cover; border-radius:20px; box-shadow:0 20px 60px rgba(45,106,79,0.2); }
+    .float-badge { position:absolute; background:#fff; border-radius:12px; padding:0.8rem 1rem; box-shadow:0 4px 20px rgba(0,0,0,0.1); font-family:var(--dm); font-size:0.75rem; white-space:nowrap; }
+    .float-badge.b1 { top:10%; left:-30%; border-left:3px solid var(--green); }
+    .float-badge.b2 { bottom:20%; right:-30%; border-left:3px solid var(--gold); }
+    .float-badge strong { display:block; font-size:1rem; color:var(--green2); margin-bottom:0.2rem; }
+
+    /* Wrap */
+    .wrap { max-width:1100px; margin:0 auto; padding:0 2.5rem; }
+    .sec-label { font-family:var(--dm); font-size:0.68rem; letter-spacing:0.5em; color:var(--green); display:block; margin-bottom:0.6rem; font-weight:500; }
+    .sec-title { font-family:var(--serif); font-size:clamp(1.8rem,4vw,2.8rem); color:var(--green2); line-height:1.25; }
+    .sec-title em { color:var(--green); font-style:italic; }
+    .rule-green { width:36px; height:2px; background:var(--green); margin:1rem 0; border-radius:1px; }
+    .rule-center { margin:1rem auto; }
+
+    /* Ingredients */
+    #ingredients { padding:7rem 0; background:var(--white); }
+    .ing-grid { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; }
+    .ing-visual { position:relative; }
+    .ing-visual img { width:100%; height:460px; object-fit:cover; border-radius:16px; }
+    .ing-visual-badge { position:absolute; bottom:1.5rem; right:1.5rem; background:var(--green2); color:#fff; padding:1rem 1.4rem; border-radius:10px; font-family:var(--dm); }
+    .ing-visual-badge strong { display:block; font-size:1.3rem; }
+    .ing-visual-badge span { font-size:0.72rem; color:rgba(255,255,255,0.65); }
+    .ing-bars { display:flex; flex-direction:column; gap:1.4rem; margin-top:1.5rem; }
+    .ing-bar-item {}
+    .ing-bar-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem; }
+    .ing-bar-name { font-family:var(--dm); font-size:0.85rem; font-weight:500; color:var(--green2); }
+    .ing-bar-pct { font-family:var(--dm); font-size:0.78rem; color:var(--green); font-weight:500; }
+    .ing-bar-track { height:6px; background:var(--cream); border-radius:3px; overflow:hidden; }
+    .ing-bar-fill { height:100%; border-radius:3px; background:linear-gradient(to right, var(--green), var(--lime)); width:0; transition:width 1.2s ease; }
+
+    /* Benefits */
+    #benefits { padding:7rem 0; background:var(--cream); }
+    .benefits-head { text-align:center; margin-bottom:3.5rem; }
+    .benefits-head .rule-green { margin:1rem auto; }
+    .benefits-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .benefit-card { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:2.2rem 1.8rem; text-align:center; transition:box-shadow 0.3s, transform 0.3s; }
+    .benefit-card:hover { box-shadow:0 8px 30px rgba(45,106,79,0.1); transform:translateY(-4px); }
+    .benefit-icon { width:56px; height:56px; background:var(--green-l); border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; }
+    .benefit-icon svg { width:28px; height:28px; stroke:var(--green); fill:none; stroke-width:1.8; }
+    .benefit-card h3 { font-family:var(--serif); font-size:1.1rem; color:var(--green2); margin-bottom:0.5rem; }
+    .benefit-card p { font-size:0.82rem; color:var(--muted); line-height:1.9; }
+
+    /* Reviews */
+    #reviews { padding:7rem 0; background:var(--white); }
+    .reviews-head { text-align:center; margin-bottom:3.5rem; }
+    .reviews-head .rule-green { margin:1rem auto; }
+    .reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:2.5rem; }
+    .review-card { border:1px solid var(--border); border-radius:12px; padding:1.8rem; position:relative; overflow:hidden; transition:box-shadow 0.3s; }
+    .review-card:hover { box-shadow:0 6px 24px rgba(0,0,0,0.07); }
+    .review-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right, var(--green), var(--lime)); }
+    .review-stars { color:#e2ac2e; font-size:0.85rem; margin-bottom:0.8rem; }
+    .review-text { font-size:0.85rem; color:var(--muted); line-height:1.9; margin-bottom:1.2rem; }
+    .review-author { display:flex; align-items:center; gap:0.8rem; }
+    .review-avatar { width:40px; height:40px; border-radius:50%; overflow:hidden; }
+    .review-avatar img { width:100%; height:100%; object-fit:cover; }
+    .review-name { font-family:var(--dm); font-size:0.85rem; font-weight:500; color:var(--green2); }
+    .review-meta { font-size:0.72rem; color:var(--muted); }
+    .review-summary { display:grid; grid-template-columns:auto 1fr; gap:3rem; align-items:center; background:var(--cream); border-radius:14px; padding:2rem 3rem; }
+    .review-big-num { font-family:var(--serif); font-size:5rem; color:var(--green); line-height:1; }
+    .review-big-label { font-family:var(--dm); font-size:0.8rem; color:var(--muted); }
+    .review-bars { display:flex; flex-direction:column; gap:0.5rem; }
+    .rbar { display:flex; align-items:center; gap:0.8rem; }
+    .rbar-star { font-family:var(--dm); font-size:0.75rem; color:var(--muted); width:30px; text-align:right; }
+    .rbar-track { flex:1; height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+    .rbar-fill { height:100%; border-radius:3px; background:#e2ac2e; width:0; transition:width 1s ease; }
+    .rbar-count { font-family:var(--dm); font-size:0.72rem; color:var(--muted); width:30px; }
+
+    /* CTA / Order */
+    #order { padding:7rem 0; background:var(--green2); position:relative; overflow:hidden; }
+    #order::before { content:''; position:absolute; top:-150px; right:-150px; width:500px; height:500px; border-radius:50%; background:rgba(149,213,178,0.08); }
+    .order-inner { max-width:900px; margin:0 auto; padding:0 2.5rem; position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .order-left {}
+    .order-left .sec-label { color:var(--lime); }
+    .order-left .sec-title { color:#fff; }
+    .order-left p { font-size:0.9rem; color:rgba(255,255,255,0.65); line-height:2; margin-top:1rem; }
+    .plan-toggle { display:flex; gap:0.5rem; margin-top:1.5rem; }
+    .plan-btn { font-family:var(--dm); font-size:0.78rem; font-weight:500; letter-spacing:0.08em; padding:0.5rem 1.2rem; border-radius:100px; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.6); cursor:pointer; transition:all 0.25s; background:transparent; }
+    .plan-btn.active { background:var(--green); border-color:var(--green); color:#fff; }
+    .order-card { background:#fff; border-radius:16px; padding:2.5rem; }
+    .order-card h3 { font-family:var(--serif); font-size:1.4rem; color:var(--green2); margin-bottom:0.3rem; }
+    .order-price { font-family:var(--serif); font-size:2.8rem; color:var(--green); line-height:1; margin:1rem 0; }
+    .order-price span { font-family:var(--dm); font-size:0.9rem; color:var(--muted); }
+    .order-price del { font-size:1.4rem; color:var(--muted); text-decoration:line-through; }
+    .order-includes { list-style:none; margin:1.2rem 0 1.5rem; }
+    .order-includes li { font-family:var(--dm); font-size:0.82rem; color:var(--muted); padding:0.4rem 0; display:flex; gap:0.5rem; align-items:center; border-bottom:1px solid var(--border); }
+    .order-includes li::before { content:'✓'; color:var(--green); font-weight:700; }
+    .btn-order { width:100%; background:var(--green); color:#fff; border:none; padding:1.1rem; border-radius:100px; font-family:var(--dm); font-size:0.9rem; font-weight:500; letter-spacing:0.1em; cursor:pointer; transition:background 0.25s, transform 0.2s; }
+    .btn-order:hover { background:var(--green2); transform:translateY(-2px); }
+    .order-guarantee { margin-top:1rem; text-align:center; font-family:var(--dm); font-size:0.72rem; color:var(--muted); }
+
+    footer { background:var(--green2); border-top:1px solid rgba(255,255,255,0.1); padding:2.5rem; text-align:center; }
+    .footer-logo { font-family:var(--serif); font-size:1.3rem; color:var(--lime); font-style:italic; margin-bottom:0.4rem; }
+    footer small { font-size:0.7rem; color:rgba(255,255,255,0.3); }
+
+    /* Sticky buy */
+    #sticky-buy { background:var(--green2); border-top:1px solid rgba(255,255,255,0.1); padding:0.8rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.8rem; }
+    .sticky-buy-text { font-family:var(--dm); font-size:0.88rem; color:#fff; }
+    .sticky-buy-text strong { color:var(--lime); }
+    .sticky-buy-btn { background:var(--green); color:#fff; font-family:var(--dm); font-size:0.85rem; font-weight:500; letter-spacing:0.1em; padding:0.7rem 2rem; border-radius:100px; border:none; cursor:pointer; display:inline-block; transition:background 0.25s; }
+    .sticky-buy-btn:hover { background:var(--lime); color:var(--green2); }
+
+    @media(max-width:960px){
+      #nav .nav-links { display:none; }
+      #hero { grid-template-columns:1fr; }
+      .hero-left { padding:3rem 2rem; }
+      .hero-right { display:none; }
+      .ing-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .benefits-grid { grid-template-columns:1fr 1fr; }
+      .reviews-grid { grid-template-columns:1fr; }
+      .review-summary { grid-template-columns:1fr; gap:1.5rem; text-align:center; }
+      .order-inner { grid-template-columns:1fr; gap:2.5rem; }
+      #sticky-buy { justify-content:center; }
+    }
+    @media(max-width:600px){ .benefits-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">LUMINA BOOST</div>
+  <ul class="nav-links">
+    <li><a href="#ingredients">成分</a></li>
+    <li><a href="#benefits">効果</a></li>
+    <li><a href="#reviews">口コミ</a></li>
+    <li><a href="#order">購入</a></li>
+  </ul>
+  <a href="#order" class="nav-buy">今すぐ購入</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-tag">医師監修 / 国内製造 / GMP認定工場</span>
+    <h1 class="hero-h1">体の内側から、<br><em>輝く毎日</em>へ。</h1>
+    <p class="hero-sub">LUMINA BOOST プレミアムサプリメント</p>
+    <p class="hero-copy">厳選された植物由来の成分と、医師・栄養士が設計した配合比率。毎日の健康維持から、美容・パフォーマンス向上まで、あなたの「なりたい自分」をサポートします。</p>
+    <div class="hero-stars">
+      <span class="star-icons">★★★★★</span>
+      <small>4.8 / 5.0（2,340件の口コミ）</small>
+    </div>
+    <div class="hero-btns">
+      <a href="#order" class="btn-green">定期購入で30%OFF</a>
+      <a href="#ingredients" class="btn-outline-green">成分を見る</a>
+    </div>
+    <p class="hero-note">初回限定 送料無料 / 30日間返金保証</p>
+  </div>
+  <div class="hero-right">
+    <div class="product-img-wrap">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=85" alt="LUMINA BOOST">
+      <div class="float-badge b1">
+        <strong>天然成分100%</strong>
+        添加物・着色料不使用
+      </div>
+      <div class="float-badge b2">
+        <strong>累計30万個</strong>
+        販売突破
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ingredients -->
+<section id="ingredients">
+  <div class="wrap">
+    <div class="ing-grid">
+      <div class="ing-visual io io-l">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=85" alt="成分">
+        <div class="ing-visual-badge">
+          <strong>23種類</strong>
+          <span>の厳選成分</span>
+        </div>
+      </div>
+      <div class="io io-r">
+        <span class="sec-label">INGREDIENTS</span>
+        <h2 class="sec-title">妥協なき<br><em>成分設計</em></h2>
+        <div class="rule-green"></div>
+        <p style="font-size:0.9rem;color:var(--muted);line-height:2;margin-bottom:2rem">世界中から厳選した植物由来の成分を、医師と栄養士が最も効果的な配合比率で組み合わせました。GMP認定の国内工場で製造されています。</p>
+        <div class="ing-bars">
+          <div class="ing-bar-item"><div class="ing-bar-top"><span class="ing-bar-name">高吸収型マグネシウム</span><span class="ing-bar-pct">95%</span></div><div class="ing-bar-track"><div class="ing-bar-fill" style="--target-w:95%"></div></div></div>
+          <div class="ing-bar-item"><div class="ing-bar-top"><span class="ing-bar-name">アシュワガンダエキス</span><span class="ing-bar-pct">88%</span></div><div class="ing-bar-track"><div class="ing-bar-fill" style="--target-w:88%"></div></div></div>
+          <div class="ing-bar-item"><div class="ing-bar-top"><span class="ing-bar-name">コエンザイムQ10</span><span class="ing-bar-pct">82%</span></div><div class="ing-bar-track"><div class="ing-bar-fill" style="--target-w:82%"></div></div></div>
+          <div class="ing-bar-item"><div class="ing-bar-top"><span class="ing-bar-name">L-テアニン（茶葉由来）</span><span class="ing-bar-pct">90%</span></div><div class="ing-bar-track"><div class="ing-bar-fill" style="--target-w:90%"></div></div></div>
+          <div class="ing-bar-item"><div class="ing-bar-top"><span class="ing-bar-name">ビタミンD3（天然型）</span><span class="ing-bar-pct">78%</span></div><div class="ing-bar-track"><div class="ing-bar-fill" style="--target-w:78%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section id="benefits">
+  <div class="wrap">
+    <div class="benefits-head">
+      <span class="sec-label io">BENEFITS</span>
+      <h2 class="sec-title io">飲み続けると<em>こう変わる</em></h2>
+      <div class="rule-green rule-center io"></div>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card io" data-delay="0">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>疲労感の改善</h3>
+        <p>マグネシウムとアシュワガンダが、慢性疲労・ストレスに働きかけ、朝から活力のある状態をサポートします。</p>
+      </div>
+      <div class="benefit-card io" data-delay="100">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20A10 10 0 0 1 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
+        <h3>睡眠の質向上</h3>
+        <p>L-テアニンとマグネシウムが、リラックス状態を促進。深い眠りと翌朝のすっきり感をサポートします。</p>
+      </div>
+      <div class="benefit-card io" data-delay="200">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <h3>免疫力・抗酸化</h3>
+        <p>ビタミンD3とコエンザイムQ10が、細胞レベルでの抗酸化作用を発揮。免疫機能の維持をサポートします。</p>
+      </div>
+      <div class="benefit-card io" data-delay="0">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h3>集中力・脳機能</h3>
+        <p>テアニンと各種B群ビタミンが、神経伝達を最適化。集中力・記憶力のサポートにアプローチします。</p>
+      </div>
+      <div class="benefit-card io" data-delay="100">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>美肌・アンチエイジング</h3>
+        <p>コラーゲン生成を促進するビタミンCと抗酸化成分が、肌のキメ・ハリをサポートします。</p>
+      </div>
+      <div class="benefit-card io" data-delay="200">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h3>運動パフォーマンス</h3>
+        <p>マグネシウムと亜鉛が筋肉の回復をサポート。アスリートから日常的な運動をする方まで対応します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="reviews-head">
+      <span class="sec-label io">REVIEWS</span>
+      <h2 class="sec-title io">お客様の声</h2>
+      <div class="rule-green rule-center io"></div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card io"><div class="review-stars">★★★★★</div><p class="review-text">飲み始めて2週間で朝の目覚めが全然違います。夜中に何度も起きていたのが、ぐっすり眠れるようになりました。</p><div class="review-author"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=96&q=80" alt=""></div><div><div class="review-name">田中 みほ / 38歳</div><div class="review-meta">定期購入 4ヶ月目</div></div></div></div>
+      <div class="review-card io"><div class="review-stars">★★★★★</div><p class="review-text">仕事のストレスで疲れが取れず悩んでいましたが、1ヶ月でだいぶ楽になりました。コーヒーの量が半分に減りました！</p><div class="review-author"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&q=80" alt=""></div><div><div class="review-name">山本 たかし / 42歳</div><div class="review-meta">定期購入 2ヶ月目</div></div></div></div>
+      <div class="review-card io"><div class="review-stars">★★★★☆</div><p class="review-text">肌のツヤが出てきたと友人に言われるようになりました。大きいカプセルが少し飲みにくいですが、効果は実感しています。</p><div class="review-author"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&q=80" alt=""></div><div><div class="review-name">佐藤 あかね / 29歳</div><div class="review-meta">通常購入 3回目</div></div></div></div>
+    </div>
+    <div class="review-summary io">
+      <div><div class="review-big-num">4.8</div><div class="review-big-label">/ 5.0 平均評価<br>（2,340件）</div></div>
+      <div class="review-bars">
+        <div class="rbar"><span class="rbar-star">5★</span><div class="rbar-track"><div class="rbar-fill" style="--tw:78%"></div></div><span class="rbar-count">78%</span></div>
+        <div class="rbar"><span class="rbar-star">4★</span><div class="rbar-track"><div class="rbar-fill" style="--tw:14%"></div></div><span class="rbar-count">14%</span></div>
+        <div class="rbar"><span class="rbar-star">3★</span><div class="rbar-track"><div class="rbar-fill" style="--tw:5%"></div></div><span class="rbar-count">5%</span></div>
+        <div class="rbar"><span class="rbar-star">2★</span><div class="rbar-track"><div class="rbar-fill" style="--tw:2%"></div></div><span class="rbar-count">2%</span></div>
+        <div class="rbar"><span class="rbar-star">1★</span><div class="rbar-track"><div class="rbar-fill" style="--tw:1%"></div></div><span class="rbar-count">1%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Order -->
+<section id="order">
+  <div class="order-inner">
+    <div class="order-left io io-l">
+      <span class="sec-label">ORDER</span>
+      <h2 class="sec-title">今すぐ始める</h2>
+      <p>定期購入なら常に30%OFF。いつでも解約・変更可能。初回限定で送料も無料です。</p>
+      <div class="plan-toggle">
+        <button class="plan-btn active" id="plan-teiki">定期購入（おすすめ）</button>
+        <button class="plan-btn" id="plan-normal">通常購入</button>
+      </div>
+    </div>
+    <div class="order-card io io-r">
+      <h3 id="plan-name">定期購入プラン</h3>
+      <div class="order-price"><del id="plan-del">¥6,980</del> → <span id="plan-price">¥4,886</span><span> / 月（税込）</span></div>
+      <ul class="order-includes">
+        <li id="plan-i1">初回限定 送料無料</li>
+        <li>30日間返金保証</li>
+        <li id="plan-i2">いつでも解約・スキップ可能</li>
+        <li>医師監修 23種類の成分配合</li>
+      </ul>
+      <button class="btn-order" id="orderBtn">定期購入を始める（30%OFF）</button>
+      <p class="order-guarantee">30日間全額返金保証 / SSL暗号化通信</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">LUMINA BOOST</div>
+  <small>© 2024 LUMINA BOOST. All Rights Reserved. 本製品は医薬品ではありません。</small>
+</footer>
+
+<!-- Sticky Buy -->
+<div id="sticky-buy">
+  <span class="sticky-buy-text">LUMINA BOOST — 定期購入 <strong>30% OFF</strong> ¥4,886/月</span>
+  <a href="#order" class="sticky-buy-btn">今すぐ購入する</a>
+</div>
+
+<script>
+  /* IO reveal */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const delay = e.target.dataset.delay || 0;
+      setTimeout(() => e.target.classList.add('in'), +delay);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.io, .io-l, .io-r').forEach(el => io.observe(el));
+
+  /* Ingredient bars */
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.ing-bar-fill').forEach(b => {
+        b.style.width = getComputedStyle(b).getPropertyValue('--target-w').trim();
+      });
+      barObs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.ing-bars').forEach(el => barObs.observe(el));
+
+  /* Review rating bars */
+  const rbarObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.rbar-fill').forEach(b => {
+        b.style.width = getComputedStyle(b).getPropertyValue('--tw').trim();
+      });
+      rbarObs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.review-summary').forEach(el => rbarObs.observe(el));
+
+  /* Sticky buy */
+  window.addEventListener('scroll', () => {
+    document.getElementById('sticky-buy').classList.toggle('show', window.scrollY > 400);
+  });
+
+  /* Plan toggle */
+  const planTeiki  = document.getElementById('plan-teiki');
+  const planNormal = document.getElementById('plan-normal');
+  const planName   = document.getElementById('plan-name');
+  const planDel    = document.getElementById('plan-del');
+  const planPrice  = document.getElementById('plan-price');
+  const planI1     = document.getElementById('plan-i1');
+  const planI2     = document.getElementById('plan-i2');
+  const orderBtn   = document.getElementById('orderBtn');
+
+  planTeiki.addEventListener('click', () => {
+    planTeiki.classList.add('active'); planNormal.classList.remove('active');
+    planName.textContent = '定期購入プラン';
+    planDel.textContent  = '¥6,980'; planPrice.textContent = '¥4,886';
+    planI1.textContent   = '初回限定 送料無料';
+    planI2.textContent   = 'いつでも解約・スキップ可能';
+    orderBtn.textContent = '定期購入を始める（30%OFF）';
+  });
+  planNormal.addEventListener('click', () => {
+    planNormal.classList.add('active'); planTeiki.classList.remove('active');
+    planName.textContent = '通常購入';
+    planDel.textContent  = ''; planPrice.textContent = '¥6,980';
+    planI1.textContent   = '送料 ¥440';
+    planI2.textContent   = '次回から定期購入に変更可能';
+    orderBtn.textContent = '通常購入する';
+  });
+
+  /* Form order button */
+  orderBtn.addEventListener('click', () => {
+    orderBtn.textContent = 'カートに追加しました！';
+    orderBtn.style.background = 'var(--lime)';
+    orderBtn.style.color = 'var(--green2)';
+    setTimeout(() => {
+      orderBtn.textContent = '定期購入を始める（30%OFF）';
+      orderBtn.style.background = '';
+      orderBtn.style.color = '';
+    }, 3000);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CODE RISE Academy | 未経験から6ヶ月でエンジニア転職</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark:   '#0a0a16',
+            dark2:  '#10101f',
+            dark3:  '#16162a',
+            purple: '#7c3aed',
+            purple2:'#a855f7',
+            blue:   '#3b82f6',
+            blue2:  '#60a5fa',
+            cyan:   '#06b6d4',
+            green:  '#10b981',
+          },
+          fontFamily: {
+            sans:  ['"Noto Sans JP"', 'sans-serif'],
+            grotesk: ['"Space Grotesk"', 'sans-serif'],
+            mono:  ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ============================================================
+       Custom CSS (beyond Tailwind)
+    ============================================================ */
+    * { box-sizing: border-box; }
+    body { background: #0a0a16; }
+
+    /* Gradient text */
+    .grad-text {
+      background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-green {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Gradient border */
+    .grad-border {
+      position: relative;
+    }
+    .grad-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, #7c3aed, #3b82f6, #06b6d4);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* Glow button */
+    .btn-glow {
+      background: linear-gradient(135deg, #7c3aed, #3b82f6);
+      box-shadow: 0 0 20px rgba(124,58,237,0.4), 0 0 60px rgba(59,130,246,0.2);
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+    .btn-glow:hover {
+      box-shadow: 0 0 30px rgba(124,58,237,0.6), 0 0 80px rgba(59,130,246,0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Code block */
+    .code-block {
+      background: #0d1117;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .code-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* Typing cursor */
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: #a855f7;
+      margin-left: 2px;
+      animation: blink 0.8s step-end infinite;
+      vertical-align: middle;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left  { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right { opacity: 0; transform: translateX(40px);  transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible,
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* Grid shimmer bg */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Glow orb */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    /* Tag */
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    /* Timeline */
+    .timeline-item { position: relative; padding-left: 3rem; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 12px;
+      bottom: -24px;
+      width: 1px;
+      background: linear-gradient(to bottom, #7c3aed, transparent);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-dot {
+      position: absolute;
+      left: -8px; top: 8px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed, #3b82f6);
+      box-shadow: 0 0 12px rgba(124,58,237,0.5);
+    }
+
+    /* Progress bar */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(to right, #7c3aed, #3b82f6, #06b6d4);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* Comparison card */
+    .before-card { border: 1px solid rgba(239,68,68,0.3); background: rgba(239,68,68,0.04); }
+    .after-card  { border: 1px solid rgba(16,185,129,0.3); background: rgba(16,185,129,0.04); }
+
+    /* Sticky CTA */
+    #sticky-cta {
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    #sticky-cta.visible { transform: translateY(0); }
+
+    /* Swipe tabs */
+    .plan-tab.active {
+      background: linear-gradient(135deg, #7c3aed, #3b82f6);
+      color: #fff;
+    }
+
+    /* Countdown */
+    .countdown-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 0.8rem 1.2rem;
+      text-align: center;
+      min-width: 70px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0a0a16; }
+    ::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 2px; }
+  </style>
+</head>
+<body class="font-sans text-white antialiased overflow-x-hidden">
+
+<!-- Progress Bar -->
+<div id="progress-bar" style="width:0%"></div>
+
+<!-- ============================================================
+     Navigation
+============================================================ -->
+<nav class="fixed top-3 left-0 right-0 z-50 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex items-center justify-between px-6 py-3 rounded-xl" style="background:rgba(16,16,31,0.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-md btn-glow flex items-center justify-center text-xs font-bold font-mono">CR</div>
+        <span class="font-grotesk font-700 text-sm tracking-wide">CODE RISE <span class="text-purple2">Academy</span></span>
+      </div>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#results" class="text-xs text-white/60 hover:text-white transition-colors tracking-wider">実績</a>
+        <a href="#curriculum" class="text-xs text-white/60 hover:text-white transition-colors tracking-wider">カリキュラム</a>
+        <a href="#price" class="text-xs text-white/60 hover:text-white transition-colors tracking-wider">料金</a>
+        <a href="#faq" class="text-xs text-white/60 hover:text-white transition-colors tracking-wider">FAQ</a>
+      </div>
+      <a href="#contact" class="btn-glow text-white text-xs font-bold tracking-wider px-5 py-2 rounded-lg">無料カウンセリング</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     Hero
+============================================================ -->
+<section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 grid-bg overflow-hidden">
+  <!-- Orbs -->
+  <div class="orb w-96 h-96 top-10 left-10 opacity-20" style="background:#7c3aed"></div>
+  <div class="orb w-80 h-80 bottom-20 right-20 opacity-15" style="background:#3b82f6"></div>
+  <div class="orb w-60 h-60 top-1/2 left-1/2 opacity-10 -translate-x-1/2 -translate-y-1/2" style="background:#06b6d4"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full text-xs tracking-widest font-mono" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#a855f7;">
+      <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+      2025年5月開講コース 受付中 — 残り 8席
+    </div>
+
+    <!-- Typing headline -->
+    <h1 class="font-grotesk font-bold leading-tight mb-6" style="font-size:clamp(2.2rem,6vw,4.5rem)">
+      <span id="typing-text" class="grad-text"></span><span class="cursor"></span><br>
+      <span class="text-white">6ヶ月でエンジニア転職を</span><br>
+      <span class="text-white">実現する</span><span class="grad-text-green">スクール</span>
+    </h1>
+
+    <p class="text-white/60 text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+      未経験からWebエンジニアへ。現役エンジニアによる完全オーダーメイドのカリキュラムと、<br class="hidden md:block">
+      転職成功まで伴走するメンタリング制度で<strong class="text-white">転職成功率94%</strong>を誇ります。
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+      <a href="#contact" class="btn-glow text-white font-bold tracking-wider px-10 py-4 rounded-xl text-sm">無料カウンセリングを予約する</a>
+      <a href="#curriculum" class="text-white/80 hover:text-white border border-white/15 hover:border-white/30 px-8 py-4 rounded-xl text-sm transition-all tracking-wider">カリキュラムを見る</a>
+    </div>
+
+    <!-- Countdown -->
+    <div class="flex flex-col items-center gap-3 mb-12">
+      <p class="text-xs text-white/40 tracking-widest">次回開講まで</p>
+      <div class="flex items-center gap-3">
+        <div class="countdown-block"><div id="cd-days" class="text-2xl font-grotesk font-bold grad-text">00</div><div class="text-xs text-white/40 mt-1">DAYS</div></div>
+        <span class="text-white/30 text-xl">:</span>
+        <div class="countdown-block"><div id="cd-hours" class="text-2xl font-grotesk font-bold grad-text">00</div><div class="text-xs text-white/40 mt-1">HOURS</div></div>
+        <span class="text-white/30 text-xl">:</span>
+        <div class="countdown-block"><div id="cd-mins" class="text-2xl font-grotesk font-bold grad-text">00</div><div class="text-xs text-white/40 mt-1">MINS</div></div>
+        <span class="text-white/30 text-xl">:</span>
+        <div class="countdown-block"><div id="cd-secs" class="text-2xl font-grotesk font-bold grad-text">00</div><div class="text-xs text-white/40 mt-1">SECS</div></div>
+      </div>
+    </div>
+
+    <!-- Code snippet decoration -->
+    <div class="code-block max-w-xl mx-auto p-4 text-left reveal">
+      <div class="flex items-center gap-1.5 mb-3">
+        <div class="code-dot bg-red-500/70"></div>
+        <div class="code-dot bg-yellow-500/70"></div>
+        <div class="code-dot bg-green-500/70"></div>
+        <span class="text-xs text-white/25 ml-2 font-mono">career.ts</span>
+      </div>
+      <div class="font-mono text-xs leading-relaxed">
+        <span class="text-purple2">const</span> <span class="text-blue2">yourFuture</span> <span class="text-white/50">=</span> <span class="text-white/50">{</span><br>
+        &nbsp;&nbsp;<span class="text-cyan">currentStatus</span><span class="text-white/50">:</span> <span class="text-green-400">"未経験"</span><span class="text-white/50">,</span><br>
+        &nbsp;&nbsp;<span class="text-cyan">afterCODERISE</span><span class="text-white/50">:</span> <span class="text-green-400">"Webエンジニア"</span><span class="text-white/50">,</span><br>
+        &nbsp;&nbsp;<span class="text-cyan">period</span><span class="text-white/50">:</span> <span class="text-green-400">"6ヶ月"</span><span class="text-white/50">,</span><br>
+        &nbsp;&nbsp;<span class="text-cyan">salary</span><span class="text-white/50">:</span> <span class="text-green-400">"+¥2,000,000 / year"</span><br>
+        <span class="text-white/50">}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Results / Stats
+============================================================ -->
+<section id="results" class="py-24" style="background:#0d0d1f">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <span class="tag reveal" style="background:rgba(124,58,237,0.15);color:#a855f7;border:1px solid rgba(124,58,237,0.3)">RESULTS</span>
+      <h2 class="font-grotesk font-bold mt-4 reveal" style="font-size:clamp(1.8rem,4vw,2.8rem)">
+        <span class="grad-text">数字が証明する</span>実績
+      </h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+      <div class="grad-border rounded-xl p-6 text-center reveal" style="background:rgba(255,255,255,0.02)">
+        <div class="font-grotesk font-bold mb-1 grad-text" style="font-size:2.8rem" data-count="94">0</div>
+        <div class="text-white/30 text-xs tracking-wider">転職成功率</div>
+        <div class="text-white/50 text-xs mt-2">業界平均の約2倍</div>
+      </div>
+      <div class="grad-border rounded-xl p-6 text-center reveal" data-delay="100" style="background:rgba(255,255,255,0.02)">
+        <div class="font-grotesk font-bold mb-1 grad-text" style="font-size:2.8rem" data-count="1850">0</div>
+        <div class="text-white/30 text-xs tracking-wider">卒業生数</div>
+        <div class="text-white/50 text-xs mt-2">2020年〜累計</div>
+      </div>
+      <div class="grad-border rounded-xl p-6 text-center reveal" data-delay="200" style="background:rgba(255,255,255,0.02)">
+        <div class="font-grotesk font-bold mb-1 grad-text" style="font-size:2.8rem" data-count="420">0</div>
+        <div class="text-white/30 text-xs tracking-wider">万円（平均年収UP）</div>
+        <div class="text-white/50 text-xs mt-2">転職後年収増加額</div>
+      </div>
+      <div class="grad-border rounded-xl p-6 text-center reveal" data-delay="300" style="background:rgba(255,255,255,0.02)">
+        <div class="font-grotesk font-bold mb-1 grad-text" style="font-size:2.8rem" data-count="6">0</div>
+        <div class="text-white/30 text-xs tracking-wider">ヶ月（平均転職期間）</div>
+        <div class="text-white/50 text-xs mt-2">入学〜転職決定まで</div>
+      </div>
+    </div>
+
+    <!-- Before / After -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="before-card rounded-xl p-6 reveal reveal-left">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style="background:rgba(239,68,68,0.2);color:#f87171">✕</div>
+          <span class="text-sm font-bold text-red-400 tracking-wider">BEFORE — 入学前</span>
+        </div>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-white/60"><span class="text-red-400 mt-0.5">—</span>プログラミングは完全未経験</li>
+          <li class="flex items-start gap-3 text-sm text-white/60"><span class="text-red-400 mt-0.5">—</span>何から始めればいいか分からない</li>
+          <li class="flex items-start gap-3 text-sm text-white/60"><span class="text-red-400 mt-0.5">—</span>年収350万円の仕事に閉塞感</li>
+          <li class="flex items-start gap-3 text-sm text-white/60"><span class="text-red-400 mt-0.5">—</span>独学で挫折した経験がある</li>
+          <li class="flex items-start gap-3 text-sm text-white/60"><span class="text-red-400 mt-0.5">—</span>転職活動の進め方も分からない</li>
+        </ul>
+      </div>
+      <div class="after-card rounded-xl p-6 reveal reveal-right">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style="background:rgba(16,185,129,0.2);color:#34d399">✓</div>
+          <span class="text-sm font-bold text-green-400 tracking-wider">AFTER — 卒業後</span>
+        </div>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-sm text-white/70"><span class="text-green-400 mt-0.5">✓</span>React / Node.js でのアプリ開発が可能</li>
+          <li class="flex items-start gap-3 text-sm text-white/70"><span class="text-green-400 mt-0.5">✓</span>GitHubにポートフォリオを公開済み</li>
+          <li class="flex items-start gap-3 text-sm text-white/70"><span class="text-green-400 mt-0.5">✓</span>年収550万円のWebエンジニアに転職</li>
+          <li class="flex items-start gap-3 text-sm text-white/70"><span class="text-green-400 mt-0.5">✓</span>チーム開発・コードレビューも経験済み</li>
+          <li class="flex items-start gap-3 text-sm text-white/70"><span class="text-green-400 mt-0.5">✓</span>エージェントと連携してスムーズに転職決定</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Curriculum — Timeline
+============================================================ -->
+<section id="curriculum" class="py-24" style="background:#0a0a16">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <span class="tag reveal" style="background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)">CURRICULUM</span>
+      <h2 class="font-grotesk font-bold mt-4 reveal" style="font-size:clamp(1.8rem,4vw,2.8rem)">
+        6ヶ月の<span class="grad-text">学習ロードマップ</span>
+      </h2>
+      <p class="text-white/50 text-sm mt-3 reveal">段階的に積み上げるカリキュラムで、確実にスキルを定着させます</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="space-y-8">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="grad-border rounded-lg p-4" style="background:rgba(255,255,255,0.02)">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="tag text-purple2" style="background:rgba(124,58,237,0.15)">Month 1–2</span>
+            </div>
+            <h3 class="font-bold text-base mb-2">Web開発の基礎</h3>
+            <p class="text-white/50 text-sm leading-relaxed mb-3">HTML/CSS/JavaScriptの基本から、レスポンシブデザインまで。毎日の課題とコードレビューで着実に定着させます。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">HTML5</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">CSS3</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">JavaScript</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">Git / GitHub</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="grad-border rounded-lg p-4" style="background:rgba(255,255,255,0.02)">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="tag text-blue2" style="background:rgba(59,130,246,0.15)">Month 3–4</span>
+            </div>
+            <h3 class="font-bold text-base mb-2">フロントエンド開発</h3>
+            <p class="text-white/50 text-sm leading-relaxed mb-3">ReactとTypeScriptを習得。状態管理・API連携・テストまでモダンなフロントエンド開発を実践します。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">React</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">TypeScript</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">Next.js</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">REST API</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="grad-border rounded-lg p-4" style="background:rgba(255,255,255,0.02)">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="tag" style="background:rgba(6,182,212,0.15);color:#67e8f9;border:none">Month 5</span>
+            </div>
+            <h3 class="font-bold text-base mb-2">バックエンド & DB</h3>
+            <p class="text-white/50 text-sm leading-relaxed mb-3">Node.js/Express でAPIサーバーを構築。データベース設計からクラウドデプロイまで、フルスタック開発を習得します。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">Node.js</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">PostgreSQL</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">AWS</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">Docker</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot" style="background:linear-gradient(135deg,#10b981,#06b6d4)"></div>
+          <div class="rounded-lg p-4" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2)">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="tag text-green-400" style="background:rgba(16,185,129,0.15)">Month 6</span>
+            </div>
+            <h3 class="font-bold text-base mb-2">卒業制作 & 転職活動</h3>
+            <p class="text-white/50 text-sm leading-relaxed mb-3">チーム開発でポートフォリオアプリを完成。転職エージェントと連携し、模擬面接・企業選定・内定獲得まで全力サポート。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">チーム開発</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">ポートフォリオ</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">面接対策</span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(255,255,255,0.05);color:#e2e8f0">内定獲得</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Feature highlights -->
+      <div class="space-y-5">
+        <div class="rounded-xl p-5 reveal reveal-right" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)">
+          <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=600&q=80" alt="コーディング" class="w-full rounded-lg mb-4 object-cover" style="height:200px">
+          <h4 class="font-bold text-sm mb-2">週5日・毎日メンタリング</h4>
+          <p class="text-white/50 text-xs leading-relaxed">現役エンジニアによる毎日のコードレビューと1on1メンタリング。詰まったときにすぐ質問できる環境が挫折を防ぎます。</p>
+        </div>
+        <div class="rounded-xl p-5 reveal reveal-right" data-delay="150" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" alt="チーム開発" class="w-full rounded-lg mb-4 object-cover" style="height:160px">
+          <h4 class="font-bold text-sm mb-2">リアルなチーム開発を経験</h4>
+          <p class="text-white/50 text-xs leading-relaxed">GitHubを使ったプルリクエスト・コードレビュー・アジャイル開発を実践。現場で即戦力になれるスキルを身につけます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Pricing
+============================================================ -->
+<section id="price" class="py-24" style="background:#0d0d1f">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <span class="tag reveal" style="background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.3)">PRICING</span>
+      <h2 class="font-grotesk font-bold mt-4 reveal" style="font-size:clamp(1.8rem,4vw,2.8rem)">
+        シンプルな<span class="grad-text">料金プラン</span>
+      </h2>
+      <p class="text-white/50 text-sm mt-3 reveal">すべてのプランで転職サポートが含まれています</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <!-- Basic -->
+      <div class="rounded-2xl p-6 reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
+        <div class="text-xs tracking-widest text-white/40 mb-3">SELF-PACED</div>
+        <h3 class="font-grotesk font-bold text-xl mb-1">ライト</h3>
+        <div class="my-4">
+          <span class="font-grotesk font-bold grad-text" style="font-size:2.4rem">¥298,000</span>
+          <span class="text-white/40 text-sm ml-1">（税込）</span>
+        </div>
+        <p class="text-white/50 text-xs mb-5 leading-relaxed">マイペースに学びたい方向け。動画教材＋週2回の質問対応。</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-xs text-white/60"><span class="text-green-400">✓</span>全カリキュラム教材へのアクセス</li>
+          <li class="flex items-center gap-2 text-xs text-white/60"><span class="text-green-400">✓</span>週2回メンタリング</li>
+          <li class="flex items-center gap-2 text-xs text-white/60"><span class="text-green-400">✓</span>転職サポート（3ヶ月）</li>
+          <li class="flex items-center gap-2 text-xs text-white/30"><span class="text-white/20">—</span>毎日コードレビュー</li>
+          <li class="flex items-center gap-2 text-xs text-white/30"><span class="text-white/20">—</span>チーム開発プログラム</li>
+        </ul>
+        <a href="#contact" class="block text-center text-sm font-bold tracking-wider py-3 rounded-lg transition-all" style="border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)" onmouseover="this.style.borderColor='rgba(124,58,237,0.5)';this.style.color='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.7)'">無料相談を予約</a>
+      </div>
+
+      <!-- Standard (featured) -->
+      <div class="rounded-2xl p-6 reveal relative" data-delay="120" style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(59,130,246,0.1));border:1px solid rgba(124,58,237,0.4)">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold tracking-wider" style="background:linear-gradient(135deg,#7c3aed,#3b82f6)">MOST POPULAR</div>
+        <div class="text-xs tracking-widest text-purple2/70 mb-3">STANDARD</div>
+        <h3 class="font-grotesk font-bold text-xl mb-1">スタンダード</h3>
+        <div class="my-4">
+          <span class="font-grotesk font-bold grad-text" style="font-size:2.4rem">¥498,000</span>
+          <span class="text-white/40 text-sm ml-1">（税込）</span>
+        </div>
+        <p class="text-white/50 text-xs mb-5 leading-relaxed">最も人気のプラン。現役エンジニアによる毎日サポートで確実に転職。</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-xs text-white/70"><span class="text-green-400">✓</span>全カリキュラム教材へのアクセス</li>
+          <li class="flex items-center gap-2 text-xs text-white/70"><span class="text-green-400">✓</span>毎日メンタリング（週5回）</li>
+          <li class="flex items-center gap-2 text-xs text-white/70"><span class="text-green-400">✓</span>転職サポート（無制限）</li>
+          <li class="flex items-center gap-2 text-xs text-white/70"><span class="text-green-400">✓</span>毎日コードレビュー</li>
+          <li class="flex items-center gap-2 text-xs text-white/70"><span class="text-green-400">✓</span>チーム開発プログラム</li>
+        </ul>
+        <a href="#contact" class="btn-glow block text-center text-sm font-bold tracking-wider py-3 rounded-lg text-white">無料相談を予約</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="rounded-2xl p-6 reveal" data-delay="240" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)">
+        <div class="text-xs tracking-widest text-white/40 mb-3">PREMIUM</div>
+        <h3 class="font-grotesk font-bold text-xl mb-1">プレミアム</h3>
+        <div class="my-4">
+          <span class="font-grotesk font-bold grad-text" style="font-size:2.4rem">¥748,000</span>
+          <span class="text-white/40 text-sm ml-1">（税込）</span>
+        </div>
+        <p class="text-white/50 text-xs mb-5 leading-relaxed">専属メンターが完全マンツーマンで伴走。最速・最短で転職を実現。</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-xs text-white/60"><span class="text-green-400">✓</span>スタンダードの全内容</li>
+          <li class="flex items-center gap-2 text-xs text-white/60"><span class="text-green-400">✓</span>専属メンター（1対1）</li>
+          <li class="flex items-center gap-2 text-xs text-white/60"><span class="text-green-400">✓</span>転職後も6ヶ月フォロー</li>
+          <li class="flex items-center gap-2 text-xs text-white/60"><span class="text-green-400">✓</span>給与交渉サポート</li>
+          <li class="flex items-center gap-2 text-xs text-white/60"><span class="text-green-400">✓</span>転職未達成で全額返金保証</li>
+        </ul>
+        <a href="#contact" class="block text-center text-sm font-bold tracking-wider py-3 rounded-lg transition-all" style="border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)" onmouseover="this.style.borderColor='rgba(124,58,237,0.5)';this.style.color='#a855f7'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.7)'">無料相談を予約</a>
+      </div>
+    </div>
+
+    <!-- Income deduction note -->
+    <div class="mt-8 rounded-xl p-4 reveal" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2)">
+      <p class="text-center text-sm text-green-400/80"><span class="font-bold">給付金活用で最大70%OFF</span> — 専門実践教育訓練給付金の対象スクールです。条件を満たす方は受講料が大幅に軽減されます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section id="faq" class="py-24" style="background:#0a0a16">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <span class="tag reveal" style="background:rgba(6,182,212,0.15);color:#67e8f9;border:1px solid rgba(6,182,212,0.3)">FAQ</span>
+      <h2 class="font-grotesk font-bold mt-4 reveal" style="font-size:clamp(1.6rem,3.5vw,2.4rem)">よくある質問</h2>
+    </div>
+    <div id="faq-list" class="space-y-3 reveal">
+      <!-- items injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Contact
+============================================================ -->
+<section id="contact" class="py-24 relative overflow-hidden" style="background:#0d0d1f">
+  <div class="orb w-80 h-80 -top-20 right-0 opacity-15" style="background:#7c3aed"></div>
+  <div class="max-w-2xl mx-auto px-6 relative z-10">
+    <div class="text-center mb-12">
+      <span class="tag reveal" style="background:rgba(124,58,237,0.15);color:#a855f7;border:1px solid rgba(124,58,237,0.3)">CONTACT</span>
+      <h2 class="font-grotesk font-bold mt-4 reveal" style="font-size:clamp(1.8rem,4vw,2.8rem)">
+        無料カウンセリング<br><span class="grad-text">を予約する</span>
+      </h2>
+      <p class="text-white/50 text-sm mt-3 reveal">60分のオンライン面談で、あなたの目標に合った学習プランをご提案します。</p>
+    </div>
+
+    <div class="grad-border rounded-2xl p-8 reveal" style="background:rgba(255,255,255,0.02)">
+      <form id="contact-form" class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-white/40 tracking-wider mb-1.5">お名前 <span class="text-red-400">*</span></label>
+            <input type="text" placeholder="山田 太郎" required class="w-full px-4 py-3 rounded-lg text-sm text-white placeholder-white/20 outline-none focus:border-purple2 transition-colors" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+          </div>
+          <div>
+            <label class="block text-xs text-white/40 tracking-wider mb-1.5">メールアドレス <span class="text-red-400">*</span></label>
+            <input type="email" placeholder="your@email.com" required class="w-full px-4 py-3 rounded-lg text-sm text-white placeholder-white/20 outline-none focus:border-purple2 transition-colors" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-white/40 tracking-wider mb-1.5">現在のご職業</label>
+          <select class="w-full px-4 py-3 rounded-lg text-sm text-white/70 outline-none focus:border-purple2 transition-colors" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+            <option style="background:#0d0d1f">会社員（非IT）</option>
+            <option style="background:#0d0d1f">会社員（IT系）</option>
+            <option style="background:#0d0d1f">フリーランス</option>
+            <option style="background:#0d0d1f">学生</option>
+            <option style="background:#0d0d1f">その他</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-white/40 tracking-wider mb-1.5">プログラミング経験</label>
+          <select class="w-full px-4 py-3 rounded-lg text-sm text-white/70 outline-none" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+            <option style="background:#0d0d1f">まったくない</option>
+            <option style="background:#0d0d1f">少しある（3ヶ月未満）</option>
+            <option style="background:#0d0d1f">ある程度ある（3ヶ月以上）</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-white/40 tracking-wider mb-1.5">転職希望時期</label>
+          <select class="w-full px-4 py-3 rounded-lg text-sm text-white/70 outline-none" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+            <option style="background:#0d0d1f">できるだけ早く（3ヶ月以内）</option>
+            <option style="background:#0d0d1f">半年以内</option>
+            <option style="background:#0d0d1f">1年以内</option>
+            <option style="background:#0d0d1f">まだ未定</option>
+          </select>
+        </div>
+        <button type="submit" id="submit-btn" class="btn-glow w-full text-white font-bold tracking-wider py-4 rounded-xl text-sm">
+          無料カウンセリングを予約する
+        </button>
+        <p class="text-center text-xs text-white/25">送信後、担当者より24時間以内にご連絡いたします</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-8 px-6 text-center" style="background:#070710;border-top:1px solid rgba(255,255,255,0.05)">
+  <div class="font-grotesk font-bold text-base mb-1">CODE RISE <span style="color:#a855f7">Academy</span></div>
+  <p class="text-xs text-white/25">© 2024 CODE RISE Academy. All Rights Reserved.</p>
+</footer>
+
+<!-- Sticky CTA -->
+<div id="sticky-cta" class="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4">
+  <div class="max-w-lg mx-auto">
+    <a href="#contact" class="btn-glow flex items-center justify-center gap-2 text-white font-bold text-sm tracking-wider py-4 rounded-xl">
+      <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+      残り8席 — 無料カウンセリングを予約する
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
+     JavaScript
+============================================================ -->
+<script>
+/* ----------------------------------------------------------
+   1. Progress bar
+---------------------------------------------------------- */
+window.addEventListener('scroll', () => {
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct   = (window.scrollY / total) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+/* ----------------------------------------------------------
+   2. Scroll reveal (Intersection Observer)
+---------------------------------------------------------- */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const delay = e.target.dataset.delay || 0;
+    setTimeout(() => e.target.classList.add('visible'), +delay);
+    revealObs.unobserve(e.target);
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObs.observe(el));
+
+/* ----------------------------------------------------------
+   3. Typing animation
+---------------------------------------------------------- */
+const words   = ['未経験から', 'どんな人でも', '今日から始めれば'];
+let wIdx = 0, cIdx = 0, deleting = false;
+const typingEl = document.getElementById('typing-text');
+function type() {
+  const word = words[wIdx];
+  if (!deleting) {
+    typingEl.textContent = word.slice(0, ++cIdx);
+    if (cIdx === word.length) { deleting = true; setTimeout(type, 1600); return; }
+  } else {
+    typingEl.textContent = word.slice(0, --cIdx);
+    if (cIdx === 0) { deleting = false; wIdx = (wIdx + 1) % words.length; }
+  }
+  setTimeout(type, deleting ? 60 : 110);
+}
+type();
+
+/* ----------------------------------------------------------
+   4. Countdown timer (target: next May 1)
+---------------------------------------------------------- */
+function updateCountdown() {
+  const now    = new Date();
+  const target = new Date(now.getFullYear(), 4, 1);
+  if (target <= now) target.setFullYear(target.getFullYear() + 1);
+  const diff  = target - now;
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000)  / 60000);
+  const secs  = Math.floor((diff % 60000)    / 1000);
+  document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ----------------------------------------------------------
+   5. Counter animation
+---------------------------------------------------------- */
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el  = e.target;
+    const end = parseInt(el.dataset.count);
+    let cur   = 0;
+    const dur = 1500;
+    const inc = end / (dur / 16);
+    const t   = setInterval(() => {
+      cur += inc;
+      if (cur >= end) { el.textContent = end; clearInterval(t); return; }
+      el.textContent = Math.floor(cur);
+    }, 16);
+    cntObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
+
+/* ----------------------------------------------------------
+   6. FAQ accordion (built from data)
+---------------------------------------------------------- */
+const faqs = [
+  { q: 'プログラミング未経験でも本当についていけますか？',
+    a: 'はい、卒業生の<strong class="text-purple2">約80%が完全未経験</strong>からスタートしています。個人の進度に合わせたカリキュラム調整と、毎日のメンタリングで、誰一人置き去りにしません。' },
+  { q: '仕事をしながら受講できますか？',
+    a: '可能です。受講生の約60%が在職しながら学んでいます。教材はすべてオンデマンドで、メンタリングも夜間・週末対応しています。ただし、1日2〜3時間の学習時間の確保をお願いしています。' },
+  { q: '転職できなかった場合はどうなりますか？',
+    a: 'プレミアムプランは<strong class="text-purple2">転職未達成の場合に全額返金</strong>いたします（条件あり）。スタンダードプランも、転職決定まで無期限でサポートを継続します。' },
+  { q: '分割払いは可能ですか？',
+    a: 'はい、最大24回払いの分割払いが可能です。月々の負担を抑えながら受講いただけます。また、専門実践教育訓練給付金を活用すると、実質負担を大幅に軽減できます。' },
+  { q: 'どんな企業に転職できますか？',
+    a: '卒業生の転職先はメガベンチャー・大手SIer・スタートアップなど多岐にわたります。転職先企業の平均年収は<strong class="text-purple2">550万円</strong>です（2023年度実績）。' },
+];
+const faqList = document.getElementById('faq-list');
+faqs.forEach((f, i) => {
+  const item = document.createElement('div');
+  item.className = 'rounded-xl overflow-hidden';
+  item.style.cssText = 'background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)';
+  item.innerHTML = `
+    <button onclick="this.parentElement.classList.toggle('open');this.querySelector('.faq-arr').classList.toggle('rotate-180')"
+      class="w-full flex items-center justify-between px-5 py-4 text-left gap-3">
+      <span class="text-sm font-bold text-white/80">${f.q}</span>
+      <span class="faq-arr flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-transform duration-300"
+        style="background:rgba(124,58,237,0.2);color:#a855f7;font-size:0.9rem">▾</span>
+    </button>
+    <div class="faq-body px-5 pb-4 text-sm text-white/50 leading-relaxed hidden">${f.a}</div>
+  `;
+  item.querySelector('button').addEventListener('click', () => {
+    const body = item.querySelector('.faq-body');
+    body.classList.toggle('hidden');
+  });
+  faqList.appendChild(item);
+});
+
+/* ----------------------------------------------------------
+   7. Sticky CTA show/hide
+---------------------------------------------------------- */
+const stickyCta = document.getElementById('sticky-cta');
+window.addEventListener('scroll', () => {
+  stickyCta.classList.toggle('visible', window.scrollY > 600);
+});
+
+/* ----------------------------------------------------------
+   8. Form submit
+---------------------------------------------------------- */
+document.getElementById('contact-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = '送信しました！24時間以内にご連絡します。';
+  btn.style.background = 'linear-gradient(135deg, #10b981, #06b6d4)';
+  btn.style.boxShadow  = '0 0 20px rgba(16,185,129,0.4)';
+  setTimeout(() => {
+    btn.textContent = '無料カウンセリングを予約する';
+    btn.style.background = '';
+    btn.style.boxShadow  = '';
+  }, 5000);
+});
+</script>
+</body>
+</html>
