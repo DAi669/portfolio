@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>湘南美容 川越脱毛 | 30代女性のための美容脱毛サロン｜藤沢駅 徒歩3分</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:        #E03A6E;
+      --pink-mid:    #EA5E89;
+      --pink-light:  #F5AECB;
+      --pink-pale:   #FFF0F5;
+      --blue:        #5BB5D5;
+      --blue-light:  #A8DDED;
+      --blue-pale:   #EFF8FC;
+      --yellow:      #FFB347;
+      --yellow-pale: #FFF8EE;
+      --mint:        #7ECDC8;
+      --mint-pale:   #EFFAF9;
+      --dark:        #2D2D2D;
+      --text:        #555555;
+      --text-light:  #888888;
+      --white:       #FFFFFF;
+      --grad-pink:   linear-gradient(135deg, #E03A6E, #F070A0);
+      --grad-blue:   linear-gradient(135deg, #5BB5D5, #7ED4E8);
+      --grad-hero:   linear-gradient(150deg, rgba(224,58,110,.85) 0%, rgba(91,181,213,.65) 100%);
+      --shadow:      0 4px 20px rgba(224,58,110,.15);
+      --shadow-b:    0 4px 20px rgba(91,181,213,.18);
+      --radius:      16px;
+      --radius-sm:   8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ─────────────────── */
+    .section-en {
+      display: block;
+      font-size: .7rem; font-weight: 800;
+      letter-spacing: .3em; color: var(--pink);
+      margin-bottom: .4rem; text-align: center;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.8vw, 2.4rem);
+      font-weight: 800; color: var(--dark);
+      text-align: center; line-height: 1.4;
+      margin-bottom: .5rem;
+    }
+    .section-sub {
+      text-align: center; color: var(--text-light);
+      font-size: .9rem; margin-bottom: 3rem;
+      line-height: 1.8;
+    }
+    .pink-text  { color: var(--pink); }
+    .blue-text  { color: var(--blue); }
+
+    /* ── Accent line ─── */
+    .accent-line {
+      display: flex; align-items: center; justify-content: center;
+      gap: .5rem; margin-bottom: 2.5rem;
+    }
+    .accent-line::before, .accent-line::after {
+      content: ''; flex: 0 0 40px; height: 2px;
+      background: linear-gradient(to right, transparent, var(--pink-light));
+    }
+    .accent-line::after {
+      background: linear-gradient(to left, transparent, var(--pink-light));
+    }
+    .accent-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--pink);
+    }
+
+    /* ── Buttons ────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: .5rem; padding: 1rem 2.2rem;
+      border-radius: 50px; font-size: .95rem; font-weight: 800;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all .3s ease; letter-spacing: .04em;
+    }
+    .btn-pink {
+      background: var(--grad-pink); color: white;
+      box-shadow: 0 6px 24px rgba(224,58,110,.4);
+    }
+    .btn-pink:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(224,58,110,.5); }
+    .btn-white {
+      background: white; color: var(--pink);
+      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    }
+    .btn-white:hover { transform: translateY(-3px); }
+    .btn-blue {
+      background: var(--grad-blue); color: white;
+      box-shadow: 0 6px 24px rgba(91,181,213,.35);
+    }
+    .btn-blue:hover { transform: translateY(-3px); }
+    .btn-line { background: #06C755; color: white; box-shadow: 0 6px 20px rgba(6,199,85,.3); }
+    .btn-line:hover { transform: translateY(-3px); background: #00A846; }
+    .btn-outline-pink { background: transparent; color: white; border: 2px solid rgba(255,255,255,.7); }
+    .btn-outline-pink:hover { background: rgba(255,255,255,.15); }
+    .btn-lg { padding: 1.2rem 2.8rem; font-size: 1rem; }
+    .btn-full { width: 100%; }
+
+    /* ── Layout ─────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 80px 0; }
+
+    /* ════════════════════════════════
+       NAV
+    ════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000; padding: 1rem 1.5rem;
+      transition: all .3s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 2px 20px rgba(224,58,110,.1);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1rem; font-weight: 800;
+      color: white; text-decoration: none;
+      letter-spacing: .06em; transition: color .3s;
+    }
+    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-logo small {
+      display: block; font-size: .65em; font-weight: 500;
+      letter-spacing: .15em; opacity: .75;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.9);
+      text-decoration: none; transition: color .25s;
+    }
+    nav.scrolled .nav-links a { color: var(--text); }
+    .nav-links a:hover { color: var(--pink-light) !important; }
+    .nav-cta { background: white !important; color: var(--pink) !important; padding: .45rem 1.2rem !important; border-radius: 50px; }
+    nav.scrolled .nav-cta { background: var(--grad-pink) !important; color: white !important; }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; z-index: 1001;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: white; transition: all .3s; border-radius: 2px; }
+    nav.scrolled .nav-hamburger span { background: var(--dark); }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; overflow: hidden; padding: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover; background-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: var(--grad-hero);
+    }
+    /* floating circles */
+    .hero-circle1 {
+      position: absolute; top: 10%; right: 8%;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      pointer-events: none;
+    }
+    .hero-circle2 {
+      position: absolute; bottom: 15%; right: 15%;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      padding: 140px 1.5rem 100px;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.2); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.35);
+      color: white; padding: .4rem 1.1rem; border-radius: 50px;
+      font-size: .78rem; font-weight: 700; letter-spacing: .08em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow {
+      font-size: .82rem; font-weight: 700; letter-spacing: .2em;
+      color: rgba(255,255,255,.8); margin-bottom: .8rem;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-weight: 900; color: white;
+      line-height: 1.25; margin-bottom: 1.2rem;
+      letter-spacing: -.01em;
+    }
+    .hero-title .accent { color: #FFE47A; display: inline; }
+    .hero-text {
+      font-size: 1rem; color: rgba(255,255,255,.85);
+      max-width: 460px; margin-bottom: 2.5rem; line-height: 1.9;
+    }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+    /* stats pills */
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .hero-stat-pill {
+      background: rgba(255,255,255,.18); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 50px; padding: .5rem 1.2rem;
+      color: white; display: flex; align-items: center; gap: .5rem;
+    }
+    .hero-stat-pill strong { font-size: 1.2rem; font-weight: 900; }
+    .hero-stat-pill span { font-size: .78rem; opacity: .85; }
+    .hero-wave { position: absolute; bottom: -1px; left: 0; right: 0; }
+
+    /* ════════════════════════════════
+       WORRY (お悩みセクション)
+    ════════════════════════════════ */
+    #worry { background: var(--pink-pale); }
+    .worry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 3rem;
+    }
+    .worry-card {
+      background: white; border-radius: var(--radius);
+      padding: 1.3rem 1rem; text-align: center;
+      border: 2px solid var(--pink-pale);
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .worry-card:hover { border-color: var(--pink-light); box-shadow: var(--shadow); }
+    .worry-icon { font-size: 2rem; margin-bottom: .5rem; display: block; }
+    .worry-text { font-size: .9rem; font-weight: 700; color: var(--dark); }
+    .worry-arrow {
+      text-align: center; font-size: 2.5rem; color: var(--pink);
+      margin-bottom: 1.5rem; font-weight: 900; line-height: 1;
+    }
+    .worry-solution {
+      background: var(--grad-pink); border-radius: var(--radius);
+      padding: 2rem; text-align: center; color: white;
+    }
+    .worry-solution h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: .5rem; line-height: 1.4; }
+    .worry-solution p { font-size: .9rem; opacity: .9; }
+
+    /* ════════════════════════════════
+       FEATURES
+    ════════════════════════════════ */
+    #features { background: white; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      border-radius: var(--radius); padding: 2rem 1.5rem;
+      text-align: center; transition: all .3s;
+    }
+    .feature-card:nth-child(1) { background: var(--pink-pale); }
+    .feature-card:nth-child(2) { background: var(--blue-pale); }
+    .feature-card:nth-child(3) { background: var(--yellow-pale); }
+    .feature-card:nth-child(4) { background: var(--mint-pale); }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,.1); }
+    .feature-num {
+      display: inline-block;
+      width: 36px; height: 36px; border-radius: 50%;
+      font-size: .8rem; font-weight: 900; color: white;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto .8rem;
+    }
+    .feature-card:nth-child(1) .feature-num { background: var(--pink); }
+    .feature-card:nth-child(2) .feature-num { background: var(--blue); }
+    .feature-card:nth-child(3) .feature-num { background: var(--yellow); }
+    .feature-card:nth-child(4) .feature-num { background: var(--mint); }
+    .feature-icon { font-size: 2.4rem; display: block; margin-bottom: .8rem; }
+    .feature-title { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: .5rem; }
+    .feature-text { font-size: .85rem; color: var(--text-light); line-height: 1.8; }
+
+    /* ════════════════════════════════
+       CTA BAND
+    ════════════════════════════════ */
+    .cta-band {
+      background: var(--grad-pink);
+      padding: 3.5rem 1.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; top: -60px; left: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+    .cta-band::after {
+      content: '';
+      position: absolute; bottom: -40px; right: -40px;
+      width: 150px; height: 150px; border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+    .cta-band h3 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; color: white; margin-bottom: .5rem; }
+    .cta-band p { font-size: .9rem; color: rgba(255,255,255,.85); margin-bottom: 1.8rem; }
+    .cta-band-buttons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; position: relative; z-index: 1; }
+
+    /* ════════════════════════════════
+       PRICING
+    ════════════════════════════════ */
+    #pricing { background: var(--blue-pale); }
+    .price-tabs {
+      display: flex; max-width: 700px; margin: 0 auto 2.5rem;
+      background: rgba(255,255,255,.7); border-radius: 50px;
+      padding: 5px; gap: 4px; backdrop-filter: blur(8px);
+    }
+    .price-tab {
+      flex: 1; padding: .7rem .3rem; text-align: center;
+      cursor: pointer; font-size: .8rem; font-weight: 700;
+      color: var(--text-light); background: none; border: none;
+      border-radius: 50px; transition: all .25s; white-space: nowrap;
+    }
+    .price-tab.active { background: var(--grad-pink); color: white; box-shadow: 0 4px 12px rgba(224,58,110,.3); }
+    .price-tab:hover:not(.active) { background: var(--pink-pale); color: var(--pink); }
+    .price-panel { display: none; }
+    .price-panel.active { display: block; }
+
+    /* Free select */
+    .free-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .free-card {
+      background: white; border-radius: var(--radius);
+      padding: 1.3rem 1rem; text-align: center;
+      border: 2px solid transparent;
+      transition: all .25s; position: relative;
+    }
+    .free-card:hover { border-color: var(--pink-light); box-shadow: var(--shadow); }
+    .free-card.popular { border-color: var(--pink); }
+    .popular-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--grad-pink); color: white;
+      font-size: .65rem; font-weight: 800; letter-spacing: .08em;
+      padding: .25rem .9rem; border-radius: 50px; white-space: nowrap;
+    }
+    .free-parts { font-size: 1.3rem; font-weight: 900; color: var(--dark); margin-bottom: .2rem; }
+    .free-price { font-size: 1.5rem; font-weight: 900; color: var(--pink); }
+    .free-price small { font-size: .55em; font-weight: 600; }
+
+    /* Parts */
+    .parts-header {
+      background: var(--grad-pink); border-radius: var(--radius);
+      padding: 1.2rem 1.5rem; text-align: center; color: white;
+      margin-bottom: 1.5rem; font-weight: 800; font-size: 1rem;
+    }
+    .parts-header strong { font-size: 1.4em; }
+    .parts-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .parts-cat {
+      background: white; border-radius: var(--radius); overflow: hidden;
+    }
+    .parts-cat-head {
+      background: var(--pink); color: white;
+      padding: .55rem 1rem; font-size: .82rem; font-weight: 800;
+    }
+    .parts-cat-body { padding: .8rem 1rem; }
+    .parts-cat-body li {
+      font-size: .84rem; color: var(--text);
+      padding: .22rem 0; list-style: none;
+      border-bottom: 1px solid var(--pink-pale);
+    }
+    .parts-cat-body li:last-child { border: none; }
+    .parts-cat-body li::before { content: '✦ '; color: var(--pink-light); font-size: .7em; }
+
+    /* Sets */
+    .sets-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .set-card {
+      background: white; border-radius: var(--radius);
+      padding: 1.2rem 1rem; text-align: center;
+      border-bottom: 3px solid var(--blue);
+      transition: all .25s;
+    }
+    .set-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-b); }
+    .set-name { font-size: .88rem; font-weight: 800; color: var(--dark); margin-bottom: .4rem; }
+    .set-price { font-size: 1.4rem; font-weight: 900; color: var(--blue); }
+    .set-price small { font-size: .5em; }
+    .set-items { font-size: .72rem; color: var(--text-light); margin-top: .2rem; line-height: 1.5; }
+
+    /* Best value */
+    .bestval-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .bestval-card {
+      background: white; border-radius: var(--radius);
+      overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.1);
+      transition: transform .3s;
+    }
+    .bestval-card:hover { transform: translateY(-6px); }
+    .bestval-head {
+      padding: 1.5rem; color: white;
+    }
+    .bestval-card:nth-child(1) .bestval-head { background: var(--grad-pink); }
+    .bestval-card:nth-child(2) .bestval-head { background: var(--grad-blue); }
+    .bestval-tag {
+      display: inline-block; background: rgba(255,255,255,.25);
+      font-size: .65rem; font-weight: 800; letter-spacing: .1em;
+      padding: .2rem .8rem; border-radius: 50px; margin-bottom: .6rem;
+    }
+    .bestval-name { font-size: 1.1rem; font-weight: 800; margin-bottom: .2rem; }
+    .bestval-desc { font-size: .8rem; opacity: .85; }
+    .bestval-body { padding: 1.5rem; }
+    .bestval-prices { display: flex; align-items: center; gap: .8rem; margin-bottom: .3rem; }
+    .price-before { font-size: 1rem; color: var(--text-light); text-decoration: line-through; }
+    .price-off { background: #FEE2E2; color: #DC2626; font-size: .7rem; font-weight: 800; padding: .2rem .5rem; border-radius: 4px; }
+    .price-after { font-size: 2.2rem; font-weight: 900; color: var(--pink); }
+    .price-after small { font-size: .45em; }
+    .bestval-note { font-size: .8rem; color: var(--text-light); margin-top: .3rem; }
+
+    .price-notice {
+      max-width: 720px; margin: 2rem auto 0;
+      background: white; border-left: 4px solid var(--pink-light);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 1rem 1.5rem;
+      font-size: .82rem; color: var(--text-light); line-height: 2;
+    }
+
+    /* ════════════════════════════════
+       FLOW
+    ════════════════════════════════ */
+    #flow { background: white; }
+    .flow-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0; position: relative;
+    }
+    .flow-step {
+      background: white; padding: 2rem 1.5rem; text-align: center;
+      position: relative;
+    }
+    .flow-step::after {
+      content: '→';
+      position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.5rem; color: var(--pink-light); z-index: 1;
+      font-weight: 900;
+    }
+    .flow-step:last-child::after { display: none; }
+    .flow-num-wrap {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; position: relative;
+    }
+    .flow-step:nth-child(1) .flow-num-wrap { background: var(--pink-pale); }
+    .flow-step:nth-child(2) .flow-num-wrap { background: var(--blue-pale); }
+    .flow-step:nth-child(3) .flow-num-wrap { background: var(--yellow-pale); }
+    .flow-step:nth-child(4) .flow-num-wrap { background: var(--mint-pale); }
+    .flow-num {
+      font-size: 1.6rem; font-weight: 900;
+    }
+    .flow-step:nth-child(1) .flow-num { color: var(--pink); }
+    .flow-step:nth-child(2) .flow-num { color: var(--blue); }
+    .flow-step:nth-child(3) .flow-num { color: var(--yellow); }
+    .flow-step:nth-child(4) .flow-num { color: var(--mint); }
+    .flow-icon { font-size: 1.4rem; position: absolute; top: -8px; right: -8px; }
+    .flow-title { font-size: .95rem; font-weight: 800; color: var(--dark); margin-bottom: .4rem; }
+    .flow-desc { font-size: .82rem; color: var(--text-light); line-height: 1.7; }
+
+    /* ════════════════════════════════
+       VOICE
+    ════════════════════════════════ */
+    #voice { background: var(--pink-pale); }
+    .voice-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .voice-card {
+      background: white; border-radius: var(--radius);
+      padding: 1.8rem; position: relative;
+      box-shadow: 0 4px 20px rgba(224,58,110,.08);
+    }
+    .voice-stars { color: #FFB347; font-size: .9rem; margin-bottom: .8rem; letter-spacing: .1em; }
+    .voice-quote {
+      position: absolute; top: 1rem; right: 1.2rem;
+      font-size: 3.5rem; color: var(--pink-pale); line-height: 1;
+      font-family: Georgia, serif; font-weight: 900; pointer-events: none;
+    }
+    .voice-result {
+      display: inline-block;
+      background: var(--pink-pale); color: var(--pink);
+      font-size: .75rem; font-weight: 800; padding: .25rem .8rem;
+      border-radius: 50px; margin-bottom: .8rem;
+    }
+    .voice-text { font-size: .88rem; color: var(--text); line-height: 1.85; margin-bottom: 1.2rem; }
+    .voice-user { display: flex; align-items: center; gap: .75rem; }
+    .voice-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--grad-pink); color: white;
+      font-size: 1rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .voice-name { font-weight: 800; font-size: .88rem; color: var(--dark); }
+    .voice-info { font-size: .75rem; color: var(--text-light); }
+
+    /* ════════════════════════════════
+       FAQ
+    ════════════════════════════════ */
+    #faq { background: white; }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: .8rem; }
+    .faq-item {
+      background: var(--pink-pale); border-radius: var(--radius-sm);
+      overflow: hidden; border-left: 4px solid var(--pink-light);
+      transition: border-color .25s;
+    }
+    .faq-item.open { border-color: var(--pink); }
+    .faq-q {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.1rem 1.2rem; cursor: pointer;
+      font-weight: 700; color: var(--dark); font-size: .92rem;
+      user-select: none;
+    }
+    .faq-q:hover { opacity: .8; }
+    .faq-q-badge {
+      min-width: 28px; height: 28px;
+      background: var(--grad-pink); color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: .78rem; font-weight: 800; flex-shrink: 0;
+    }
+    .faq-arrow { color: var(--pink); font-size: .9rem; transition: transform .3s; margin-left: auto; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s;
+      font-size: .88rem; color: var(--text); line-height: 1.85;
+      background: white;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 1rem 1.2rem 1.2rem; }
+
+    /* ════════════════════════════════
+       CONTACT
+    ════════════════════════════════ */
+    #contact {
+      background: var(--grad-pink);
+      position: relative; overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute; top: -100px; right: -80px;
+      width: 350px; height: 350px; border-radius: 50%;
+      background: rgba(255,255,255,.1);
+    }
+    #contact::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -60px;
+      width: 250px; height: 250px; border-radius: 50%;
+      background: rgba(255,255,255,.07);
+    }
+    .contact-inner { position: relative; z-index: 1; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; max-width: 900px; margin: 0 auto;
+    }
+    .contact-form {
+      background: rgba(255,255,255,.15); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: var(--radius); padding: 2rem;
+    }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-label { display: block; font-size: .8rem; font-weight: 700; color: rgba(255,255,255,.85); margin-bottom: .4rem; letter-spacing: .05em; }
+    .form-input {
+      width: 100%; background: rgba(255,255,255,.9);
+      border: 2px solid transparent; border-radius: var(--radius-sm);
+      padding: .78rem 1rem; font-size: .9rem; color: var(--dark); outline: none;
+      transition: border-color .3s; font-family: inherit;
+    }
+    .form-input:focus { border-color: var(--pink-mid); }
+    .form-input::placeholder { color: var(--text-light); }
+    .form-input option { color: var(--dark); }
+    textarea.form-input { resize: vertical; min-height: 90px; }
+    .line-box {
+      background: rgba(255,255,255,.15); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: var(--radius); padding: 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 1.2rem;
+    }
+    .line-icon {
+      width: 80px; height: 80px; background: #06C755; border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.6rem; box-shadow: 0 8px 24px rgba(6,199,85,.3);
+    }
+    .line-box h3 { font-size: 1.2rem; font-weight: 800; color: white; }
+    .line-box p { font-size: .86rem; color: rgba(255,255,255,.8); line-height: 1.8; }
+    .line-hint { font-size: .76rem !important; color: rgba(255,255,255,.55) !important; }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      background: var(--dark); padding: 2.5rem 1.5rem;
+      text-align: center; color: rgba(255,255,255,.4);
+      border-top: 3px solid var(--pink);
+    }
+    .footer-logo { font-size: 1rem; font-weight: 800; color: white; margin-bottom: .3rem; letter-spacing: .06em; }
+    .footer-info { font-size: .8rem; line-height: 2; margin: .6rem 0; }
+    .footer-copy { font-size: .72rem; }
+
+    /* Float CTA */
+    .float-cta {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      z-index: 999; display: none; flex-direction: column; gap: .7rem; align-items: flex-end;
+    }
+    .float-btn {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .72rem 1.2rem; border-radius: 50px;
+      font-size: .82rem; font-weight: 800; text-decoration: none; color: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25); transition: all .3s; letter-spacing: .04em;
+    }
+    .float-btn:hover { transform: translateY(-3px); }
+    .float-pink { background: var(--grad-pink); }
+    .float-line { background: #06C755; }
+
+    /* Animations */
+    .fade-up { opacity: 0; transform: translateY(26px); transition: opacity .65s ease, transform .65s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: fixed;
+        inset: 0; background: rgba(224,58,110,.97);
+        justify-content: center; align-items: center;
+        gap: 2.2rem; z-index: 999;
+      }
+      .nav-links.open a { font-size: 1.2rem; color: white !important; }
+      .nav-hamburger { display: flex; }
+      .hero-buttons { flex-direction: column; }
+      .hero-stats { flex-direction: column; gap: .6rem; }
+      .free-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow-grid { grid-template-columns: 1fr 1fr; }
+      .flow-step::after { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .cta-band-buttons { flex-direction: column; align-items: center; }
+      .price-tabs { gap: 2px; }
+      .price-tab { font-size: .72rem; padding: .6rem .2rem; }
+    }
+    @media (max-width: 480px) {
+      .free-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      湘南美容 川越脱毛<small>SHONAN BEAUTY HAIR REMOVAL</small>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#worry">こんな方に</a></li>
+      <li><a href="#features">特徴</a></li>
+      <li><a href="#pricing">料金</a></li>
+      <li><a href="#voice">お客様の声</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">無料体験</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-circle1"></div>
+  <div class="hero-circle2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌸 藤沢駅 南口 徒歩3分 ｜ 女性専用サロン</div>
+    <p class="hero-eyebrow">30代女性のための美容脱毛</p>
+    <h1 class="hero-title">
+      毎日の自己処理、<br>もう手放しませんか？<br>
+      <span class="accent">初回体験、無料です。</span>
+    </h1>
+    <p class="hero-text">
+      最新機器×独自の痛みレス技術で、<br>
+      忙しい30代女性の肌に自信を届けます。<br>
+      完全個室で、あなただけのプライベート時間を。
+    </p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-white btn-lg">🎁 無料体験を予約する</a>
+      <a href="#contact" class="btn btn-outline-pink btn-lg">💬 LINEで相談する</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-pill">
+        <strong>初回</strong><span>無料体験あり</span>
+      </div>
+      <div class="hero-stat-pill">
+        <strong>97%</strong><span>顧客満足度</span>
+      </div>
+      <div class="hero-stat-pill">
+        <strong>19</strong><span>選べるパーツ</span>
+      </div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,35 C480,70 960,0 1440,35 L1440,70 L0,70 Z" fill="#FFF0F5"/>
+  </svg>
+</section>
+
+<!-- WORRY -->
+<section id="worry">
+  <div class="container">
+    <span class="section-en">— HAVE YOU EVER FELT —</span>
+    <h2 class="section-title">こんなお悩み、ありませんか？</h2>
+    <p class="section-sub">多くの30代女性がこのような悩みを抱えています。</p>
+    <div class="worry-grid">
+      <div class="worry-card fade-up">
+        <span class="worry-icon">😓</span>
+        <div class="worry-text">毎日の自己処理が<br>面倒くさい</div>
+      </div>
+      <div class="worry-card fade-up">
+        <span class="worry-icon">💸</span>
+        <div class="worry-text">カミソリ代・脱毛代が<br>かかりすぎる</div>
+      </div>
+      <div class="worry-card fade-up">
+        <span class="worry-icon">😣</span>
+        <div class="worry-text">脱毛が痛そうで<br>怖くて行けない</div>
+      </div>
+      <div class="worry-card fade-up">
+        <span class="worry-icon">🤔</span>
+        <div class="worry-text">効果があるのか<br>不安で一歩踏み出せない</div>
+      </div>
+    </div>
+    <div class="worry-arrow">↓</div>
+    <div class="worry-solution fade-up">
+      <h3>湘南美容 川越脱毛なら<br>その悩み、すべて解決できます</h3>
+      <p>最新機器 × 痛みレス技術 × 管理されたプライベート空間で、<br>快適・安心・リーズナブルな脱毛体験を提供します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <span class="section-en">— OUR STRENGTHS —</span>
+    <h2 class="section-title">選ばれる<span class="pink-text"> 4つの理由</span></h2>
+    <div class="accent-line"><div class="accent-dot"></div></div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-num">01</div>
+        <span class="feature-icon">✨</span>
+        <div class="feature-title">最新機器導入</div>
+        <p class="feature-text">業界最先端の脱毛機器を常に更新。短時間で高い効果を実現し、肌への負担も最小限です。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-num">02</div>
+        <span class="feature-icon">🚪</span>
+        <div class="feature-title">完全個室</div>
+        <p class="feature-text">全室完全個室。周りの目を一切気にせず、リラックスした状態で施術を受けていただけます。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-num">03</div>
+        <span class="feature-icon">🌸</span>
+        <div class="feature-title">独自の痛みレス技術</div>
+        <p class="feature-text">痛みを最大限に抑えた独自技術。「脱毛は痛い」という常識を覆す快適な施術です。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-num">04</div>
+        <span class="feature-icon">🎁</span>
+        <div class="feature-title">初回完全無料</div>
+        <p class="feature-text">初めての方は1回分の施術が完全無料。納得してからご検討いただける安心の仕組みです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND 1 -->
+<div class="cta-band">
+  <div class="container">
+    <h3>まずは、無料で体験してみてください</h3>
+    <p>初回体験は完全無料。無理な勧誘は一切ありません。</p>
+    <div class="cta-band-buttons">
+      <a href="#contact" class="btn btn-white btn-lg">🎁 無料体験を予約する</a>
+      <a href="#contact" class="btn btn-line btn-lg">💬 LINEで気軽に相談</a>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <span class="section-en">— PRICE MENU —</span>
+    <h2 class="section-title">料金メニュー</h2>
+    <p class="section-sub">19パーツから自由に選べる。あなたに合ったプランで始めましょう。</p>
+    <div class="price-tabs">
+      <button class="price-tab active" onclick="switchTab(0)">フリーセレクト</button>
+      <button class="price-tab" onclick="switchTab(1)">パーツ単品</button>
+      <button class="price-tab" onclick="switchTab(2)">セットプラン</button>
+      <button class="price-tab" onclick="switchTab(3)">お得なセット</button>
+    </div>
+
+    <!-- Panel 0 -->
+    <div class="price-panel active fade-up" id="panel-0">
+      <p style="text-align:center;color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">19箇所のパーツから自由に組み合わせ可能</p>
+      <div class="free-grid">
+        <div class="free-card">
+          <div class="free-parts">2箇所</div>
+          <div class="free-price">¥<span>3,500</span></div>
+        </div>
+        <div class="free-card">
+          <div class="free-parts">3箇所</div>
+          <div class="free-price">¥<span>5,500</span></div>
+        </div>
+        <div class="free-card">
+          <div class="free-parts">4箇所</div>
+          <div class="free-price">¥<span>7,500</span></div>
+        </div>
+        <div class="free-card popular">
+          <div class="popular-badge">POPULAR</div>
+          <div class="free-parts">5箇所</div>
+          <div class="free-price">¥<span>9,500</span></div>
+        </div>
+        <div class="free-card">
+          <div class="free-parts">6箇所</div>
+          <div class="free-price">¥<span>11,000</span></div>
+        </div>
+        <div class="free-card">
+          <div class="free-parts">7箇所</div>
+          <div class="free-price">¥<span>13,000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 1 -->
+    <div class="price-panel" id="panel-1">
+      <div class="parts-header">全19パーツ <strong>各 ¥2,000</strong> でご利用いただけます</div>
+      <div class="parts-grid">
+        <div class="parts-cat">
+          <div class="parts-cat-head">顔・フェイスライン</div>
+          <ul class="parts-cat-body">
+            <li>産毛・うぶ毛</li><li>口周り</li><li>フェイスライン</li>
+            <li>もみあげ</li><li>ほほ・頬</li>
+          </ul>
+        </div>
+        <div class="parts-cat">
+          <div class="parts-cat-head">腕・手</div>
+          <ul class="parts-cat-body">
+            <li>ひじ上</li><li>ひじ下</li><li>手の甲・指</li>
+          </ul>
+        </div>
+        <div class="parts-cat">
+          <div class="parts-cat-head">脚・足</div>
+          <ul class="parts-cat-body">
+            <li>ひざ上</li><li>ひざ下</li><li>足の甲・指</li>
+          </ul>
+        </div>
+        <div class="parts-cat">
+          <div class="parts-cat-head">ボディ</div>
+          <ul class="parts-cat-body">
+            <li>ワキ</li><li>うなじ</li><li>お腹</li>
+            <li>背中上部</li><li>背中下部</li><li>Vゾーン</li><li>Iゾーン</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2 -->
+    <div class="price-panel" id="panel-2">
+      <div class="parts-header">全7セット <strong>各 ¥5,000</strong> でご利用いただけます</div>
+      <div class="sets-grid">
+        <div class="set-card">
+          <div class="set-name">顔全体セット</div>
+          <div class="set-price">¥<span>5,000</span></div>
+          <div class="set-items">産毛・口周り・フェイスライン・もみあげ・ほほ</div>
+        </div>
+        <div class="set-card">
+          <div class="set-name">腕全体セット</div>
+          <div class="set-price">¥<span>5,000</span></div>
+          <div class="set-items">ひじ上・ひじ下・手の甲・指</div>
+        </div>
+        <div class="set-card">
+          <div class="set-name">脚全体セット</div>
+          <div class="set-price">¥<span>5,000</span></div>
+          <div class="set-items">ひざ上・ひざ下・足の甲・指</div>
+        </div>
+        <div class="set-card">
+          <div class="set-name">ボディ前面セット</div>
+          <div class="set-price">¥<span>5,000</span></div>
+          <div class="set-items">ワキ・お腹・Vゾーン</div>
+        </div>
+        <div class="set-card">
+          <div class="set-name">ボディ背面セット</div>
+          <div class="set-price">¥<span>5,000</span></div>
+          <div class="set-items">うなじ・背中上部・背中下部</div>
+        </div>
+        <div class="set-card">
+          <div class="set-name">VIセット</div>
+          <div class="set-price">¥<span>5,000</span></div>
+          <div class="set-items">Vゾーン・Iゾーン</div>
+        </div>
+        <div class="set-card">
+          <div class="set-name">VIOセット</div>
+          <div class="set-price">¥<span>5,000</span></div>
+          <div class="set-items">Vゾーン・Iゾーン・Oゾーン</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 3 -->
+    <div class="price-panel" id="panel-3">
+      <div class="bestval-grid">
+        <div class="bestval-card">
+          <div class="bestval-head">
+            <div class="bestval-tag">BEST VALUE</div>
+            <div class="bestval-name">まるごと全身プラン</div>
+            <div class="bestval-desc">顔から足の指まで、全19パーツ対応</div>
+          </div>
+          <div class="bestval-body">
+            <div class="bestval-prices">
+              <span class="price-before">¥39,000</span>
+              <span class="price-off">約41%OFF</span>
+            </div>
+            <div class="price-after">¥<span>23,000</span></div>
+            <div class="bestval-note">全身まとめてお得に対応</div>
+          </div>
+        </div>
+        <div class="bestval-card">
+          <div class="bestval-head">
+            <div class="bestval-tag">POPULAR</div>
+            <div class="bestval-name">まとめて下半身プラン</div>
+            <div class="bestval-desc">お腹から足の指まですっきり</div>
+          </div>
+          <div class="bestval-body">
+            <div class="bestval-prices">
+              <span class="price-before">¥19,000</span>
+              <span class="price-off">約47%OFF</span>
+            </div>
+            <div class="price-after">¥<span>10,000</span></div>
+            <div class="bestval-note">人気No.1のお得セット</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-notice">
+      ※ 初回無料体験は1回分のみ適用。<br>
+      ※ 施術前日または当日に自己処理をお願いしております。剃り忘れの場合は、シェービング代 ¥1,000 を頂戴します。<br>
+      ※ 背中・うなじなど手の届きにくい部位は無料にてシェービング対応いたします。
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem">
+      <a href="#contact" class="btn btn-pink btn-lg">🎁 このプランで無料体験する</a>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section id="flow">
+  <div class="container">
+    <span class="section-en">— HOW TO START —</span>
+    <h2 class="section-title">はじめての方へ<span class="pink-text"> 4ステップ</span></h2>
+    <div class="accent-line"><div class="accent-dot"></div></div>
+    <div class="flow-grid">
+      <div class="flow-step fade-up">
+        <div class="flow-num-wrap">
+          <div class="flow-num">1</div>
+          <span class="flow-icon">📱</span>
+        </div>
+        <div class="flow-title">無料体験を予約</div>
+        <p class="flow-desc">LINEまたはフォームから希望日時を送るだけ。24時間受付しています。</p>
+      </div>
+      <div class="flow-step fade-up">
+        <div class="flow-num-wrap">
+          <div class="flow-num">2</div>
+          <span class="flow-icon">💬</span>
+        </div>
+        <div class="flow-title">カウンセリング</div>
+        <p class="flow-desc">肌質・お悩み・ご希望をヒアリング。最適なプランをご提案します（約20分）。</p>
+      </div>
+      <div class="flow-step fade-up">
+        <div class="flow-num-wrap">
+          <div class="flow-num">3</div>
+          <span class="flow-icon">✨</span>
+        </div>
+        <div class="flow-title">無料体験施術</div>
+        <p class="flow-desc">実際の機器・技術を体験。痛みの少なさを自身の肌でお確かめください。</p>
+      </div>
+      <div class="flow-step fade-up">
+        <div class="flow-num-wrap">
+          <div class="flow-num">4</div>
+          <span class="flow-icon">🌸</span>
+        </div>
+        <div class="flow-title">ご納得後にスタート</div>
+        <p class="flow-desc">無理な勧誘は一切なし。体験後にご自身のペースでご判断いただけます。</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem">
+      <a href="#contact" class="btn btn-pink btn-lg">🎁 無料体験を予約する</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND 2 -->
+<div class="cta-band">
+  <div class="container">
+    <h3>今なら初回体験が完全無料</h3>
+    <p>藤沢駅南口 徒歩3分。仕事帰りにもお立ち寄りください。</p>
+    <div class="cta-band-buttons">
+      <a href="#contact" class="btn btn-white btn-lg">フォームで予約する</a>
+      <a href="#contact" class="btn btn-line btn-lg">💬 LINEで予約する</a>
+    </div>
+  </div>
+</div>
+
+<!-- VOICE -->
+<section id="voice">
+  <div class="container">
+    <span class="section-en">— CUSTOMER VOICE —</span>
+    <h2 class="section-title">お客様の<span class="pink-text">リアルな声</span></h2>
+    <p class="section-sub">継続率95%。多くの30代女性が効果を実感しています。</p>
+    <div class="voice-grid">
+      <div class="voice-card fade-up">
+        <div class="voice-stars">★★★★★</div>
+        <div class="voice-result">ムダ毛が気にならなくなった</div>
+        <div class="voice-quote">"</div>
+        <p class="voice-text">30代になって肌が敏感になり、カミソリで荒れることが増えていました。こちらで施術を受けてから自己処理が激減！痛みもほとんどなく通い続けられています。</p>
+        <div class="voice-user">
+          <div class="voice-avatar">M</div>
+          <div>
+            <div class="voice-name">M.K さん（34歳）</div>
+            <div class="voice-info">下半身プラン / 3ヶ月継続中</div>
+          </div>
+        </div>
+      </div>
+      <div class="voice-card fade-up">
+        <div class="voice-stars">★★★★★</div>
+        <div class="voice-result">最初の無料体験で即決</div>
+        <div class="voice-quote">"</div>
+        <p class="voice-text">他サロンで怖い思いをしたので不安でしたが、完全個室で丁寧な説明があって安心できました。体験の時点で「ここにしよう」と決めていました。</p>
+        <div class="voice-user">
+          <div class="voice-avatar">A</div>
+          <div>
+            <div class="voice-name">A.T さん（31歳）</div>
+            <div class="voice-info">フリーセレクト / 2ヶ月</div>
+          </div>
+        </div>
+      </div>
+      <div class="voice-card fade-up">
+        <div class="voice-stars">★★★★★</div>
+        <div class="voice-result">仕事帰りに通えて続けやすい</div>
+        <div class="voice-quote">"</div>
+        <p class="voice-text">藤沢駅からすぐなので、仕事帰りにサクッと通えます。施術時間も短めなので忙しい私にぴったり。友人にもすすめました！</p>
+        <div class="voice-user">
+          <div class="voice-avatar">Y</div>
+          <div>
+            <div class="voice-name">Y.S さん（36歳）</div>
+            <div class="voice-info">全身プラン / 4ヶ月</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <span class="section-en">— FAQ —</span>
+    <h2 class="section-title">よくある<span class="pink-text">ご質問</span></h2>
+    <p class="section-sub">ご不明な点は、LINEやフォームからお気軽にどうぞ。</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-badge">Q</span>
+          <span>初回無料体験はどんな内容ですか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">カウンセリング（約20分）＋お好きな1パーツの体験施術をご案内しています。実際の機器と技術を体感していただいたうえで、ご検討いただけます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-badge">Q</span>
+          <span>痛みはありますか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">当サロン独自の痛みレス技術により、痛みを最大限に抑えています。「脱毛は痛い」というイメージをお持ちの方も、体験後に「思ったより全然痛くない！」とおっしゃる方が多いです。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-badge">Q</span>
+          <span>施術前の自己処理は必要ですか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">前日または当日に自己処理をお願いしています。背中・うなじなど自己処理が難しい部位は、無料でシェービング対応いたします。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-badge">Q</span>
+          <span>仕事帰りでも通えますか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">藤沢駅南口から徒歩3分ですので、お仕事帰りや買い物のついでにも立ち寄っていただけます。夜間の時間帯も対応していますので、お気軽にご予約ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-badge">Q</span>
+          <span>何回通えば効果を感じますか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">個人差はありますが、平均3〜5回で効果を実感されるお客様が多いです。カウンセリング時に肌質に合わせた目安をご案内します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-badge">Q</span>
+          <span>体験後に強引な勧誘はありますか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">一切ありません。体験を受けていただいたうえで、ご自身のペースでご判断いただけます。「今日は考えます」も大歓迎です。</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <a href="#contact" class="btn btn-pink btn-lg">🎁 まずは無料体験してみる</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container contact-inner">
+    <div style="text-align:center;margin-bottom:3rem">
+      <span class="section-en" style="color:rgba(255,255,255,.6)">— CONTACT —</span>
+      <h2 class="section-title" style="color:white">まずは、体験から。<br>初回は完全無料です。</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.8);margin-top:.4rem">フォームまたはLINEから、お気軽にご連絡ください</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-group">
+            <label class="form-label">お名前 <span style="color:#FFE47A">*</span></label>
+            <input type="text" class="form-input" placeholder="山田 花子" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">メールアドレス <span style="color:#FFE47A">*</span></label>
+            <input type="email" class="form-input" placeholder="example@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">電話番号</label>
+            <input type="tel" class="form-input" placeholder="090-1234-5678">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ご希望のプラン</label>
+            <select class="form-input">
+              <option value="">選択してください</option>
+              <option>フリーセレクト</option>
+              <option>パーツ単品</option>
+              <option>セットプラン</option>
+              <option>まるごと全身プラン</option>
+              <option>まとめて下半身プラン</option>
+              <option>まだ決めていない</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ご質問・ご要望</label>
+            <textarea class="form-input" placeholder="お気軽にご記入ください"></textarea>
+          </div>
+          <button type="submit" id="submitBtn" class="btn btn-white btn-full">
+            無料体験を申し込む →
+          </button>
+        </form>
+      </div>
+      <div class="line-box">
+        <div class="line-icon">💬</div>
+        <h3>LINEで気軽に相談</h3>
+        <p>質問・予約はLINEでもOK！<br>24時間いつでも受付中です。<br>まずはお気軽にメッセージを。</p>
+        <a href="https://line.me" target="_blank" rel="noopener" class="btn btn-line btn-full btn-lg">
+          💬 LINEで友だち追加
+        </a>
+        <p class="line-hint">＼ 友だち追加で初回無料クーポンをプレゼント ／</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">湘南美容 川越脱毛</div>
+  <p class="footer-info">
+    〒111-1111 神奈川県藤沢市○○ 1-1-1<br>
+    藤沢駅 南口より徒歩3分 ｜ TEL: 000-0000-0000<br>
+    営業時間: 10:00〜21:00（年中無休）
+  </p>
+  <p class="footer-copy">© 2024 湘南美容 川越脱毛 All Rights Reserved.</p>
+</footer>
+
+<!-- Float CTA -->
+<div class="float-cta" id="floatCta">
+  <a href="#contact" class="float-btn float-pink">🎁 無料体験を予約</a>
+  <a href="#contact" class="float-btn float-line">💬 LINEで相談</a>
+</div>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const floatCta = document.getElementById('floatCta');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY > 80;
+    navbar.classList.toggle('scrolled', s);
+    floatCta.style.display = s ? 'flex' : 'none';
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  function switchTab(index) {
+    document.querySelectorAll('.price-tab').forEach((t, i) => t.classList.toggle('active', i === index));
+    document.querySelectorAll('.price-panel').forEach((p, i) => p.classList.toggle('active', i === index));
+  }
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = '✅ 送信が完了しました！';
+    btn.style.background = '#10b981';
+    btn.style.color = 'white';
+    btn.disabled = true;
+  });
+</script>
+</body>
+</html>

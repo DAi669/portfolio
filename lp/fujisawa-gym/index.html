@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>藤沢川越ジム | 女性専用パーソナルジム｜藤沢駅徒歩4分</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:       #0096C7;
+      --primary-dark:  #0077A8;
+      --primary-light: #48CAE4;
+      --accent:        #90E0EF;
+      --accent2:       #CAF0F8;
+      --dark:          #1A2B3C;
+      --text:          #334155;
+      --text-light:    #64748B;
+      --bg:            #F4FBFF;
+      --white:         #FFFFFF;
+      --gradient:      linear-gradient(135deg, #0096C7, #48CAE4);
+      --shadow:        0 4px 24px rgba(0,150,199,.15);
+      --shadow-lg:     0 8px 48px rgba(0,150,199,.22);
+      --radius:        16px;
+      --radius-sm:     8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ────────────────────── */
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: .4rem;
+      line-height: 1.3;
+    }
+    .section-label {
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--primary);
+      margin-bottom: .6rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-light);
+      font-size: .95rem;
+      margin-bottom: 3rem;
+    }
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Buttons ───────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all .3s ease;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 4px 20px rgba(0,150,199,.4);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,150,199,.5); }
+    .btn-ghost {
+      background: rgba(255,255,255,.15);
+      color: white;
+      border: 2px solid rgba(255,255,255,.6);
+      backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.25); }
+    .btn-line { background: #06C755; color: white; box-shadow: 0 4px 20px rgba(6,199,85,.35); }
+    .btn-line:hover { transform: translateY(-3px); background: #00A846; }
+    .btn-lg { padding: 1.2rem 2.6rem; font-size: 1.05rem; }
+
+    /* ── Layout ────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 80px 0; }
+
+    /* ════════════════════════════════════
+       NAV
+    ════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 1.5rem;
+      transition: all .35s ease;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 2px 20px rgba(0,0,0,.08);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: white;
+      text-decoration: none;
+      transition: color .3s;
+      letter-spacing: -.02em;
+    }
+    nav.scrolled .nav-logo { color: var(--primary); }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      font-size: .88rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.9);
+      text-decoration: none;
+      transition: all .25s;
+    }
+    nav.scrolled .nav-links a { color: var(--text); }
+    .nav-links a:hover { color: var(--primary-light) !important; }
+    .nav-cta {
+      background: white !important;
+      color: var(--primary) !important;
+      padding: .45rem 1.2rem !important;
+      border-radius: 50px;
+    }
+    nav.scrolled .nav-cta { background: var(--gradient) !important; color: white !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 1001;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: white; transition: all .3s; border-radius: 2px;
+    }
+    nav.scrolled .nav-hamburger span { background: var(--dark); }
+
+    /* ════════════════════════════════════
+       HERO
+    ════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center top;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(155deg, rgba(0,70,130,.88) 0%, rgba(0,150,199,.65) 55%, rgba(72,202,228,.4) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 130px 1.5rem 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.3);
+      color: white;
+      padding: .4rem 1rem;
+      border-radius: 50px;
+      font-size: .82rem;
+      font-weight: 700;
+      margin-bottom: 1.4rem;
+      letter-spacing: .03em;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+      font-weight: 900;
+      color: white;
+      margin-bottom: 1rem;
+      letter-spacing: -.03em;
+      line-height: 1.2;
+    }
+    .hero-title span {
+      display: block;
+      color: var(--accent);
+      font-size: .85em;
+      letter-spacing: -.01em;
+    }
+    .hero-text {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.9);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      line-height: 1.9;
+    }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem; }
+    .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .hero-stat { color: white; }
+    .hero-stat-num { display: block; font-size: 2.2rem; font-weight: 900; line-height: 1; }
+    .hero-stat-num small { font-size: .55em; font-weight: 700; }
+    .hero-stat-label { font-size: .78rem; opacity: .75; margin-top: .3rem; }
+    .hero-wave {
+      position: absolute; bottom: -1px; left: 0; right: 0;
+    }
+
+    /* ════════════════════════════════════
+       FEATURES
+    ════════════════════════════════════ */
+    #features { background: white; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border: 1px solid rgba(0,150,199,.1);
+      transition: all .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transition: transform .35s ease;
+      transform-origin: left;
+    }
+    .feature-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
+    .feature-card:hover::after { transform: scaleX(1); }
+    .feature-icon {
+      width: 66px; height: 66px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-size: 1.9rem;
+    }
+    .feature-title { font-size: 1.05rem; font-weight: 800; color: var(--dark); margin-bottom: .5rem; }
+    .feature-text { font-size: .88rem; color: var(--text-light); line-height: 1.7; }
+
+    /* ════════════════════════════════════
+       SERVICES
+    ════════════════════════════════════ */
+    #services { background: var(--bg); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .service-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all .35s ease;
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .service-img { height: 220px; overflow: hidden; }
+    .service-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .service-card:hover .service-img img { transform: scale(1.06); }
+    .service-body { padding: 1.5rem; }
+    .service-tag {
+      display: inline-block;
+      background: var(--accent2);
+      color: var(--primary-dark);
+      font-size: .72rem; font-weight: 800;
+      padding: .28rem .8rem;
+      border-radius: 50px;
+      margin-bottom: .7rem;
+      letter-spacing: .06em;
+    }
+    .service-name { font-size: 1.2rem; font-weight: 800; color: var(--dark); margin-bottom: .45rem; }
+    .service-desc { font-size: .88rem; color: var(--text-light); line-height: 1.75; }
+
+    /* ════════════════════════════════════
+       PRICING
+    ════════════════════════════════════ */
+    #pricing { background: white; }
+    .pricing-wrapper { max-width: 580px; margin: 0 auto; }
+    .pricing-card {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 56px rgba(0,150,199,.22);
+      border: 2px solid var(--primary-light);
+    }
+    .pricing-header {
+      background: var(--gradient);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .pricing-label { font-size: .82rem; font-weight: 700; opacity: .85; margin-bottom: .4rem; letter-spacing: .1em; }
+    .pricing-price { font-size: 3.8rem; font-weight: 900; line-height: 1; }
+    .pricing-price small { font-size: 1.1rem; }
+    .pricing-tax { font-size: .82rem; opacity: .75; margin-top: .3rem; }
+    .pricing-body { padding: 2rem 2rem 2.5rem; background: white; }
+    .pricing-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; margin-bottom: 2rem; }
+    .pricing-list li {
+      display: flex; align-items: flex-start; gap: .75rem;
+      font-size: .95rem; color: var(--text);
+    }
+    .pricing-list li::before {
+      content: '✓';
+      min-width: 22px; height: 22px;
+      background: var(--accent2); color: var(--primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+    }
+    .pricing-note {
+      background: linear-gradient(135deg, #E0F7FA, #B3EEF8);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.2rem;
+      font-size: .9rem; color: var(--primary-dark); font-weight: 700;
+      text-align: center; margin-bottom: 1.5rem;
+    }
+    .pricing-cta { text-align: center; }
+
+    /* ════════════════════════════════════
+       FLOW
+    ════════════════════════════════════ */
+    #flow { background: var(--bg); }
+    .flow-steps {
+      max-width: 680px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+      position: relative;
+    }
+    .flow-steps::before {
+      content: '';
+      position: absolute; left: 29px; top: 30px; bottom: 30px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+    }
+    .flow-step { display: flex; gap: 1.5rem; align-items: flex-start; padding: 1.2rem 0; }
+    .flow-num {
+      min-width: 60px; height: 60px;
+      border-radius: 50%; background: var(--gradient);
+      color: white; font-size: 1.3rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,150,199,.3);
+      position: relative; z-index: 1; flex-shrink: 0;
+    }
+    .flow-body {
+      background: white; border-radius: var(--radius);
+      padding: 1.3rem 1.5rem; flex: 1;
+      box-shadow: var(--shadow);
+      border-left: 3px solid var(--primary-light);
+    }
+    .flow-title { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: .3rem; }
+    .flow-desc { font-size: .88rem; color: var(--text-light); }
+
+    /* ════════════════════════════════════
+       VOICE
+    ════════════════════════════════════ */
+    #voice { background: white; }
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .voice-card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      border: 1px solid var(--accent2);
+      position: relative;
+    }
+    .voice-card::before {
+      content: '\201C';
+      position: absolute; top: -6px; left: 18px;
+      font-size: 4.5rem; font-weight: 900;
+      color: var(--accent); line-height: 1;
+      font-family: Georgia, serif;
+    }
+    .voice-text { font-size: .92rem; color: var(--text); margin-bottom: 1.2rem; padding-top: .5rem; line-height: 1.8; }
+    .voice-user { display: flex; align-items: center; gap: .75rem; }
+    .voice-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--gradient); color: white;
+      font-size: 1.1rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .voice-stars { color: #FBBF24; font-size: .82rem; margin-bottom: .15rem; }
+    .voice-name { font-weight: 800; font-size: .88rem; color: var(--dark); }
+    .voice-info { font-size: .78rem; color: var(--text-light); }
+
+    /* ════════════════════════════════════
+       FAQ
+    ════════════════════════════════════ */
+    #faq { background: var(--bg); }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: .7rem; }
+    .faq-item {
+      background: white; border-radius: var(--radius-sm);
+      border: 1px solid rgba(0,150,199,.15); overflow: hidden;
+    }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.15rem 1.5rem; cursor: pointer;
+      font-weight: 700; color: var(--dark); font-size: .93rem;
+      user-select: none; transition: background .2s;
+    }
+    .faq-q:hover { background: var(--accent2); }
+    .faq-q-icon {
+      min-width: 28px; height: 28px;
+      background: var(--gradient); color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .8rem; flex-shrink: 0;
+    }
+    .faq-arrow { color: var(--primary); font-size: 1.1rem; transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s;
+      font-size: .9rem; color: var(--text); line-height: 1.8;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 1.5rem 1.2rem; }
+
+    /* ════════════════════════════════════
+       CONTACT
+    ════════════════════════════════════ */
+    #contact {
+      background: var(--dark);
+      position: relative; overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(0,150,199,.18), transparent 70%);
+      border-radius: 50%;
+    }
+    #contact::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(72,202,228,.12), transparent 70%);
+      border-radius: 50%;
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; max-width: 880px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .contact-form {
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius); padding: 2rem;
+    }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-label { display: block; font-size: .82rem; font-weight: 700; color: rgba(255,255,255,.75); margin-bottom: .4rem; }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-sm);
+      padding: .78rem 1rem;
+      font-size: .93rem; color: white; outline: none;
+      transition: border-color .3s;
+      font-family: inherit;
+    }
+    .form-input:focus { border-color: var(--primary-light); }
+    .form-input::placeholder { color: rgba(255,255,255,.28); }
+    .form-input option { color: #333; }
+    textarea.form-input { resize: vertical; min-height: 90px; }
+    .line-cta {
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      padding: 2rem; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 1.2rem;
+    }
+    .line-icon {
+      width: 80px; height: 80px; background: #06C755;
+      border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.6rem;
+    }
+    .line-cta h3 { font-size: 1.3rem; font-weight: 800; color: white; }
+    .line-cta p { font-size: .88rem; color: rgba(255,255,255,.6); line-height: 1.75; }
+    .line-hint { font-size: .78rem !important; color: rgba(255,255,255,.35) !important; }
+
+    /* ════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════ */
+    footer {
+      background: #0C1723;
+      color: rgba(255,255,255,.5);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    .footer-logo { font-size: 1.2rem; font-weight: 900; color: white; margin-bottom: .5rem; }
+    .footer-info { font-size: .82rem; line-height: 2; margin-bottom: .8rem; }
+    .footer-copy { font-size: .75rem; }
+
+    /* ── Floating CTA ─────────────────── */
+    .float-cta {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      z-index: 999;
+      display: none;
+      flex-direction: column; gap: .7rem; align-items: flex-end;
+    }
+    .float-btn {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.2rem; border-radius: 50px;
+      font-size: .82rem; font-weight: 700; text-decoration: none; color: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25); transition: all .3s;
+    }
+    .float-btn:hover { transform: translateY(-3px); }
+    .float-primary { background: var(--gradient); }
+    .float-line { background: #06C755; }
+
+    /* ── Scroll animations ────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: fixed;
+        inset: 0; background: rgba(0,70,130,.97);
+        justify-content: center; align-items: center;
+        gap: 2.2rem; z-index: 999;
+      }
+      .nav-links.open a { font-size: 1.2rem; color: white !important; }
+      .nav-hamburger { display: flex; }
+
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons .btn { text-align: center; }
+      .hero-stats { gap: 1.5rem; }
+
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   NAVIGATION                        -->
+<!-- ╚══════════════════════════════════╝ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">藤沢川越ジム</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">特徴</a></li>
+      <li><a href="#services">コース</a></li>
+      <li><a href="#pricing">料金</a></li>
+      <li><a href="#voice">お客様の声</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">無料体験</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   HERO                              -->
+<!-- ╚══════════════════════════════════╝ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌊 藤沢駅 徒歩4分 ｜ 女性専用パーソナルジム</div>
+    <h1 class="hero-title">
+      なりたい自分に、<span>最短距離で。</span>
+    </h1>
+    <p class="hero-text">
+      湘南の地に生まれた、あなただけのパーソナルジム。<br>
+      管理栄養士と専属トレーナーが二人三脚で、<br>理想の体型へと導きます。
+    </p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-primary btn-lg">🎁 無料体験を予約する</a>
+      <a href="#services" class="btn btn-ghost btn-lg">コースを見る →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">98<small>%</small></span>
+        <div class="hero-stat-label">顧客満足度</div>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">3<small>ヶ月</small></span>
+        <div class="hero-stat-label">平均達成期間</div>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">24<small>h</small></span>
+        <div class="hero-stat-label">LINEサポート</div>
+      </div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,50 C400,90 1040,10 1440,50 L1440,80 L0,80 Z" fill="#F4FBFF"/>
+  </svg>
+</section>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   FEATURES                          -->
+<!-- ╚══════════════════════════════════╝ -->
+<section id="features">
+  <div class="container">
+    <p class="section-label">— WHY CHOOSE US —</p>
+    <h2 class="section-title">藤沢川越ジムが<br><span class="gradient-text">選ばれる理由</span></h2>
+    <p class="section-sub">湘南エリアで女性に寄り添う、4つの強みをご紹介します。</p>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">👩</div>
+        <div class="feature-title">完全女性専用</div>
+        <p class="feature-text">女性だけのプライベートな空間。周りの目を気にせず、トレーニングに集中できます。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🥗</div>
+        <div class="feature-title">管理栄養士在籍</div>
+        <p class="feature-text">食事面もプロが徹底サポート。あなたの生活習慣に合わせた食事プランを作成します。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🚉</div>
+        <div class="feature-title">駅チカ4分</div>
+        <p class="feature-text">藤沢駅から徒歩4分。仕事帰りや買い物のついでに気軽に通える好立地です。</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">💬</div>
+        <div class="feature-title">LINEサポート</div>
+        <p class="feature-text">セッション外も24時間LINEで相談OK。食事の写真を送るだけでアドバイスが届きます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   SERVICES                          -->
+<!-- ╚══════════════════════════════════╝ -->
+<section id="services">
+  <div class="container">
+    <p class="section-label">— OUR PROGRAMS —</p>
+    <h2 class="section-title">目標に合わせた<br><span class="gradient-text">3つのコース</span></h2>
+    <p class="section-sub">あなたの悩みや目標に合わせて、最適なプログラムをご提案します。</p>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="ボディメイクコース" loading="lazy">
+        </div>
+        <div class="service-body">
+          <span class="service-tag">BODY MAKE</span>
+          <h3 class="service-name">ボディメイクコース</h3>
+          <p class="service-desc">メリハリのあるボディラインを目指す方へ。筋力トレーニングと有酸素運動を組み合わせた、理想のプロポーションづくりをサポートします。</p>
+        </div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=600&q=80" alt="ダイエットコース" loading="lazy">
+        </div>
+        <div class="service-body">
+          <span class="service-tag">DIET</span>
+          <h3 class="service-name">ダイエットコース</h3>
+          <p class="service-desc">管理栄養士監修の食事指導×パーソナルトレーニング。無理な制限なし、リバウンドしない健康的なダイエットを実現します。</p>
+        </div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=600&q=80" alt="産後ケアコース" loading="lazy">
+        </div>
+        <div class="service-body">
+          <span class="service-tag">POSTNATAL CARE</span>
+          <h3 class="service-name">産後ケアコース</h3>
+          <p class="service-desc">産後の骨盤矯正・体型回復を、専門知識を持つトレーナーが丁寧にサポート。無理なく、安心して通えるプログラムです。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   PRICING                           -->
+<!-- ╚══════════════════════════════════╝ -->
+<section id="pricing">
+  <div class="container">
+    <p class="section-label">— PRICE —</p>
+    <h2 class="section-title">わかりやすい<br><span class="gradient-text">シンプルな料金</span></h2>
+    <p class="section-sub">隠れた追加費用は一切なし。安心の月額制です。</p>
+    <div class="pricing-wrapper fade-up">
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-label">MONTHLY PLAN</div>
+          <div class="pricing-price"><small>¥</small>55,000<small> /月</small></div>
+          <div class="pricing-tax">税込</div>
+        </div>
+        <div class="pricing-body">
+          <ul class="pricing-list">
+            <li>週2回パーソナルトレーニング（月8回）</li>
+            <li>管理栄養士による食事プラン作成・指導</li>
+            <li>LINEによる24時間サポート</li>
+            <li>ボディチェック＆進捗管理</li>
+            <li>ウェア・シューズ・タオル無料貸出</li>
+            <li>入会金 ¥0（無料）</li>
+          </ul>
+          <div class="pricing-note">
+            🎁 初月特別割引あり！まずは無料体験（1回）からどうぞ。
+          </div>
+          <div class="pricing-cta">
+            <a href="#contact" class="btn btn-primary btn-lg" style="width:100%">
+              無料体験を申し込む →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   FLOW                              -->
+<!-- ╚══════════════════════════════════╝ -->
+<section id="flow">
+  <div class="container">
+    <p class="section-label">— HOW TO START —</p>
+    <h2 class="section-title">入会までの<br><span class="gradient-text">かんたん4ステップ</span></h2>
+    <p class="section-sub">お申し込みから最短当日、ご来店いただけます。</p>
+    <div class="flow-steps">
+      <div class="flow-step fade-up">
+        <div class="flow-num">1</div>
+        <div class="flow-body">
+          <div class="flow-title">無料体験を予約する</div>
+          <p class="flow-desc">フォームまたはLINEから24時間受付中。希望の日時をお知らせください。</p>
+        </div>
+      </div>
+      <div class="flow-step fade-up">
+        <div class="flow-num">2</div>
+        <div class="flow-body">
+          <div class="flow-title">無料カウンセリング</div>
+          <p class="flow-desc">現在の悩みや目標をヒアリング。体組成測定も行います（約30分）。</p>
+        </div>
+      </div>
+      <div class="flow-step fade-up">
+        <div class="flow-num">3</div>
+        <div class="flow-body">
+          <div class="flow-title">体験トレーニング</div>
+          <p class="flow-desc">実際のトレーニングを体験。空間や担当トレーナーとの相性をご確認ください。</p>
+        </div>
+      </div>
+      <div class="flow-step fade-up">
+        <div class="flow-num">4</div>
+        <div class="flow-body">
+          <div class="flow-title">ご入会・スタート！</div>
+          <p class="flow-desc">ご納得いただけたらご入会。翌日から理想の体へのステップが始まります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   VOICE                             -->
+<!-- ╚══════════════════════════════════╝ -->
+<section id="voice">
+  <div class="container">
+    <p class="section-label">— VOICE —</p>
+    <h2 class="section-title">通っている方の<br><span class="gradient-text">リアルな声</span></h2>
+    <p class="section-sub">継続率95%。多くの女性が理想の体型を実現しています。</p>
+    <div class="voice-grid">
+      <div class="voice-card fade-up">
+        <p class="voice-text">産後の体型が気になって入会。骨盤ケアから始めて3ヶ月でウエスト −8cm！トレーナーさんが優しくて、通うのが毎回楽しみです。</p>
+        <div class="voice-user">
+          <div class="voice-avatar">M</div>
+          <div>
+            <div class="voice-stars">★★★★★</div>
+            <div class="voice-name">M.T さん（28歳）</div>
+            <div class="voice-info">産後ケアコース / 3ヶ月</div>
+          </div>
+        </div>
+      </div>
+      <div class="voice-card fade-up">
+        <p class="voice-text">ダイエットを何度も失敗してきたけど、食事指導のおかげで無理なく −6kg 達成。リバウンドもなく安定しています！</p>
+        <div class="voice-user">
+          <div class="voice-avatar">A</div>
+          <div>
+            <div class="voice-stars">★★★★★</div>
+            <div class="voice-name">A.K さん（25歳）</div>
+            <div class="voice-info">ダイエットコース / 4ヶ月</div>
+          </div>
+        </div>
+      </div>
+      <div class="voice-card fade-up">
+        <p class="voice-text">女性専用なので気兼ねなく通えるのが一番！仕事帰りに寄れる立地も最高。体が引き締まって自信がつきました。</p>
+        <div class="voice-user">
+          <div class="voice-avatar">Y</div>
+          <div>
+            <div class="voice-stars">★★★★★</div>
+            <div class="voice-name">Y.S さん（23歳）</div>
+            <div class="voice-info">ボディメイクコース / 2ヶ月</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   FAQ                               -->
+<!-- ╚══════════════════════════════════╝ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-label">— FAQ —</p>
+    <h2 class="section-title">よくある<br><span class="gradient-text">ご質問</span></h2>
+    <p class="section-sub">解決しない場合はLINEやフォームからお気軽にどうぞ。</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-icon">Q</span>
+          <span style="flex:1">運動が全くの初心者でも大丈夫ですか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">もちろん大丈夫です！当ジムは初心者の方でも安心して通えるよう、基礎から丁寧に指導します。体験トレーニングで実際にご確認ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-icon">Q</span>
+          <span style="flex:1">産後どのくらいから通えますか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">一般的には産後2〜3ヶ月以降（かかりつけ医の許可が出てから）を推奨しています。個人の体調に合わせてプログラムを調整しますので、まずはご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-icon">Q</span>
+          <span style="flex:1">食事制限はきつくありませんか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">過度な制限は行いません。管理栄養士がライフスタイルに合わせた現実的な食事プランを作成します。「食べながら引き締める」ことを目指しています。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-icon">Q</span>
+          <span style="flex:1">途中でコースを変更できますか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">はい、可能です。体の変化や目標の変化に応じて、担当トレーナーと相談しながらコースを柔軟に変更いただけます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-icon">Q</span>
+          <span style="flex:1">仕事帰りでも通えますか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">藤沢駅から徒歩4分の好立地です。早朝・夜間も対応可能（7:00〜22:00予定）なので、お仕事帰りや休日など、ご都合に合わせてご予約いただけます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-icon">Q</span>
+          <span style="flex:1">初月割引はいつまでですか？</span>
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">現在実施中のキャンペーンにつき、期間限定となっています。詳細はLINEまたはフォームよりお問い合わせください。お早めのご予約をおすすめします。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   CONTACT                           -->
+<!-- ╚══════════════════════════════════╝ -->
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;position:relative;z-index:1">
+      <p class="section-label" style="color:rgba(255,255,255,.4)">— CONTACT —</p>
+      <h2 class="section-title" style="color:white">まずは無料体験から<br><span class="gradient-text">一歩を踏み出そう</span></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.55);margin-top:.5rem">フォームまたはLINEからお気軽にご連絡ください</p>
+    </div>
+    <div class="contact-grid">
+      <!-- Form -->
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-group">
+            <label class="form-label">お名前 <span style="color:#f87171">*</span></label>
+            <input type="text" class="form-input" placeholder="山田 花子" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">メールアドレス <span style="color:#f87171">*</span></label>
+            <input type="email" class="form-input" placeholder="example@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">電話番号</label>
+            <input type="tel" class="form-input" placeholder="090-1234-5678">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ご興味のあるコース</label>
+            <select class="form-input">
+              <option value="">選択してください</option>
+              <option value="body">ボディメイク</option>
+              <option value="diet">ダイエット</option>
+              <option value="postnatal">産後ケア</option>
+              <option value="undecided">まだ決めていない</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ご質問・ご要望</label>
+            <textarea class="form-input" placeholder="お気軽にご記入ください"></textarea>
+          </div>
+          <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%;font-size:1rem">
+            無料体験を申し込む →
+          </button>
+        </form>
+      </div>
+      <!-- LINE -->
+      <div class="line-cta">
+        <div class="line-icon">💬</div>
+        <h3>LINEで気軽に相談</h3>
+        <p>
+          質問・体験予約はLINEでもOK！<br>
+          24時間いつでも受付中。<br>
+          まずはお気軽にメッセージを。
+        </p>
+        <a href="https://line.xo" target="_blank" rel="noopener" class="btn btn-line btn-lg" style="width:100%">
+          💬 LINEで友だち追加
+        </a>
+        <p class="line-hint">＼ 今なら初月割引クーポンをプレゼント！ ／</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════╗ -->
+<!--   FOOTER                            -->
+<!-- ╚══════════════════════════════════╝ -->
+<footer>
+  <div class="footer-logo">藤沢川越ジム</div>
+  <p class="footer-info">
+    〒111-1111 神奈川県藤沢市○○ 1-1-1<br>
+    藤沢駅 南口より徒歩4分 ｜ TEL: 000-0000-0000<br>
+    営業時間: 7:00〜22:00（年中無休）
+  </p>
+  <p class="footer-copy">© 2024 藤沢川越ジム All Rights Reserved.</p>
+</footer>
+
+<!-- Floating CTA -->
+<div class="float-cta" id="floatCta">
+  <a href="#contact" class="float-btn float-primary">🎁 無料体験を予約</a>
+  <a href="#contact" class="float-btn float-line">💬 LINEで相談</a>
+</div>
+
+<script>
+  /* ── Navbar scroll ───────────────────────── */
+  const navbar   = document.getElementById('navbar');
+  const floatCta = document.getElementById('floatCta');
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 80;
+    navbar.classList.toggle('scrolled', scrolled);
+    floatCta.style.display = scrolled ? 'flex' : 'none';
+  });
+
+  /* ── Hamburger ───────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
+
+  /* ── FAQ accordion ───────────────────────── */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item    = q.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* ── Scroll fade-up ──────────────────────── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── Form submit (demo) ──────────────────── */
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = '✅ 送信が完了しました！';
+    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    btn.disabled = true;
+  });
+</script>
+</body>
+</html>

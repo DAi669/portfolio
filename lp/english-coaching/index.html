@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ビジネス英語コーチング「SpeakCore」。TOEIC・英会話・プレゼン英語を90日で実践レベルへ。元商社マンの現役コーチが完全マンツーマンで指導。無料体験レッスン実施中。返金保証あり。">
+  <meta name="keywords" content="ビジネス英語コーチング,英語コーチング,マンツーマン英語,TOEIC対策,オンライン英会話,英語上達,ビジネス英語">
+  <meta property="og:title" content="SpeakCore | 90日でビジネス英語を実践レベルへ｜完全マンツーマンコーチング">
+  <meta property="og:description" content="元商社マン×現役英語コーチによる完全マンツーマン指導。受講生1,200名・目標達成率97%・90日全額返金保証。無料体験レッスン実施中。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80">
+  <title>SpeakCore｜90日でビジネス英語を実践レベルへ【マンツーマンコーチング】</title>
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral:       #E8503A;
+      --coral-mid:   #F06A55;
+      --coral-light: #FFCCC5;
+      --coral-pale:  #FFF4F2;
+      --teal:        #0E9E94;
+      --teal-light:  #7FD4CF;
+      --teal-pale:   #EEF9F8;
+      --yellow:      #FFB800;
+      --yellow-pale: #FFF8E6;
+      --blue:        #3B82F6;
+      --blue-pale:   #EFF6FF;
+      --dark:        #1A1A2E;
+      --text:        #3D3D3D;
+      --text-light:  #777777;
+      --border:      #E8E8E8;
+      --bg:          #F8F8FA;
+      --white:       #FFFFFF;
+      --grad-coral:  linear-gradient(135deg, #E8503A, #F5785F);
+      --grad-teal:   linear-gradient(135deg, #0E9E94, #3DBDB5);
+      --grad-dark:   linear-gradient(135deg, #1A1A2E, #2D2D50);
+      --shadow-sm:   0 2px 8px rgba(0,0,0,.08);
+      --shadow:      0 4px 24px rgba(0,0,0,.1);
+      --shadow-lg:   0 10px 48px rgba(0,0,0,.14);
+      --radius:      14px;
+      --radius-sm:   8px;
+      --radius-pill: 50px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.75;
+      overflow-x: hidden;
+      font-size: 15px;
+    }
+
+    /* ─ Typography ─────────────────── */
+    .en-label {
+      font-size: .68rem; font-weight: 800;
+      letter-spacing: .3em; color: var(--coral);
+      display: block; text-align: center; margin-bottom: .4rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900; color: var(--dark);
+      text-align: center; line-height: 1.35;
+      margin-bottom: .5rem;
+    }
+    .section-sub {
+      text-align: center; color: var(--text-light);
+      font-size: .9rem; margin-bottom: 2.8rem; line-height: 1.85;
+    }
+    .highlight { background: linear-gradient(transparent 55%, rgba(255,184,0,.4) 55%); }
+    .coral-text { color: var(--coral); }
+    .teal-text  { color: var(--teal); }
+
+    /* ─ Title deco ─ */
+    .title-line {
+      width: 40px; height: 3px; background: var(--coral);
+      border-radius: 2px; margin: .6rem auto 1rem;
+    }
+
+    /* ─ Buttons ─────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: .5rem; padding: .95rem 2rem;
+      border-radius: var(--radius-sm);
+      font-size: .93rem; font-weight: 800; letter-spacing: .03em;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all .22s ease; font-family: inherit;
+      white-space: nowrap;
+    }
+    .btn-coral {
+      background: var(--grad-coral); color: white;
+      box-shadow: 0 4px 18px rgba(232,80,58,.38);
+    }
+    .btn-coral:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,80,58,.48); }
+    .btn-teal {
+      background: var(--grad-teal); color: white;
+      box-shadow: 0 4px 18px rgba(14,158,148,.3);
+    }
+    .btn-teal:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(14,158,148,.42); }
+    .btn-outline {
+      background: white; color: var(--coral);
+      border: 2px solid var(--coral);
+    }
+    .btn-outline:hover { background: var(--coral-pale); }
+    .btn-ghost {
+      background: rgba(255,255,255,.15);
+      color: white; border: 2px solid rgba(255,255,255,.45);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.25); }
+    .btn-dark { background: var(--dark); color: white; }
+    .btn-dark:hover { transform: translateY(-2px); }
+    .btn-line { background: #06C755; color: white; box-shadow: 0 4px 14px rgba(6,199,85,.3); }
+    .btn-line:hover { transform: translateY(-2px); background: #00A846; }
+    .btn-lg  { padding: 1.1rem 2.5rem; font-size: .97rem; }
+    .btn-xl  { padding: 1.25rem 3rem; font-size: 1rem; }
+    .btn-full { width: 100%; }
+    .btn-icon { font-size: 1.1em; }
+
+    /* ─ Layout ───────────────────────── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    .container-sm { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 80px 0; }
+
+    /* ─ Badge / Tag ─ */
+    .badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .72rem; font-weight: 800; letter-spacing: .06em;
+      padding: .28rem .8rem; border-radius: var(--radius-pill);
+    }
+    .badge-coral { background: var(--coral-pale); color: var(--coral); }
+    .badge-teal  { background: var(--teal-pale); color: var(--teal); }
+    .badge-yellow { background: var(--yellow-pale); color: #9B6F00; }
+    .badge-dark  { background: var(--dark); color: white; }
+
+    /* ════════════════════════════════
+       NAV
+    ════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000; padding: .85rem 1.5rem;
+      transition: all .3s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border), 0 4px 20px rgba(0,0,0,.06);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .nav-logo {
+      font-size: 1.25rem; font-weight: 900; color: white;
+      text-decoration: none; letter-spacing: -.02em; transition: color .3s; flex-shrink: 0;
+    }
+    .nav-logo .dot { color: var(--yellow); }
+    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-links { display: flex; align-items: center; gap: 1.6rem; list-style: none; }
+    .nav-links a {
+      font-size: .8rem; font-weight: 700; color: rgba(255,255,255,.85);
+      text-decoration: none; transition: color .25s;
+    }
+    nav.scrolled .nav-links a { color: var(--text); }
+    .nav-links a:hover { color: var(--coral-light) !important; }
+    nav.scrolled .nav-links a:hover { color: var(--coral) !important; }
+    .nav-cta {
+      background: var(--coral) !important; color: white !important;
+      padding: .48rem 1.3rem !important; border-radius: var(--radius-sm); font-weight: 800 !important;
+      box-shadow: 0 3px 12px rgba(232,80,58,.3);
+    }
+    nav.scrolled .nav-cta { background: var(--grad-coral) !important; }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; z-index: 1001; flex-shrink: 0;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: white; transition: all .3s; border-radius: 2px; }
+    nav.scrolled .nav-hamburger span { background: var(--dark); }
+
+    /* ════════════════════════════════
+       HERO  ★ 非対称レイアウト
+    ════════════════════════════════ */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      background: var(--dark); overflow: hidden; padding: 0;
+    }
+    /* 背景グラデーション */
+    .hero-bg-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0E0E1E 0%, #1A2040 50%, #1A1A2E 100%);
+    }
+    /* 斜めカラーブロック */
+    .hero-shape {
+      position: absolute; top: 0; right: 0;
+      width: 50%; height: 100%;
+      background: var(--coral);
+      clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+      opacity: .12;
+    }
+    /* ドットパターン */
+    .hero-dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    /* 右側の画像エリア */
+    .hero-photo {
+      position: absolute; top: 0; right: 0;
+      width: 48%; height: 100%;
+      overflow: hidden;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; opacity: .35; }
+    .hero-photo::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to right, var(--dark) 0%, transparent 60%),
+                  linear-gradient(to top, var(--dark) 0%, transparent 40%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 140px 1.5rem 100px;
+      max-width: 1080px; margin: 0 auto; width: 100%;
+    }
+    /* 上部のロゴ的バッジ */
+    .hero-trust-bar {
+      display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 2rem;
+    }
+    .hero-trust-pill {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.8);
+      font-size: .73rem; font-weight: 700; letter-spacing: .06em;
+      padding: .32rem .9rem; border-radius: var(--radius-pill);
+      display: flex; align-items: center; gap: .3rem;
+    }
+    .hero-trust-pill .icon { font-size: .85em; }
+    .hero-kicker {
+      font-size: .8rem; font-weight: 800; letter-spacing: .2em;
+      color: var(--coral-light); margin-bottom: .8rem;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 900; color: white; line-height: 1.2;
+      margin-bottom: 1rem; letter-spacing: -.02em;
+    }
+    .hero-title .accent { color: var(--yellow); }
+    .hero-title .line { display: block; }
+    .hero-desc {
+      font-size: 1rem; color: rgba(255,255,255,.7);
+      max-width: 500px; margin-bottom: 2.2rem; line-height: 1.9;
+    }
+    .hero-cta-group { display: flex; flex-wrap: wrap; gap: .8rem; margin-bottom: 2.5rem; }
+    /* 数字ストリップ */
+    .hero-nums {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .hero-num-item { color: white; }
+    .hero-num-val {
+      font-size: 1.9rem; font-weight: 900;
+      color: var(--yellow); line-height: 1;
+    }
+    .hero-num-val small { font-size: .5em; }
+    .hero-num-label { font-size: .72rem; opacity: .6; margin-top: .2rem; }
+
+    /* ════════════════════════════════
+       PAIN ─ カラーカードで共感訴求
+    ════════════════════════════════ */
+    #pain { background: white; }
+    .pain-intro {
+      text-align: center; max-width: 600px; margin: 0 auto 2.5rem;
+      font-size: 1rem; color: var(--text); line-height: 1.9;
+    }
+    .pain-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .pain-card {
+      border-radius: var(--radius); padding: 1.4rem 1.2rem;
+      display: flex; gap: .8rem; align-items: flex-start;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .pain-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .pain-card:nth-child(1) { background: var(--coral-pale); }
+    .pain-card:nth-child(2) { background: var(--teal-pale); }
+    .pain-card:nth-child(3) { background: var(--yellow-pale); }
+    .pain-card:nth-child(4) { background: var(--blue-pale); }
+    .pain-emoji { font-size: 1.8rem; line-height: 1; flex-shrink: 0; margin-top: .1rem; color: var(--coral); }
+    .pain-emoji i { font-size: inherit; }
+    .pain-text { font-size: .88rem; font-weight: 700; color: var(--dark); line-height: 1.55; }
+    /* 矢印 + 解決ボックス */
+    .pain-solve-wrap { text-align: center; }
+    .pain-solve-arrow { font-size: 2.2rem; color: var(--coral); margin-bottom: .8rem; font-weight: 900; }
+    .pain-solve-box {
+      background: var(--grad-coral); border-radius: var(--radius);
+      padding: 2rem 2.5rem; color: white; display: inline-block;
+      max-width: 700px; width: 100%;
+    }
+    .pain-solve-box h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: .4rem; line-height: 1.5; }
+    .pain-solve-box p  { font-size: .88rem; opacity: .85; line-height: 1.75; }
+
+    /* ════════════════════════════════
+       SOCIAL PROOF STRIP
+    ════════════════════════════════ */
+    .proof-strip {
+      background: var(--dark); padding: 1.8rem 1.5rem;
+      overflow: hidden;
+    }
+    .proof-strip-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 2rem;
+    }
+    .proof-item {
+      display: flex; align-items: center; gap: .6rem; color: white;
+      font-size: .82rem;
+    }
+    .proof-num { font-size: 1.4rem; font-weight: 900; color: var(--yellow); }
+    .proof-label { opacity: .65; }
+    .proof-divider { width: 1px; height: 28px; background: rgba(255,255,255,.15); }
+
+    /* ════════════════════════════════
+       REASON  ─  交互レイアウト
+    ════════════════════════════════ */
+    #reason { background: var(--bg); }
+    .reason-item {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center; margin-bottom: 4rem;
+    }
+    .reason-item:last-child { margin-bottom: 0; }
+    .reason-item.reverse { direction: rtl; }
+    .reason-item.reverse > * { direction: ltr; }
+    .reason-img {
+      border-radius: var(--radius); overflow: hidden;
+      aspect-ratio: 4/3; box-shadow: var(--shadow);
+    }
+    .reason-img img { width: 100%; height: 100%; object-fit: cover; }
+    /* 色付きのダミーイメージ */
+    .reason-img-block {
+      border-radius: var(--radius); aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; box-shadow: var(--shadow);
+    }
+    .bg-c1 { background: linear-gradient(135deg, var(--coral-pale), var(--coral-light)); }
+    .bg-c2 { background: linear-gradient(135deg, var(--teal-pale), var(--teal-light)); }
+    .bg-c3 { background: linear-gradient(135deg, var(--yellow-pale), #FFE08A); }
+    .bg-c4 { background: linear-gradient(135deg, var(--blue-pale), #BFDBFE); }
+    .reason-body {}
+    .reason-num {
+      font-size: .7rem; font-weight: 900; letter-spacing: .2em;
+      color: var(--coral); margin-bottom: .4rem;
+    }
+    .reason-title { font-size: 1.3rem; font-weight: 900; color: var(--dark); margin-bottom: .8rem; line-height: 1.4; }
+    .reason-text { font-size: .88rem; color: var(--text); line-height: 1.9; margin-bottom: 1.2rem; }
+    .reason-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .reason-list li { font-size: .85rem; color: var(--text); padding-left: 1.3rem; position: relative; }
+    .reason-list li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 900; }
+
+    /* ════════════════════════════════
+       CTA BAND（中間）
+    ════════════════════════════════ */
+    .cta-band {
+      background: var(--grad-coral); padding: 3.2rem 1.5rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-band::before, .cta-band::after {
+      content: '';
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+    .cta-band::before { width: 300px; height: 300px; top: -100px; left: -80px; }
+    .cta-band::after  { width: 200px; height: 200px; bottom: -60px; right: -40px; }
+    .cta-band-inner { position: relative; z-index: 1; }
+    .cta-band h3 { font-size: clamp(1.3rem, 3vw, 1.9rem); font-weight: 900; color: white; margin-bottom: .4rem; }
+    .cta-band p  { font-size: .88rem; color: rgba(255,255,255,.8); margin-bottom: 1.6rem; line-height: 1.7; }
+    .cta-band-btns { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+
+    /* ════════════════════════════════
+       PROGRAM
+    ════════════════════════════════ */
+    #program { background: white; }
+    .program-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .program-card {
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .program-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .program-card-head { padding: 1.4rem 1.5rem; }
+    .program-card:nth-child(1) .program-card-head { background: var(--coral); }
+    .program-card:nth-child(2) .program-card-head { background: var(--teal); }
+    .program-card:nth-child(3) .program-card-head { background: #4B5EAA; }
+    .program-icon-wrap {
+      width: 52px; height: 52px; background: rgba(255,255,255,.2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: .8rem;
+    }
+    .program-icon-wrap i { color: white; font-size: 1.4rem; }
+    .program-card-name { font-size: 1.05rem; font-weight: 900; color: white; margin-bottom: .2rem; }
+    .program-card-for  { font-size: .75rem; color: rgba(255,255,255,.7); }
+    .program-card-body { padding: 1.5rem; background: white; }
+    .program-card-desc { font-size: .86rem; color: var(--text); line-height: 1.8; margin-bottom: 1.2rem; }
+    .program-card-list { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .program-card-list li { font-size: .83rem; color: var(--text); padding-left: 1.2rem; position: relative; }
+    .program-card-list li::before { content: '✓'; position: absolute; left: 0; font-weight: 900; color: var(--teal); }
+
+    /* ════════════════════════════════
+       PRICING  ─  比較テーブル風
+    ════════════════════════════════ */
+    #pricing { background: var(--bg); }
+    .pricing-wrap { max-width: 860px; margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding-top: 1.2rem; }
+    .pricing-card {
+      background: white; border-radius: var(--radius);
+      overflow: visible; border: 2px solid var(--border);
+      box-shadow: var(--shadow-sm); transition: transform .3s;
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.rec { border-color: var(--coral); }
+    .pricing-head { padding: 1.8rem 1.5rem; text-align: center; position: relative; border-radius: var(--radius) var(--radius) 0 0; }
+    .pricing-card:not(.rec) .pricing-head { background: var(--bg); }
+    .pricing-card.rec .pricing-head { background: var(--grad-coral); }
+    .pricing-body { border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; }
+    .rec-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--yellow); color: var(--dark);
+      font-size: .66rem; font-weight: 900; padding: .28rem 1rem;
+      border-radius: var(--radius-pill); white-space: nowrap; letter-spacing: .06em;
+    }
+    .pricing-plan {
+      font-size: .72rem; font-weight: 900; letter-spacing: .15em;
+      margin-bottom: .4rem;
+    }
+    .pricing-card:not(.rec) .pricing-plan { color: var(--text-light); }
+    .pricing-card.rec .pricing-plan { color: rgba(255,255,255,.7); }
+    .pricing-price { font-size: 2.6rem; font-weight: 900; line-height: 1; }
+    .pricing-card:not(.rec) .pricing-price { color: var(--dark); }
+    .pricing-card.rec .pricing-price { color: white; }
+    .pricing-price small { font-size: .4em; font-weight: 600; }
+    .pricing-sub { font-size: .78rem; margin-top: .3rem; }
+    .pricing-card:not(.rec) .pricing-sub { color: var(--text-light); }
+    .pricing-card.rec .pricing-sub { color: rgba(255,255,255,.65); }
+    .pricing-body { padding: 1.5rem; border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; }
+    .pricing-items { list-style: none; display: flex; flex-direction: column; gap: .65rem; margin-bottom: 1.5rem; }
+    .pricing-items li { font-size: .86rem; color: var(--text); padding-left: 1.4rem; position: relative; line-height: 1.4; }
+    .pricing-items li::before { content: '✓'; position: absolute; left: 0; color: #22C55E; font-weight: 900; }
+    .pricing-items li.no { color: var(--text-light); }
+    .pricing-items li.no::before { content: '—'; color: var(--border); }
+    .pricing-note { text-align: center; font-size: .78rem; color: var(--text-light); margin-top: 1.5rem; line-height: 1.7; }
+
+    /* 返金保証バナー */
+    .guarantee-box {
+      background: white; border: 2px solid var(--teal);
+      border-radius: var(--radius); padding: 1.5rem 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+      margin-top: 2rem; flex-wrap: wrap;
+    }
+    .guarantee-icon { font-size: 3rem; flex-shrink: 0; color: var(--teal); }
+    .guarantee-body h4 { font-size: 1rem; font-weight: 900; color: var(--dark); margin-bottom: .3rem; }
+    .guarantee-body p  { font-size: .83rem; color: var(--text-light); line-height: 1.7; }
+
+    /* ════════════════════════════════
+       TESTIMONIALS
+    ════════════════════════════════ */
+    #testimonials { background: white; }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .testi-card {
+      background: var(--bg); border-radius: var(--radius);
+      padding: 1.8rem; border-top: 4px solid transparent;
+      box-shadow: var(--shadow-sm); transition: transform .3s, box-shadow .3s;
+    }
+    .testi-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .testi-card:nth-child(1) { border-color: var(--coral); }
+    .testi-card:nth-child(2) { border-color: var(--teal); }
+    .testi-card:nth-child(3) { border-color: var(--yellow); }
+    .testi-result-pills { display: flex; align-items: center; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .testi-before { background: #FEE2E2; color: #991B1B; font-size: .72rem; font-weight: 800; padding: .2rem .7rem; border-radius: 4px; }
+    .testi-after  { background: #DCFCE7; color: #166534; font-size: .72rem; font-weight: 800; padding: .2rem .7rem; border-radius: 4px; }
+    .testi-arrow  { font-size: .9rem; color: var(--text-light); }
+    .testi-stars  { color: var(--yellow); font-size: .85rem; letter-spacing: .08em; margin-bottom: .6rem; }
+    .testi-quote  { font-size: .88rem; color: var(--text); line-height: 1.85; margin-bottom: 1.2rem; }
+    .testi-user   { display: flex; align-items: center; gap: .7rem; }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+      background: var(--grad-coral); color: white;
+      font-size: .9rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .testi-card:nth-child(2) .testi-avatar { background: var(--grad-teal); }
+    .testi-name { font-weight: 800; font-size: .85rem; color: var(--dark); }
+    .testi-info { font-size: .73rem; color: var(--text-light); }
+
+    /* ════════════════════════════════
+       COACH
+    ════════════════════════════════ */
+    #coach { background: var(--bg); }
+    .coach-grid {
+      display: grid; grid-template-columns: 260px 1fr;
+      gap: 3.5rem; align-items: start; max-width: 900px; margin: 0 auto;
+    }
+    .coach-photo {
+      border-radius: var(--radius); overflow: hidden;
+      aspect-ratio: 3/4; box-shadow: var(--shadow);
+    }
+    .coach-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .coach-body {}
+    .coach-name { font-size: 1.6rem; font-weight: 900; color: var(--dark); margin: .5rem 0 .2rem; }
+    .coach-role { font-size: .85rem; color: var(--text-light); margin-bottom: 1.2rem; }
+    .coach-bio  { font-size: .88rem; color: var(--text); line-height: 1.9; margin-bottom: 1.5rem; }
+    .coach-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .coach-certs {
+      background: white; border-radius: var(--radius); padding: 1.2rem;
+      border-left: 4px solid var(--coral);
+    }
+    .coach-cert-title { font-size: .75rem; font-weight: 800; letter-spacing: .1em; color: var(--coral); margin-bottom: .7rem; }
+    .coach-cert-list { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
+    .coach-cert-list li { font-size: .83rem; color: var(--text); padding-left: 1rem; position: relative; }
+    .coach-cert-list li::before { content: '▸'; position: absolute; left: 0; color: var(--coral); }
+
+    /* ════════════════════════════════
+       FLOW  ─ 横並びステップ
+    ════════════════════════════════ */
+    #flow { background: white; }
+    .flow-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; position: relative;
+    }
+    .flow-steps::before {
+      content: ''; position: absolute;
+      top: 36px; left: 12.5%; right: 12.5%;
+      height: 2px; background: linear-gradient(to right, var(--coral), var(--teal));
+      z-index: 0;
+    }
+    .flow-step { text-align: center; padding: 0 .8rem; position: relative; z-index: 1; }
+    .flow-circle {
+      width: 72px; height: 72px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem; font-size: 1.6rem;
+      border: 3px solid white; box-shadow: var(--shadow);
+    }
+    .flow-circle i { color: white; font-size: 1.5rem; }
+    .flow-step:nth-child(1) .flow-circle { background: var(--coral); }
+    .flow-step:nth-child(2) .flow-circle { background: #E8663A; }
+    .flow-step:nth-child(3) .flow-circle { background: #60B090; }
+    .flow-step:nth-child(4) .flow-circle { background: var(--teal); }
+    .flow-step-num {
+      font-size: .65rem; font-weight: 900; letter-spacing: .15em;
+      color: var(--coral); margin-bottom: .3rem;
+    }
+    .flow-step:nth-child(3) .flow-step-num, .flow-step:nth-child(4) .flow-step-num { color: var(--teal); }
+    .flow-title { font-size: .9rem; font-weight: 800; color: var(--dark); margin-bottom: .3rem; }
+    .flow-desc  { font-size: .78rem; color: var(--text-light); line-height: 1.65; }
+
+    /* ════════════════════════════════
+       FAQ
+    ════════════════════════════════ */
+    #faq { background: var(--bg); }
+    .faq-list { display: flex; flex-direction: column; gap: .6rem; }
+    .faq-item { background: white; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
+    .faq-q {
+      display: flex; align-items: center; gap: .9rem;
+      padding: 1.1rem 1.3rem; cursor: pointer;
+      font-weight: 700; color: var(--dark); font-size: .9rem;
+      user-select: none; transition: background .2s;
+    }
+    .faq-q:hover { background: var(--bg); }
+    .faq-q-icon {
+      min-width: 28px; height: 28px;
+      background: var(--coral-pale); color: var(--coral);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 900; flex-shrink: 0;
+    }
+    .faq-arrow { color: var(--coral); font-size: .85rem; transition: transform .3s; margin-left: auto; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-item.open .faq-q { background: var(--coral-pale); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s;
+      font-size: .87rem; color: var(--text); line-height: 1.85;
+      border-top: 1px solid var(--border);
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 1rem 1.3rem 1.2rem 3.5rem; }
+
+    /* ════════════════════════════════
+       FINAL CTA  ─ 強クロージング
+    ════════════════════════════════ */
+    #cta-final {
+      background: var(--grad-dark); position: relative; overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(232,80,58,.18), transparent 60%);
+    }
+    .cta-final-inner { position: relative; z-index: 1; }
+    .urgency-bar {
+      background: rgba(232,80,58,.25); border: 1px solid rgba(232,80,58,.4);
+      border-radius: var(--radius-sm); padding: .7rem 1.2rem;
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: #FCA5A5; font-size: .8rem; font-weight: 800;
+      letter-spacing: .04em; margin-bottom: 1.5rem;
+    }
+    .urgency-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); animation: blink 1.2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    .cta-final-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: white; margin-bottom: .8rem; line-height: 1.3; }
+    .cta-final-title .accent { color: var(--yellow); }
+    .cta-final-sub { font-size: .92rem; color: rgba(255,255,255,.6); margin-bottom: 2.5rem; line-height: 1.85; }
+
+    .cta-final-card {
+      background: rgba(255,255,255,.06); backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius); padding: 2.5rem;
+      max-width: 580px; margin: 0 auto;
+    }
+    .cta-final-card-title {
+      font-size: .72rem; font-weight: 900; letter-spacing: .2em;
+      color: var(--yellow); text-align: center; margin-bottom: 1.2rem;
+    }
+    .cta-checklist { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin-bottom: 2rem; }
+    .cta-checklist li { font-size: .88rem; color: rgba(255,255,255,.8); padding-left: 1.6rem; position: relative; line-height: 1.5; }
+    .cta-checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--yellow); font-weight: 900; font-size: .95em; }
+    .cta-btn-stack { display: flex; flex-direction: column; gap: .7rem; }
+    .cta-fine { text-align: center; font-size: .73rem; color: rgba(255,255,255,.35); margin-top: .8rem; line-height: 1.6; }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      background: #0E0E1E; padding: 2.5rem 1.5rem;
+      text-align: center; color: rgba(255,255,255,.35);
+      border-top: 3px solid var(--coral);
+    }
+    .footer-logo { font-size: 1.1rem; font-weight: 900; color: white; margin-bottom: .3rem; }
+    .footer-logo .dot { color: var(--yellow); }
+    .footer-info { font-size: .78rem; line-height: 2.1; margin: .5rem 0; }
+    .footer-copy { font-size: .7rem; }
+
+    /* Float CTA */
+    .float-cta {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      z-index: 999; display: none; flex-direction: column; gap: .6rem; align-items: flex-end;
+    }
+    .float-btn {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .7rem 1.15rem; border-radius: var(--radius-sm);
+      font-size: .8rem; font-weight: 800; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25); transition: all .25s; letter-spacing: .03em;
+    }
+    .float-btn:hover { transform: translateY(-3px); }
+    .float-coral { background: var(--coral); color: white; }
+    .float-line  { background: #06C755; color: white; }
+
+    /* Animations */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero-photo { display: none; }
+      .reason-item, .reason-item.reverse { direction: ltr; grid-template-columns: 1fr; gap: 1.5rem; }
+      .coach-grid { grid-template-columns: 1fr; }
+      .coach-photo { max-width: 200px; aspect-ratio: 1; border-radius: 50%; margin: 0 auto; }
+      .flow-steps { grid-template-columns: 1fr 1fr; }
+      .flow-steps::before { display: none; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: fixed;
+        inset: 0; background: rgba(14,14,30,.98);
+        justify-content: center; align-items: center; gap: 2rem; z-index: 999;
+      }
+      .nav-links.open a { font-size: 1.1rem; color: rgba(255,255,255,.9) !important; }
+      .nav-hamburger { display: flex; }
+      .hero-cta-group { flex-direction: column; }
+      .cta-band-btns { flex-direction: column; align-items: center; }
+      .flow-steps { grid-template-columns: 1fr; }
+      .proof-strip-inner { gap: 1rem; }
+      .proof-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV ─────────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Speak<span class="dot">●</span>Core</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#reason">選ばれる理由</a></li>
+      <li><a href="#program">コース</a></li>
+      <li><a href="#pricing">料金</a></li>
+      <li><a href="#testimonials">受講生の声</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#cta-final" class="nav-cta">無料体験</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ① HERO ─────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg-grad"></div>
+  <div class="hero-shape"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-photo" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="" loading="eager">
+  </div>
+  <div class="hero-content">
+    <div class="hero-trust-bar">
+      <div class="hero-trust-pill"><span class="icon"><i class="fas fa-trophy"></i></span>受講生 1,200名+</div>
+      <div class="hero-trust-pill"><span class="icon"><i class="fas fa-star"></i></span>満足度 97%</div>
+      <div class="hero-trust-pill"><span class="icon"><i class="fas fa-shield-halved"></i></span>90日全額返金保証</div>
+      <div class="hero-trust-pill"><span class="icon"><i class="fas fa-gift"></i></span>無料体験あり</div>
+    </div>
+    <p class="hero-kicker">ビジネスマンのための英語コーチング</p>
+    <h1 class="hero-title">
+      <span class="line">「勉強してきたのに</span>
+      <span class="line">話せない」を</span>
+      <span class="line accent">90日で終わらせる。</span>
+    </h1>
+    <p class="hero-desc">
+      元商社マン×現役コーチによる完全マンツーマン指導。<br>
+      ビジネス現場で<strong style="color:white">即使える英語力</strong>を、最短ルートで身につけます。
+    </p>
+    <div class="hero-cta-group">
+      <a href="#cta-final" class="btn btn-coral btn-lg">
+        <span><i class="fas fa-gift"></i> 無料体験レッスンを予約する（60分）</span>
+      </a>
+      <a href="#reason" class="btn btn-ghost btn-lg">選ばれる理由を見る →</a>
+    </div>
+    <div class="hero-nums">
+      <div class="hero-num-item">
+        <div class="hero-num-val">1,200<small>名+</small></div>
+        <div class="hero-num-label">累計受講生数</div>
+      </div>
+      <div class="hero-num-item">
+        <div class="hero-num-val">97<small>%</small></div>
+        <div class="hero-num-label">目標達成率</div>
+      </div>
+      <div class="hero-num-item">
+        <div class="hero-num-val">+185<small>点</small></div>
+        <div class="hero-num-label">TOEIC平均UP</div>
+      </div>
+      <div class="hero-num-item">
+        <div class="hero-num-val">4.9<small>/5</small></div>
+        <div class="hero-num-label">コーチ評価</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF STRIP ─────────────── -->
+<div class="proof-strip">
+  <div class="proof-strip-inner">
+    <div class="proof-item"><span class="proof-num">外資・グローバル企業</span><span class="proof-label">受講生の約60%</span></div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-num">管理職・リーダー層</span><span class="proof-label">受講生の約45%</span></div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-num">30〜40代</span><span class="proof-label">メイン受講層</span></div>
+    <div class="proof-divider"></div>
+    <div class="proof-item"><span class="proof-num">7年</span><span class="proof-label">コーチング実績</span></div>
+  </div>
+</div>
+
+<!-- ② PAIN ─────────────────────────── -->
+<section id="pain">
+  <div class="container">
+    <span class="en-label">— DOES THIS SOUND FAMILIAR? —</span>
+    <h2 class="section-title">こんなお悩み、<span class="coral-text">ありませんか？</span></h2>
+    <div class="title-line"></div>
+    <p class="pain-intro">英語を長年勉強してきたのに、なぜか現場では言葉が出てこない。その理由には、共通した「落とし穴」があります。</p>
+    <div class="pain-grid">
+      <div class="pain-card fade-up">
+        <span class="pain-emoji"><i class="fas fa-book-open"></i></span>
+        <p class="pain-text">何年も英語を勉強しているのに、いざとなると言葉が出てこない</p>
+      </div>
+      <div class="pain-card fade-up">
+        <span class="pain-emoji"><i class="fas fa-globe"></i></span>
+        <p class="pain-text">外国人との会議・交渉で、黙ってしまう場面がある</p>
+      </div>
+      <div class="pain-card fade-up">
+        <span class="pain-emoji"><i class="fas fa-briefcase"></i></span>
+        <p class="pain-text">英語力がネックで昇進・キャリアアップのチャンスを逃している</p>
+      </div>
+      <div class="pain-card fade-up">
+        <span class="pain-emoji"><i class="fas fa-face-frown"></i></span>
+        <p class="pain-text">英会話スクールに通っても「日常会話」止まりで仕事に使えない</p>
+      </div>
+    </div>
+    <div class="pain-solve-wrap fade-up">
+      <div class="pain-solve-arrow">↓</div>
+      <div class="pain-solve-box">
+        <h3>その悩み、<strong>「学び方」を変えるだけ</strong>で解決できます</h3>
+        <p>SpeakCoreは「ビジネスの現場」を知るコーチが、あなただけのカリキュラムで指導する完全マンツーマンコーチング。「試験対策」でも「日常英会話」でもない、仕事で即使える英語力を最短で身につけます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ REASON ─ 交互レイアウト ──────── -->
+<section id="reason">
+  <div class="container">
+    <span class="en-label">— WHY SPEAKCORE —</span>
+    <h2 class="section-title">選ばれる<span class="coral-text"> 4つの理由</span></h2>
+    <div class="title-line"></div>
+    <p class="section-sub">一般的な英会話スクールとは、根本から異なるアプローチです。</p>
+    <div class="reason-item fade-up">
+      <div class="reason-img"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="完全マンツーマン指導" loading="lazy"></div>
+      <div class="reason-body">
+        <p class="reason-num">REASON 01</p>
+        <h3 class="reason-title">完全マンツーマンで<br>あなただけのカリキュラム</h3>
+        <p class="reason-text">集合授業・固定テキストは一切なし。現在の英語レベル・仕事内容・目標に合わせて、コーチが毎回オーダーメイドでカリキュラムを設計します。「自分に関係ない内容」に時間を使わずに済む、最短ルートです。</p>
+        <ul class="reason-list">
+          <li>受講前に現状ヒアリング・レベルチェックを実施</li>
+          <li>業種・役職・ゴールに合わせた専用プラン</li>
+          <li>毎セッション後にフィードバックレポート</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reason-item reverse fade-up">
+      <div class="reason-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="ビジネス現場での英語指導" loading="lazy"></div>
+      <div class="reason-body">
+        <p class="reason-num">REASON 02</p>
+        <h3 class="reason-title">「ビジネスの現場」を<br>知るコーチが直接指導</h3>
+        <p class="reason-text">元商社マンとして米国・シンガポール・中東に8年間駐在し、年間20億円規模の交渉を英語で行ってきたコーチが直接指導。テキストにない「会議での切り返し方」「メールの使い分け」を、実体験から教えます。</p>
+        <ul class="reason-list">
+          <li>海外駐在・外資勤務の実体験に基づく指導</li>
+          <li>業界・役職別のビジネス英語に対応</li>
+          <li>TOEIC 990点取得・指導歴7年</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reason-item fade-up">
+      <div class="reason-img"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" alt="毎日LINEサポート" loading="lazy"></div>
+      <div class="reason-body">
+        <p class="reason-num">REASON 03</p>
+        <h3 class="reason-title">毎日LINEサポートで<br>日常×学習を紐づける</h3>
+        <p class="reason-text">週2〜3回のセッション外も、毎日LINEで学習確認・質問対応を行います。「今日の会議でこの表現が使えなかった」という実体験をその日のうちにフィードバック。日常の出来事が最高の教材になります。</p>
+        <ul class="reason-list">
+          <li>毎日LINEで学習習慣をサポート</li>
+          <li>仕事での実体験を即フィードバック</li>
+          <li>定着率が通常の3倍以上（当社比）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reason-item reverse fade-up">
+      <div class="reason-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="90日全額返金保証" loading="lazy"></div>
+      <div class="reason-body">
+        <p class="reason-num">REASON 04</p>
+        <h3 class="reason-title">結果に自信があるから<br>90日全額返金保証</h3>
+        <p class="reason-text">90日のプログラム受講後、「目標に到達しなかった」と感じた場合は全額返金します。これはSpeakCoreのメソッドへの絶対的な自信の表れです。リスクゼロで、まずは無料体験から始めてください。</p>
+        <ul class="reason-list">
+          <li>受講後90日以内に申請で全額返金</li>
+          <li>返金手続きはLINEで完結・即対応</li>
+          <li>過去の返金申請率：0.8%（ほぼなし）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND 1 ──────────────────────── -->
+<div class="cta-band">
+  <div class="cta-band-inner container">
+    <h3>まずは60分の無料体験レッスンから</h3>
+    <p>現在のレベル確認・目標設定・学習プランの相談が完全無料で受けられます。<br>強引な勧誘は一切ありません。</p>
+    <div class="cta-band-btns">
+      <a href="#cta-final" class="btn btn-dark btn-lg">無料体験レッスンを予約する →</a>
+      <a href="#cta-final" class="btn btn-ghost btn-lg"><i class="fas fa-comment-dots"></i> LINEで相談する</a>
+    </div>
+  </div>
+</div>
+
+<!-- ④ PROGRAM ────────────────────────── -->
+<section id="program">
+  <div class="container">
+    <span class="en-label">— PROGRAMS —</span>
+    <h2 class="section-title">目標に合わせた<span class="coral-text"> 3つのコース</span></h2>
+    <div class="title-line"></div>
+    <p class="section-sub">どのコースも完全マンツーマン。あなたのペース・目標に合わせて選べます。</p>
+    <div class="program-grid">
+      <div class="program-card fade-up">
+        <div class="program-card-head">
+          <div class="program-icon-wrap"><i class="fas fa-briefcase"></i></div>
+          <div class="program-card-name">ビジネス英語コース</div>
+          <div class="program-card-for">会議・交渉・プレゼンに自信をつけたい方</div>
+        </div>
+        <div class="program-card-body">
+          <p class="program-card-desc">外国人同僚・取引先との実践的なコミュニケーションに特化。ビジネスシーンで必要なフレーズ・語彙・ロジックを体系的に習得します。</p>
+          <ul class="program-card-list">
+            <li>週3回 × 60分のセッション</li>
+            <li>毎日LINEサポート</li>
+            <li>会議・メール・プレゼン特化</li>
+            <li>ロールプレイで実践練習</li>
+            <li>90日全額返金保証</li>
+          </ul>
+        </div>
+      </div>
+      <div class="program-card fade-up">
+        <div class="program-card-head">
+          <div class="program-icon-wrap"><i class="fas fa-chart-line"></i></div>
+          <div class="program-card-name">TOEIC 900突破コース</div>
+          <div class="program-card-for">昇進・転職でスコアが必要な方</div>
+        </div>
+        <div class="program-card-body">
+          <p class="program-card-desc">スコアに直結するビジネス英語力を底上げ。TOEIC900点を最短ルートで突破するメソッドを提供します。</p>
+          <ul class="program-card-list">
+            <li>週2回 × 90分のセッション</li>
+            <li>毎日LINEサポート</li>
+            <li>弱点分析・個別対策</li>
+            <li>模擬試験 × 月2回</li>
+            <li>目標未達なら延長無料</li>
+          </ul>
+        </div>
+      </div>
+      <div class="program-card fade-up">
+        <div class="program-card-head">
+          <div class="program-icon-wrap"><i class="fas fa-plane"></i></div>
+          <div class="program-card-name">海外赴任準備コース</div>
+          <div class="program-card-for">赴任・出張前に実力を上げたい方</div>
+        </div>
+        <div class="program-card-body">
+          <p class="program-card-desc">赴任先での生活・仕事を想定したシミュレーション学習で、赴任前3ヶ月に「使える英語」を集中的に習得します。</p>
+          <ul class="program-card-list">
+            <li>週3〜4回 × 60分のセッション</li>
+            <li>赴任先の文化・慣習も指導</li>
+            <li>緊急・トラブル英語に対応</li>
+            <li>スタート前の徹底ヒアリング</li>
+            <li>赴任後フォローアップ可</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ PRICING ────────────────────────── -->
+<section id="pricing">
+  <div class="container">
+    <span class="en-label">— PRICING —</span>
+    <h2 class="section-title">シンプルで<span class="coral-text">わかりやすい料金</span></h2>
+    <div class="title-line"></div>
+    <p class="section-sub">隠れた費用は一切なし。すべて込みの月額制です。</p>
+    <div class="pricing-wrap">
+      <div class="pricing-grid fade-up">
+        <div class="pricing-card">
+          <div class="pricing-head">
+            <div class="pricing-plan">STANDARD</div>
+            <div class="pricing-price">¥<span>79,800</span><small>/月</small></div>
+            <div class="pricing-sub">週2回 × 60分</div>
+          </div>
+          <div class="pricing-body">
+            <ul class="pricing-items">
+              <li>完全マンツーマンセッション</li>
+              <li>オーダーメイドカリキュラム</li>
+              <li>LINEサポート（平日）</li>
+              <li>学習進捗レポート</li>
+              <li class="no">24時間緊急サポート</li>
+              <li class="no">セッション録画データ</li>
+            </ul>
+            <a href="#cta-final" class="btn btn-outline btn-full">このプランで体験する</a>
+          </div>
+        </div>
+        <div class="pricing-card rec">
+          <div class="pricing-head">
+            <div class="rec-badge"><i class="fas fa-trophy"></i> 一番人気・おすすめ</div>
+            <div class="pricing-plan">PREMIUM</div>
+            <div class="pricing-price">¥<span>129,800</span><small>/月</small></div>
+            <div class="pricing-sub">週3回 × 60分</div>
+          </div>
+          <div class="pricing-body">
+            <ul class="pricing-items">
+              <li>完全マンツーマンセッション</li>
+              <li>オーダーメイドカリキュラム</li>
+              <li>LINEサポート（毎日24時間）</li>
+              <li>学習進捗レポート</li>
+              <li>24時間緊急サポート</li>
+              <li>セッション録画データ</li>
+            </ul>
+            <a href="#cta-final" class="btn btn-coral btn-full">無料体験を予約する →</a>
+          </div>
+        </div>
+      </div>
+      <div class="guarantee-box fade-up">
+        <div class="guarantee-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="guarantee-body">
+          <h4>90日全額返金保証つき</h4>
+          <p>規定の出席率（80%以上）を満たして取り組んでいただいた上で、90日後に「目標に届かなかった」と感じた場合は全額返金します。申請はLINEで完結、即対応いたします。</p>
+        </div>
+      </div>
+      <p class="pricing-note">※ 全プラン共通：入会金0円 / 無料体験後のキャンセルも自由 / 強引な勧誘は一切なし</p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ TESTIMONIALS ──────────────────── -->
+<section id="testimonials">
+  <div class="container">
+    <span class="en-label">— SUCCESS STORIES —</span>
+    <h2 class="section-title">受講生の<span class="coral-text">リアルな声</span></h2>
+    <div class="title-line"></div>
+    <p class="section-sub">継続率95%。実際の変化をご紹介します。</p>
+    <div class="testi-grid">
+      <div class="testi-card fade-up">
+        <div class="testi-result-pills">
+          <span class="testi-before">TOEIC 620点</span>
+          <span class="testi-arrow">→</span>
+          <span class="testi-after">TOEIC 860点</span>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">3ヶ月でTOEIC240点アップ。でも一番変わったのはスコアより「話せる自信」です。毎日のLINEフォローがなければ続けられなかったと思います。コーチの実体験に基づいたアドバイスが特に役立ちました。</p>
+        <div class="testi-user">
+          <div class="testi-avatar">T</div>
+          <div>
+            <div class="testi-name">T.M さん（38歳・メーカー営業部長）</div>
+            <div class="testi-info">PREMIUMコース / 3ヶ月</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-result-pills">
+          <span class="testi-before">会議で沈黙…</span>
+          <span class="testi-arrow">→</span>
+          <span class="testi-after">英語で提案できた</span>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">外資系に転職して英語会議が恐怖でしたが、2ヶ月後には自分から意見を言えるようになりました。「この状況ならこう言う」という実戦的な表現を大量に学べたのが一番の収穫です。</p>
+        <div class="testi-user">
+          <div class="testi-avatar">K</div>
+          <div>
+            <div class="testi-name">K.A さん（34歳・外資系IT）</div>
+            <div class="testi-info">ビジネス英語コース / 2ヶ月</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-result-pills">
+          <span class="testi-before">赴任前・不安MAX</span>
+          <span class="testi-arrow">→</span>
+          <span class="testi-after">現地で即戦力に</span>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">シンガポール赴任の2ヶ月前から受講。赴任後は「英語で困ったことが一度もない」と言えるくらい準備できました。文化的背景まで教えてもらえたのが特によかったです。</p>
+        <div class="testi-user">
+          <div class="testi-avatar">S</div>
+          <div>
+            <div class="testi-name">S.R さん（41歳・商社勤務）</div>
+            <div class="testi-info">海外赴任準備コース / 2ヶ月</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ COACH ──────────────────────────── -->
+<section id="coach">
+  <div class="container">
+    <span class="en-label">— YOUR COACH —</span>
+    <h2 class="section-title">コーチ紹介</h2>
+    <div class="title-line"></div>
+    <div class="coach-grid fade-up">
+      <div class="coach-photo">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="SpeakCore 代表コーチ 田中 拓也（仮）" loading="lazy">
+      </div>
+      <div class="coach-body">
+        <span class="badge badge-coral">HEAD COACH</span>
+        <h3 class="coach-name">田中 拓也（仮）</h3>
+        <p class="coach-role">元大手商社・海外営業10年 ／ TOEIC 990点 ／ 英語コーチング歴7年</p>
+        <p class="coach-bio">大学卒業後、大手総合商社に入社。海外営業担当として米国・シンガポール・中東に計8年間駐在し、年間20億円規模の契約交渉を英語で担当。帰国後、独立し英語コーチング事業を開始。「話せる英語」にこだわり続け、受講生1,200名以上の英語力向上を支援してきた。</p>
+        <div class="coach-tags">
+          <span class="badge badge-coral">TOEIC 990点</span>
+          <span class="badge badge-teal">海外駐在 8年</span>
+          <span class="badge badge-yellow">コーチング歴 7年</span>
+          <span class="badge badge-dark">受講生 1,200名+</span>
+        </div>
+        <div class="coach-certs">
+          <div class="coach-cert-title">— CAREER —</div>
+          <ul class="coach-cert-list">
+            <li>大手総合商社 海外営業 10年（米・シンガポール・中東駐在）</li>
+            <li>TOEIC 990点満点取得（複数回）</li>
+            <li>ビジネス英語指導者認定資格保有</li>
+            <li>英語コーチング歴 7年・受講生 1,200名以上</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ FLOW ─────────────────────────── -->
+<section id="flow">
+  <div class="container">
+    <span class="en-label">— HOW TO START —</span>
+    <h2 class="section-title">はじめての方へ<span class="coral-text"> 4ステップ</span></h2>
+    <div class="title-line"></div>
+    <p class="section-sub">お申し込みから最短翌日、無料体験を受講できます。</p>
+    <div class="flow-steps fade-up">
+      <div class="flow-step">
+        <div class="flow-circle"><i class="fas fa-mobile-screen-button"></i></div>
+        <p class="flow-step-num">STEP 01</p>
+        <p class="flow-title">無料体験を予約</p>
+        <p class="flow-desc">LINEorフォームから希望日時を送るだけ。24時間受付中。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-circle"><i class="fas fa-comment-dots"></i></div>
+        <p class="flow-step-num">STEP 02</p>
+        <p class="flow-title">ヒアリング</p>
+        <p class="flow-desc">現状・目標・課題をお伺いし最適なプランをご提案。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-circle"><i class="fas fa-wand-magic-sparkles"></i></div>
+        <p class="flow-step-num">STEP 03</p>
+        <p class="flow-title">無料体験レッスン</p>
+        <p class="flow-desc">60分の実際のレッスンを体験。効果を肌で感じてください。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-circle"><i class="fas fa-rocket"></i></div>
+        <p class="flow-step-num">STEP 04</p>
+        <p class="flow-title">スタート</p>
+        <p class="flow-desc">ご納得いただけたら入会。その場でお断りも自由です。</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <a href="#cta-final" class="btn btn-coral btn-lg">無料体験レッスンを予約する →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND 2 ──────────────────────── -->
+<div class="cta-band">
+  <div class="cta-band-inner container">
+    <h3>今月の無料体験枠、残りわずかです</h3>
+    <p>1コーチが担当できる人数に限りがあります。<br>ご検討中の方はお早めにご予約ください。</p>
+    <div class="cta-band-btns">
+      <a href="#cta-final" class="btn btn-dark btn-lg">今すぐ無料体験を予約する →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ⑨ FAQ ────────────────────────────── -->
+<section id="faq">
+  <div class="container-sm">
+    <span class="en-label">— FAQ —</span>
+    <h2 class="section-title">よくある<span class="coral-text">ご質問</span></h2>
+    <div class="title-line"></div>
+    <p class="section-sub">ご不明な点はLINEからもお気軽にどうぞ。</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-icon">Q</span><span>英語力がゼロでも受講できますか？</span><span class="faq-arrow">▼</span></div>
+        <div class="faq-a">はい、可能です。完全マンツーマンでゼロから設計するので、現在のレベルは問いません。まずは無料体験で現状をヒアリングし、最適なスタートプランをご提案します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-icon">Q</span><span>忙しいビジネスマンでも続けられますか？</span><span class="faq-arrow">▼</span></div>
+        <div class="faq-a">可能です。早朝・夜間・休日にも対応しています。週2〜3回の短時間セッション＋毎日のLINEフォローという形式なので、まとまった勉強時間が取れない方でも継続できます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-icon">Q</span><span>返金保証の条件は何ですか？</span><span class="faq-arrow">▼</span></div>
+        <div class="faq-a">①出席率80%以上、②毎日の課題への取り組みの2点が条件です。誠実に取り組んでいただいた上で目標未達の場合に適用されます。申請はLINEで完結します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-icon">Q</span><span>無料体験レッスンの内容を教えてください。</span><span class="faq-arrow">▼</span></div>
+        <div class="faq-a">60分のZoomセッションで①英語レベル確認、②目標・課題のヒアリング、③最適プランのご提案を行います。強引な勧誘は一切ありませんので、お気軽にご参加ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-icon">Q</span><span>受講中に担当コーチを変えることはできますか？</span><span class="faq-arrow">▼</span></div>
+        <div class="faq-a">可能です。コーチとの相性は学習効果に直結します。もし合わないと感じた場合は遠慮なくお申し出ください。すぐに対応します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-icon">Q</span><span>オンラインのみですか？</span><span class="faq-arrow">▼</span></div>
+        <div class="faq-a">基本はZoomでのオンラインセッションです。全国どこからでも受講いただけます。対面についてはご相談ください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑩ FINAL CTA ─ 強クロージング ───── -->
+<section id="cta-final">
+  <div class="container cta-final-inner" style="text-align:center">
+    <div class="urgency-bar">
+      <span class="urgency-dot"></span>
+      <i class="fas fa-fire"></i> 今月の無料体験枠：残り 3名
+    </div>
+    <h2 class="cta-final-title">
+      今すぐ始める人だけが、<br><span class="accent">90日後に変わっている。</span>
+    </h2>
+    <p class="cta-final-sub">
+      無料体験レッスン（60分）は完全無料・勧誘なし。<br>
+      まず話してみるだけで大丈夫です。返金保証つきなので、リスクゼロです。
+    </p>
+    <div class="cta-final-card">
+      <div class="cta-final-card-title">— 無料体験で得られること —</div>
+      <ul class="cta-checklist">
+        <li>現在の英語レベルを正確に把握できる</li>
+        <li>目標達成までの具体的なロードマップがわかる</li>
+        <li>どのコースが自分に合うかわかる</li>
+        <li>プロのコーチとの相性を確認できる</li>
+      </ul>
+      <div class="cta-btn-stack">
+        <a href="#" class="btn btn-coral btn-xl btn-full">
+          <i class="fas fa-gift"></i> 無料体験レッスンを予約する（60分）
+        </a>
+        <a href="#" class="btn btn-line btn-lg btn-full">
+          <i class="fas fa-comment-dots"></i> LINEで相談・予約する
+        </a>
+      </div>
+      <p class="cta-fine">予約後にZoomのURLをメールでお送りします。<br>キャンセルはいつでも可能。強引な勧誘は一切ありません。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER ──────────────────────────── -->
+<footer>
+  <div class="footer-logo">Speak<span class="dot">●</span>Core</div>
+  <p class="footer-info">
+    運営：SpeakCore株式会社（仮）<br>
+    お問い合わせ: info@speakcore.jp（仮） ｜ 受付：平日 9:00〜21:00
+  </p>
+  <p class="footer-copy">© 2024 SpeakCore All Rights Reserved.</p>
+</footer>
+
+<!-- Float CTA -->
+<div class="float-cta" id="floatCta">
+  <a href="#cta-final" class="float-btn float-coral"><i class="fas fa-gift"></i> 無料体験を予約</a>
+  <a href="#cta-final" class="float-btn float-line"><i class="fas fa-comment-dots"></i> LINEで相談</a>
+</div>
+
+<script>
+  /* Navbar */
+  const navbar = document.getElementById('navbar');
+  const floatCta = document.getElementById('floatCta');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY > 80;
+    navbar.classList.toggle('scrolled', s);
+    floatCta.style.display = s ? 'flex' : 'none';
+  });
+
+  /* Hamburger */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  /* FAQ */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* Fade-up */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
